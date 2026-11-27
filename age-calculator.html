@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>محاسبه دقیق سن | سن به سال، ماه و روز — شمسی و میلادی</title>
+<meta name="description" content="محاسبه دقیق سن به سال، ماه و روز از روی تاریخ تولد شمسی یا میلادی؛ روزهای زندگی، روز هفته تولد و روزهای مانده تا تولد بعدی.">
+<meta property="og:title" content="محاسبه دقیق سن | سن به سال، ماه و روز — شمسی و میلادی">
+<meta property="og:description" content="سن دقیق خود را به سال، ماه و روز حساب کنید؛ با روزهای زندگی و روزهای مانده تا تولد بعدی.">
+<meta property="og:type" content="website">
+<link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+<header class="site-header">
+  <div class="inner">
+    <a class="brand" href="index.html">دم‌دست<small>ابزار، قیمت و خبر؛ همه در یک‌جا</small></a>
+    <nav>
+      <a href="index.html#tools">ابزارها</a>
+      <a href="index.html#prices">قیمت‌ها</a>
+      <a href="index.html#briefing">مرور صبحگاهی</a>
+      <a href="about.html">درباره ما</a>
+    </nav>
+  </div>
+</header>
+
+<div class="wrap">
+  <p class="breadcrumb"><a href="index.html">دم‌دست</a> ← <a href="index.html#tools">ابزارها</a> ← محاسبه دقیق سن</p>
+  <h1>محاسبه دقیق سن</h1>
+  <p class="sub">سن دقیق شما به سال، ماه و روز — با تاریخ تولد شمسی یا میلادی.</p>
+
+  <div class="card gold">
+    <div class="field">
+      <label for="cal">تقویم تاریخ تولد</label>
+      <select id="cal">
+        <option value="j" selected>شمسی (جلالی)</option>
+        <option value="g">میلادی (گرگوری)</option>
+      </select>
+    </div>
+    <div class="fields">
+      <div class="field">
+        <label for="day">روز</label>
+        <input type="text" id="day" inputmode="numeric" value="۱">
+      </div>
+      <div class="field">
+        <label for="month">ماه</label>
+        <select id="month"></select>
+      </div>
+      <div class="field">
+        <label for="year">سال</label>
+        <input type="text" id="year" inputmode="numeric" value="۱۳۷۰">
+      </div>
+    </div>
+    <p class="hint">سن نسبت به امروز محاسبه می‌شود. ماه‌های شمسی: فروردین تا شهریور ۳۱ روزه، مهر تا بهمن ۳۰ روزه، اسفند در سال کبیسه ۳۰ روزه و در غیر آن ۲۹ روزه است.</p>
+    <div class="out" id="out"><small>سن شما</small><span class="big">—</span></div>
+    <table class="result" id="resultTable" hidden>
+      <tr><td>روزهای زندگی</td><td id="rDays">—</td></tr>
+      <tr><td>روز هفته تولد</td><td id="rWeekday">—</td></tr>
+      <tr><td id="rOtherLabel">تاریخ تولد به میلادی</td><td id="rOther">—</td></tr>
+      <tr><td>تولد بعدی</td><td id="rNext">—</td></tr>
+    </table>
+    <div class="row">
+      <button class="btn-primary" type="button" id="copyBtn">کپی نتیجه</button>
+      <button class="btn-ghost" type="button" id="shareBtn">اشتراک‌گذاری</button>
+    </div>
+    <p class="examples">مثال:
+      <button class="chip" type="button" data-cal="j" data-y="1370" data-m="1" data-d="1">۱ فروردین ۱۳۷۰</button>
+      <button class="chip" type="button" data-cal="g" data-y="1990" data-m="1" data-d="1">۱ ژانویه ۱۹۹۰</button>
+      <button class="chip" type="button" data-cal="j" data-y="1380" data-m="6" data-d="15">۱۵ شهریور ۱۳۸۰</button>
+    </p>
+  </div>
+
+  <div class="card">
+    <h2>فرمول</h2>
+    <p class="formula">سن = تاریخ امروز − تاریخ تولد</p>
+    <p>محاسبه قدم‌به‌قدم است: اول سال‌های کامل، بعد ماه‌های کامل، بعد روزهای باقی‌مانده — با طول واقعی هر ماه در همان تقویم. برای شمسی از الگوریتم استاندارد تبدیل جلالی و برای میلادی از طول واقعی ماه‌های گرگوری استفاده می‌شود.</p>
+  </div>
+
+  <div class="card">
+    <h2>مثال عددی</h2>
+    <p>متولد ۱ فروردین ۱۳۷۰، در تاریخ ۶ آذر ۱۴۰۵:</p>
+    <table class="result">
+      <tr><td>سن دقیق</td><td>۳۵ سال و ۸ ماه و ۵ روز</td></tr>
+      <tr><td>روزهای زندگی</td><td>۱۳٬۰۳۵ روز</td></tr>
+      <tr><td>روز هفته تولد</td><td>پنجشنبه، ۲۱ مارس ۱۹۹۱</td></tr>
+      <tr class="total"><td>تولد بعدی</td><td>۱ فروردین ۱۴۰۶ — ۱۱۴ روز دیگر</td></tr>
+    </table>
+    <p>و متولد ۱ ژانویه ۱۹۹۰، در تاریخ ۲۷ نوامبر ۲۰۲۶: <strong>۳۶ سال و ۱۰ ماه و ۲۶ روز</strong> (۱۳٬۴۷۹ روز).</p>
+    <p class="meta">مثال‌های این صفحه در تاریخ ۶ آذر ۱۴۰۵ با همین روش محاسبه و بازبینی شده‌اند.</p>
+  </div>
+
+  <div class="card">
+    <h2>ورودی و خروجی یعنی چه</h2>
+    <ul class="tight">
+      <li><strong>سن دقیق:</strong> سال‌ها، ماه‌ها و روزهای کامل سپری‌شده از تولد تا امروز.</li>
+      <li><strong>روزهای زندگی:</strong> شمار کل روزهای سپری‌شده از تاریخ تولد.</li>
+      <li><strong>روز هفته تولد:</strong> روزی از هفته که در آن متولد شده‌اید.</li>
+      <li><strong>تاریخ تولد به تقویم دیگر:</strong> همان روز تولد در تقویم مقابل (شمسی ↔ میلادی).</li>
+      <li><strong>تولد بعدی:</strong> تاریخ تولد بعدی و چند روز تا آن مانده است.</li>
+    </ul>
+  </div>
+
+  <div class="card">
+    <h2>این ابزار برای چه مواردی مناسب نیست</h2>
+    <ul class="tight">
+      <li>سند رسمی — برای مدارک هویتی و اداری، تاریخ تولد شناسنامه ملاک است، نه این محاسبه.</li>
+      <li>محاسبه سن قمری — این ابزار سن شمسی و میلادی را حساب می‌کند؛ برای سن قمری از <a href="today.html">تاریخ امروز</a> استفاده کنید.</li>
+      <li>فاصله بین دو تاریخ دلخواه — برای آن از <a href="date-converter.html">مبدل تاریخ</a> استفاده کنید.</li>
+    </ul>
+  </div>
+
+  <div class="card faq">
+    <h2>پرسش‌های متداول</h2>
+    <details>
+      <summary>چرا سن من با بعضی سایت‌ها یک روز فرق می‌کند؟</summary>
+      <p>بیشتر اختلاف‌ها از ساعت محاسبه یا از کبیسه بودن اسفند است. این ابزار سن را نسبت به ابتدای امروز حساب می‌کند؛ اگر تولد شما امروز است، روزهای مانده تا تولد بعدی صفر می‌شود.</p>
+    </details>
+    <details>
+      <summary>متولد ۳۰ اسفند هستم؛ در سال غیرکبیسه تولدم چه روزی است؟</summary>
+      <p>در سالی که اسفند ۲۹ روزه است، ۳۰ اسفند وجود ندارد؛ ابزار تولد بعدی را ۲۹ اسفند همان سال در نظر می‌گیرد.</p>
+    </details>
+    <details>
+      <summary>سن قمری چطور حساب می‌شود؟</summary>
+      <p>سال قمری حدود ۱۱ روز از سال شمسی کوتاه‌تر است؛ برای سن قمری باید تاریخ تولد را به قمری تبدیل و با همان روش کم کرد. این ابزار فعلاً فقط شمسی و میلادی را پوشش می‌دهد.</p>
+    </details>
+  </div>
+
+  <div class="card">
+    <h2>منابع و تاریخ بازبینی</h2>
+    <ul class="tight">
+      <li>تبدیل تاریخ شمسی و میلادی با الگوریتم استاندارد jalaali-js انجام می‌شود؛ مثال‌های این صفحه در ۶ آذر ۱۴۰۵ با همین الگوریتم محاسبه و بازبینی شده‌اند.</li>
+    </ul>
+    <p class="meta">آخرین بازبینی: ۶ آذر ۱۴۰۵</p>
+  </div>
+
+  <div class="card">
+    <h2>ابزارهای مرتبط</h2>
+    <div class="related">
+      <a href="date-converter.html">مبدل تاریخ شمسی و میلادی</a>
+      <a href="today.html">تاریخ امروز</a>
+      <a href="calendar-1406.html">تقویم ۱۴۰۶</a>
+      <a href="index.html">همه ابزارها</a>
+    </div>
+  </div>
+
+  <footer>
+    دم‌دست — ابزار، قیمت و خبر؛ همه در یک‌جا<br>
+    ساخته‌شده توسط کوروش فرجی (KouroshLabs) ·
+    <a href="about.html">درباره ما</a> · <a href="contact.html">تماس</a> · <a href="privacy.html">حریم خصوصی</a><br>
+    <span style="font-size:12px">پردازش اطلاعات این ابزار در مرورگر شما انجام می‌شود و محتوای واردشده برای پردازش به سرور ارسال نمی‌شود.</span>
+  </footer>
+</div>
+
+<script src="assets/common.js"></script>
+<script>
+(function () {
+  var calEl = document.getElementById('cal');
+  var dayEl = document.getElementById('day');
+  var monthEl = document.getElementById('month');
+  var yearEl = document.getElementById('year');
+  var out = document.getElementById('out');
+  var table = document.getElementById('resultTable');
+  var lastText = '';
+
+  function fillMonths() {
+    var names = calEl.value === 'j' ? J_MONTHS : G_MONTHS;
+    var cur = parseInt(monthEl.value, 10) || 1;
+    monthEl.innerHTML = '';
+    names.forEach(function (n, i) {
+      var o = document.createElement('option');
+      o.value = i + 1; o.textContent = n;
+      monthEl.appendChild(o);
+    });
+    monthEl.value = Math.min(cur, 12);
+  }
+  function monthLen(cal, y, m) {
+    return cal === 'j' ? jalaaliMonthLength(y, m) : gregorianMonthLength(y, m);
+  }
+  function toJdn(cal, y, m, d) {
+    return cal === 'j' ? j2d(y, m, d) : g2d(y, m, d);
+  }
+  function fromJdn(cal, jdn) {
+    return cal === 'j' ? d2j(jdn) : d2g(jdn);
+  }
+  function ageParts(cal, by, bm, bd, ty, tm, td) {
+    var years = ty - by;
+    if (tm < bm || (tm === bm && td < bd)) years--;
+    var months = tm - bm;
+    if (td < bd) months--;
+    if (months < 0) months += 12;
+    var days;
+    if (td >= bd) days = td - bd;
+    else {
+      var pm = tm - 1, py = ty;
+      if (pm === 0) { pm = 12; py = ty - 1; }
+      days = monthLen(cal, py, pm) - bd + td;
+    }
+    return { years: years, months: months, days: days };
+  }
+  function calc() {
+    var cal = calEl.value;
+    var d = parseFaNum(dayEl.value);
+    var m = parseInt(monthEl.value, 10);
+    var y = parseFaNum(yearEl.value);
+    var today = new Date();
+    var t = cal === 'j' ? toJalaali(today.getFullYear(), today.getMonth() + 1, today.getDate())
+                        : { jy: today.getFullYear(), jm: today.getMonth() + 1, jd: today.getDate() };
+    var ty = cal === 'j' ? t.jy : t.jy, tm = cal === 'j' ? t.jm : t.jm, td = cal === 'j' ? t.jd : t.jd;
+    var valid = cal === 'j' ? validJalaali(y, m, d) : validGregorian(y, m, d);
+    if (!valid) {
+      out.innerHTML = '<small>تاریخ تولد معتبر نیست — روز، ماه و سال را بررسی کنید.</small>';
+      table.hidden = true; lastText = ''; return;
+    }
+    var birthJdn = toJdn(cal, y, m, d);
+    var todayJdn = toJdn(cal, ty, tm, td);
+    if (birthJdn > todayJdn) {
+      out.innerHTML = '<small>تاریخ تولد نمی‌تواند در آینده باشد.</small>';
+      table.hidden = true; lastText = ''; return;
+    }
+    var a = ageParts(cal, y, m, d, ty, tm, td);
+    var totalDays = todayJdn - birthJdn;
+    var totalMonths = a.years * 12 + a.months;
+    var g = cal === 'j' ? toGregorian(y, m, d) : { gy: y, gm: m, gd: d };
+    var j = cal === 'j' ? { jy: y, jm: m, jd: d } : toJalaali(y, m, d);
+    var wd = weekdayFa(g.gy, g.gm, g.gd);
+    // Next birthday
+    var ny = ty, nm = m, nd = Math.min(d, monthLen(cal, ny, m));
+    var nextJdn = toJdn(cal, ny, nm, nd);
+    if (nextJdn < todayJdn) {
+      ny = ty + 1;
+      nd = Math.min(d, monthLen(cal, ny, m));
+      nextJdn = toJdn(cal, ny, m, nd);
+    }
+    var daysTo = nextJdn - todayJdn;
+    var nextParts = fromJdn(cal, nextJdn);
+    var nextStr = cal === 'j'
+      ? faNum(nextParts.jd) + ' ' + J_MONTHS[nextParts.jm - 1] + ' ' + faNum(nextParts.jy)
+      : faNum(nextParts.gd) + ' ' + G_MONTHS[nextParts.gm - 1] + ' ' + faNum(nextParts.gy);
+    var otherStr = cal === 'j'
+      ? faNum(g.gd) + ' ' + G_MONTHS[g.gm - 1] + ' ' + faNum(g.gy) + ' میلادی'
+      : faNum(j.jd) + ' ' + J_MONTHS[j.jm - 1] + ' ' + faNum(j.jy) + ' شمسی';
+    out.innerHTML = '<small>سن شما</small><span class="big">' + faNum(a.years) + ' سال و ' + faNum(a.months) + ' ماه و ' + faNum(a.days) + ' روز</span>';
+    document.getElementById('rDays').textContent = faMoney(totalDays) + ' روز (' + faMoney(totalMonths) + ' ماه کامل)';
+    document.getElementById('rWeekday').textContent = wd;
+    document.getElementById('rOtherLabel').textContent = cal === 'j' ? 'تاریخ تولد به میلادی' : 'تاریخ تولد به شمسی';
+    document.getElementById('rOther').textContent = otherStr;
+    document.getElementById('rNext').textContent = daysTo === 0 ? 'امروز! 🎂' : nextStr + ' — ' + faMoney(daysTo) + ' روز دیگر';
+    table.hidden = false;
+    lastText = 'محاسبه دقیق سن — سن من ' + faNum(a.years) + ' سال و ' + faNum(a.months) + ' ماه و ' + faNum(a.days) + ' روز است (' + faMoney(totalDays) + ' روز زندگی). تولد بعدی: ' + nextStr + ' (' + faMoney(daysTo) + ' روز دیگر). (دم‌دست)';
+  }
+  calEl.addEventListener('change', function () { fillMonths(); calc(); });
+  [dayEl, monthEl, yearEl].forEach(function (el) { el.addEventListener('input', calc); el.addEventListener('change', calc); });
+  document.querySelectorAll('.examples .chip').forEach(function (chip) {
+    chip.addEventListener('click', function () {
+      calEl.value = chip.dataset.cal;
+      fillMonths();
+      yearEl.value = faNum(chip.dataset.y);
+      monthEl.value = chip.dataset.m;
+      dayEl.value = faNum(chip.dataset.d);
+      calc();
+    });
+  });
+  document.getElementById('copyBtn').addEventListener('click', function () {
+    if (lastText) copyText(lastText, this);
+  });
+  document.getElementById('shareBtn').addEventListener('click', function () {
+    if (lastText) shareText(lastText, this);
+  });
+  fillMonths();
+  calc();
+})();
+</script>
+</body>
+</html>

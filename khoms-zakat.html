@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>محاسبه خمس و زکات | خمس ۲۰٪ مازاد و نصاب زکات</title>
+<meta name="description" content="محاسبه خمس (۲۰٪ مازاد درآمد سالانه) و زکات نقدین (۲٫۵٪ با نصاب ۸۵ گرم طلا)؛ برآورد است، جزئیات دینی را با مرجع معتبر بررسی کنید.">
+<meta property="og:title" content="محاسبه خمس و زکات | خمس ۲۰٪ مازاد و نصاب زکات">
+<meta property="og:description" content="خمس مازاد درآمد و زکات پول و طلا را با نصاب و نرخ درست حساب کنید.">
+<meta property="og:type" content="website">
+<link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+<header class="site-header">
+  <div class="inner">
+    <a class="brand" href="index.html">دم‌دست<small>ابزار، قیمت و خبر؛ همه در یک‌جا</small></a>
+    <nav>
+      <a href="index.html#tools">ابزارها</a>
+      <a href="index.html#prices">قیمت‌ها</a>
+      <a href="index.html#briefing">مرور صبحگاهی</a>
+      <a href="about.html">درباره ما</a>
+    </nav>
+  </div>
+</header>
+
+<div class="wrap">
+  <p class="breadcrumb"><a href="index.html">دم‌دست</a> ← <a href="index.html#tools">ابزارها</a> ← محاسبه خمس و زکات</p>
+  <h1>محاسبه خمس و زکات</h1>
+  <p class="sub">خمس ۲۰٪ مازاد درآمد سالانه و زکات ۲٫۵٪ نقدین با نصاب ۸۵ گرم طلا — برآورد است؛ جزئیات را با مرجع معتبر بررسی کنید.</p>
+
+  <div class="card gold">
+    <div class="field">
+      <label for="mode">نوع محاسبه</label>
+      <select id="mode">
+        <option value="khoms" selected>خمس (۲۰٪ مازاد درآمد سال)</option>
+        <option value="zakat">زکات نقدین (۲٫۵٪ با نصاب طلا)</option>
+      </select>
+    </div>
+    <div id="khomsFields">
+      <div class="field">
+        <label for="income">درآمد سالانه (تومان)</label>
+        <input type="text" id="income" inputmode="numeric" value="۶۰۰٬۰۰۰٬۰۰۰">
+      </div>
+      <div class="field">
+        <label for="expense">هزینه زندگی سالانه (تومان) — شامل بدهی‌های پرداخت‌شده</label>
+        <input type="text" id="expense" inputmode="numeric" value="۴۸۰٬۰۰۰٬۰۰۰">
+      </div>
+      <p class="hint">خمس فقط به مازاد درآمد در پایان «سال خمسی» تعلق می‌گیرد؛ هزینه‌های زندگی و بدهی‌ها از درآمد کم می‌شود.</p>
+    </div>
+    <div id="zakatFields" hidden>
+      <div class="field">
+        <label for="goldPrice">قیمت روز هر گرم طلای ۱۸ عیار (تومان) — خودتان وارد کنید</label>
+        <input type="text" id="goldPrice" inputmode="numeric" value="۱۲٬۵۰۰٬۰۰۰">
+      </div>
+      <div class="field">
+        <label for="holdings">دارایی نقدی و طلا (تومان) — پول نقد، موجودی بانکی و ارزش طلا</label>
+        <input type="text" id="holdings" inputmode="numeric" value="۱٬۲۰۰٬۰۰۰٬۰۰۰">
+      </div>
+      <p class="hint">نصاب زکات نقدین، ارزش ۸۵ گرم طلاست. زکات وقتی واجب می‌شود که دارایی به نصاب برسد و یک سال قمری از آن بگذرد.</p>
+    </div>
+    <div class="out" id="out"><small>خمس سالانه</small><span class="big">—</span></div>
+    <table class="result" id="resultTable" hidden>
+      <tr><td id="r1Label">مازاد درآمد سال</td><td id="r1">—</td></tr>
+      <tr><td id="r2Label">سهم امام (نصف خمس)</td><td id="r2">—</td></tr>
+      <tr class="total"><td id="r3Label">سهم سادات (نصف خمس)</td><td id="r3">—</td></tr>
+    </table>
+    <div class="row">
+      <button class="btn-primary" type="button" id="copyBtn">کپی نتیجه</button>
+      <button class="btn-ghost" type="button" id="shareBtn">اشتراک‌گذاری</button>
+    </div>
+    <p class="examples">مثال:
+      <button class="chip" type="button" data-mode="khoms" data-a="600000000" data-b="480000000">خمس: درآمد ۶۰۰ و هزینه ۴۸۰ میلیون</button>
+      <button class="chip" type="button" data-mode="zakat" data-a="12500000" data-b="1200000000">زکات: طلا ۱۲٫۵ میلیون، دارایی ۱٫۲ میلیارد</button>
+      <button class="chip" type="button" data-mode="zakat" data-a="12500000" data-b="500000000">زکات: دارایی ۵۰۰ میلیون (کمتر از نصاب)</button>
+    </p>
+  </div>
+
+  <div class="card">
+    <h2>فرمول</h2>
+    <p class="formula">مازاد سال = درآمد سالانه − هزینه زندگی سالانه</p>
+    <p class="formula">خمس = مازاد سال × ۲۰٪</p>
+    <p class="formula">نصاب زکات نقدین = قیمت هر گرم طلا × ۸۵</p>
+    <p class="formula">زکات = دارایی × ۲٫۵٪ (فقط اگر دارایی به نصاب برسد و یک سال قمری بگذرد)</p>
+    <p>خمس به دو نیم مساوی تقسیم می‌شود: نصف آن «سهم امام» و نصف دیگر «سهم سادات» است.</p>
+  </div>
+
+  <div class="card">
+    <h2>مثال عددی</h2>
+    <p>خمس — درآمد سالانه ۶۰۰ میلیون تومان و هزینه زندگی ۴۸۰ میلیون تومان:</p>
+    <table class="result">
+      <tr><td>مازاد درآمد سال</td><td>۱۲۰٬۰۰۰٬۰۰۰ تومان</td></tr>
+      <tr><td>سهم امام (نصف خمس)</td><td>۱۲٬۰۰۰٬۰۰۰ تومان</td></tr>
+      <tr class="total"><td>سهم سادات (نصف خمس)</td><td>۱۲٬۰۰۰٬۰۰۰ تومان</td></tr>
+      <tr class="total"><td>خمس کل</td><td>۲۴٬۰۰۰٬۰۰۰ تومان</td></tr>
+    </table>
+    <p>زکات — قیمت هر گرم طلا ۱۲٬۵۰۰٬۰۰۰ تومان و دارایی ۱٬۲۰۰٬۰۰۰٬۰۰۰ تومان:</p>
+    <table class="result">
+      <tr><td>نصاب (۸۵ گرم طلا)</td><td>۱٬۰۶۲٬۵۰۰٬۰۰۰ تومان</td></tr>
+      <tr><td>دارایی</td><td>۱٬۲۰۰٬۰۰۰٬۰۰۰ تومان (بیشتر از نصاب)</td></tr>
+      <tr class="total"><td>زکات (۲٫۵٪ دارایی)</td><td>۳۰٬۰۰۰٬۰۰۰ تومان</td></tr>
+    </table>
+    <p class="meta">مثال‌های این صفحه با همین فرمول‌ها محاسبه و بازبینی شده‌اند. قیمت طلا در مثال فرضی است؛ قیمت روز را خودتان وارد کنید.</p>
+  </div>
+
+  <div class="card">
+    <h2>ورودی و خروجی یعنی چه</h2>
+    <ul class="tight">
+      <li><strong>مازاد درآمد سال:</strong> آنچه پس از هزینه‌های زندگی و بدهی‌ها در پایان سال خمسی باقی می‌ماند؛ خمس فقط به همین مازاد تعلق می‌گیرد.</li>
+      <li><strong>سهم امام و سهم سادات:</strong> خمس به دو نیم مساوی تقسیم می‌شود؛ هر کدام ۱۰٪ مازاد است.</li>
+      <li><strong>نصاب زکات:</strong> کمترین مقدار دارایی که زکات به آن تعلق می‌گیرد؛ برای نقدین، ارزش ۸۵ گرم طلا (نصاب نقره ۵۹۵ گرم است).</li>
+      <li><strong>زکات:</strong> ۲٫۵٪ دارایی، وقتی دارایی به نصاب رسیده و یک سال قمری از آن گذشته باشد.</li>
+    </ul>
+  </div>
+
+  <div class="card">
+    <h2>این ابزار برای چه مواردی مناسب نیست</h2>
+    <ul class="tight">
+      <li>فتوای قطعی — این ابزار فقط برآورد محاسباتی است؛ جزئیات خمس و زکات (سال خمسی، بدهی‌ها، ارث، هدیه، زکات فطره و موارد خاص) را با مرجع تقلید یا مرجع دینی معتبر بررسی کنید.</li>
+      <li>زکات غلات و دام — زکات گندم، جو، خرما، کشمش، شتر، گاو و گوسفند نصاب و نرخ جداگانه دارد و در این ابزار محاسبه نمی‌شود.</li>
+      <li>زکات فطره — مبلغ جداگانه‌ای است که در پایان ماه رمضان پرداخت می‌شود و ربطی به این محاسبه ندارد.</li>
+    </ul>
+  </div>
+
+  <div class="card faq">
+    <h2>پرسش‌های متداول</h2>
+    <details>
+      <summary>خمس به چه چیزهایی تعلق می‌گیرد؟</summary>
+      <p>به مازاد درآمد سالانه پس از هزینه‌های زندگی، و همچنین به ارث، هدیه، جایزه و معادن با شرایط خاص. خمس در آیه ۴۱ سوره انفال واجب شده و نرخ آن یک‌پنجم (۲۰٪) است.</p>
+    </details>
+    <details>
+      <summary>اگر مازاد نداشته باشم خمس دارم؟</summary>
+      <p>نه؛ اگر درآمد سالانه فقط کفاف هزینه زندگی را بدهد و مازادی نماند، خمسی تعلق نمی‌گیرد.</p>
+    </details>
+    <details>
+      <summary>نصاب زکات نقدین چقدر است؟</summary>
+      <p>ارزش ۸۵ گرم طلا یا ۵۹۵ گرم نقره. در عمل نصاب طلا ملاک است؛ اگر دارایی نقدی و طلای شما به این ارزش برسد و یک سال قمری بگذرد، ۲٫۵٪ آن زکات دارد.</p>
+    </details>
+    <details>
+      <summary>زکات را به چه کسی بدهم؟</summary>
+      <p>زکات به فقرا و مساکین، و موارد مشخص‌شده در قرآن تعلق می‌گیرد؛ برای مصرف دقیق آن با مرجع دینی معتبر مشورت کنید.</p>
+    </details>
+  </div>
+
+  <div class="card">
+    <h2>منابع و تاریخ بازبینی</h2>
+    <ul class="tight">
+      <li>خمس ۲۰٪ مازاد (یک‌پنجم): آیه ۴۱ سوره انفال؛ تقسیم به سهم امام و سهم سادات: رساله‌های عملیه مراجع تقلید.</li>
+      <li>نصاب زکات نقدین (۸۵ گرم طلا / ۵۹۵ گرم نقره) و نرخ ۲٫۵٪: منابع فقهی رایج و رساله‌های عملیه.</li>
+      <li>مثال‌های عددی این صفحه با همین قواعد محاسبه و بازبینی شده‌اند؛ قیمت طلا در مثال فرضی است.</li>
+    </ul>
+    <p class="meta">آخرین بازبینی: ۶ آذر ۱۴۰۵</p>
+  </div>
+
+  <div class="card">
+    <h2>ابزارهای مرتبط</h2>
+    <div class="related">
+      <a href="salary-tax.html">محاسبه حقوق و مالیات</a>
+      <a href="percentage.html">محاسبه درصد</a>
+      <a href="gold-price.html">محاسبه قیمت طلای ساخته‌شده</a>
+      <a href="loan-installment.html">محاسبه اقساط وام</a>
+      <a href="index.html">همه ابزارها</a>
+    </div>
+  </div>
+
+  <footer>
+    دم‌دست — ابزار، قیمت و خبر؛ همه در یک‌جا<br>
+    ساخته‌شده توسط کوروش فرجی (KouroshLabs) ·
+    <a href="about.html">درباره ما</a> · <a href="contact.html">تماس</a> · <a href="privacy.html">حریم خصوصی</a><br>
+    <span style="font-size:12px">پردازش اطلاعات این ابزار در مرورگر شما انجام می‌شود و محتوای واردشده برای پردازش به سرور ارسال نمی‌شود.</span>
+  </footer>
+</div>
+
+<script src="assets/common.js"></script>
+<script>
+(function () {
+  var modeEl = document.getElementById('mode');
+  var khomsFields = document.getElementById('khomsFields');
+  var zakatFields = document.getElementById('zakatFields');
+  var incomeEl = document.getElementById('income');
+  var expenseEl = document.getElementById('expense');
+  var goldEl = document.getElementById('goldPrice');
+  var holdEl = document.getElementById('holdings');
+  var out = document.getElementById('out');
+  var table = document.getElementById('resultTable');
+  var lastText = '';
+  function calc() {
+    if (modeEl.value === 'khoms') {
+      var income = parseFaNum(incomeEl.value);
+      var expense = parseFaNum(expenseEl.value);
+      if (!(income >= 0) || !(expense >= 0) || isNaN(income) || isNaN(expense)) {
+        out.innerHTML = '<small>لطفاً درآمد و هزینه سالانه را درست وارد کنید.</small>';
+        table.hidden = true; lastText = ''; return;
+      }
+      var surplus = Math.max(0, income - expense);
+      var khoms = Math.round(surplus * 0.20);
+      var half = Math.round(khoms / 2);
+      out.innerHTML = '<small>خمس سالانه</small><span class="big">' + faMoney(khoms) + ' تومان</span>';
+      document.getElementById('r1Label').textContent = 'مازاد درآمد سال';
+      document.getElementById('r1').textContent = faMoney(surplus) + ' تومان';
+      document.getElementById('r2Label').textContent = 'سهم امام (نصف خمس)';
+      document.getElementById('r2').textContent = faMoney(half) + ' تومان';
+      document.getElementById('r3Label').textContent = 'سهم سادات (نصف خمس)';
+      document.getElementById('r3').textContent = faMoney(half) + ' تومان';
+      table.hidden = false;
+      lastText = surplus === 0
+        ? 'محاسبه خمس — مازادی نمانده است؛ خمسی تعلق نمی‌گیرد. (دم‌دست)'
+        : 'محاسبه خمس — مازاد درآمد سال: ' + faMoney(surplus) + ' تومان، خمس: ' + faMoney(khoms) + ' تومان (سهم امام ' + faMoney(half) + ' + سهم سادات ' + faMoney(half) + '). (دم‌دست)';
+    } else {
+      var price = parseFaNum(goldEl.value);
+      var hold = parseFaNum(holdEl.value);
+      if (!(price > 0) || !(hold >= 0) || isNaN(price) || isNaN(hold)) {
+        out.innerHTML = '<small>لطفاً قیمت طلا (بیشتر از صفر) و دارایی را درست وارد کنید.</small>';
+        table.hidden = true; lastText = ''; return;
+      }
+      var nisab = Math.round(price * 85);
+      var due = hold >= nisab;
+      var zakat = due ? Math.round(hold * 0.025) : 0;
+      out.innerHTML = due
+        ? '<small>زکات نقدین</small><span class="big">' + faMoney(zakat) + ' تومان</span>'
+        : '<small>زکات نقدین</small><span class="big">تعلق نمی‌گیرد</span>';
+      document.getElementById('r1Label').textContent = 'نصاب (۸۵ گرم طلا)';
+      document.getElementById('r1').textContent = faMoney(nisab) + ' تومان';
+      document.getElementById('r2Label').textContent = 'دارایی شما';
+      document.getElementById('r2').textContent = faMoney(hold) + ' تومان' + (due ? ' (بیشتر از نصاب)' : ' (کمتر از نصاب)');
+      document.getElementById('r3Label').textContent = 'زکات (۲٫۵٪ دارایی)';
+      document.getElementById('r3').textContent = due ? faMoney(zakat) + ' تومان' : '—';
+      table.hidden = false;
+      lastText = due
+        ? 'محاسبه زکات — نصاب (۸۵ گرم طلا): ' + faMoney(nisab) + ' تومان، دارایی: ' + faMoney(hold) + ' تومان، زکات: ' + faMoney(zakat) + ' تومان. (دم‌دست)'
+        : 'محاسبه زکات — دارایی ' + faMoney(hold) + ' تومان کمتر از نصاب ' + faMoney(nisab) + ' تومان است؛ زکاتی تعلق نمی‌گیرد. (دم‌دست)';
+    }
+  }
+  function syncMode() {
+    var k = modeEl.value === 'khoms';
+    khomsFields.hidden = !k;
+    zakatFields.hidden = k;
+    calc();
+  }
+  [incomeEl, expenseEl, goldEl, holdEl].forEach(function (el) { el.addEventListener('input', calc); });
+  modeEl.addEventListener('change', syncMode);
+  document.querySelectorAll('.examples .chip').forEach(function (chip) {
+    chip.addEventListener('click', function () {
+      modeEl.value = chip.dataset.mode;
+      syncMode();
+      if (chip.dataset.mode === 'khoms') {
+        incomeEl.value = faMoney(parseFloat(chip.dataset.a));
+        expenseEl.value = faMoney(parseFloat(chip.dataset.b));
+      } else {
+        goldEl.value = faMoney(parseFloat(chip.dataset.a));
+        holdEl.value = faMoney(parseFloat(chip.dataset.b));
+      }
+      calc();
+    });
+  });
+  document.getElementById('copyBtn').addEventListener('click', function () {
+    if (lastText) copyText(lastText, this);
+  });
+  document.getElementById('shareBtn').addEventListener('click', function () {
+    if (lastText) shareText(lastText, this);
+  });
+  syncMode();
+})();
+</script>
+</body>
+</html>

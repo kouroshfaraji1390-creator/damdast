@@ -92,6 +92,9 @@
       <a class="tool-card gold" href="deposit-interest.html" data-keywords="سپرده سود سپرده سود بانکی سود ساده سود مرکب سپرده گذاری"><span class="icon">💰</span><h3>محاسبه سود سپرده بانکی</h3><p>سود ساده و مرکب سپرده، مبلغ نهایی</p></a>
       <a class="tool-card gold" href="rent-deposit.html" data-keywords="رهن اجاره تبدیل رهن به اجاره رهن کامل اجاره ماهانه صدی سه ودیعه پول پیش"><span class="icon">🏠</span><h3>محاسبه رهن و اجاره</h3><p>تبدیل رهن به اجاره و برعکس، حالت ترکیبی</p></a>
       <a class="tool-card gold" href="vat.html" data-keywords="مالیات مالیات بر ارزش افزوده ارزش افزوده نرخ مالیات 10 درصد فاکتور"><span class="icon">🧾</span><h3>محاسبه مالیات بر ارزش افزوده</h3><p>مالیات ۱۰٪ سال ۱۴۰۵؛ با مالیات و بدون مالیات</p></a>
+      <a class="tool-card gold" href="percentage.html" data-keywords="درصد محاسبه درصد چند درصد افزایش کاهش تخفیف نسبت"><span class="icon">٪</span><h3>محاسبه درصد</h3><p>درصد یک عدد، نسبت دو عدد و تغییر درصدی</p></a>
+      <a class="tool-card gold" href="salary-tax.html" data-keywords="حقوق مالیات حقوق مالیات 1405 معافیت 40 میلیون پلکانی بیمه تامین اجتماعی فیش حقوقی"><span class="icon">💼</span><h3>محاسبه حقوق و مالیات ۱۴۰۵</h3><p>جدول پلکانی، معافیت ۴۰ میلیونی و بیمه</p></a>
+      <a class="tool-card" href="khoms-zakat.html" data-keywords="خمس زکات خمس 20 درصد نصاب زکات 85 گرم طلا سهم امام سهم سادات"><span class="icon">🕌</span><h3>محاسبه خمس و زکات</h3><p>خمس مازاد درآمد و زکات نقدین با نصاب طلا</p></a>
     </div>
 
     <div class="cat-title">📅 تقویم و تاریخ</div>
@@ -100,6 +103,7 @@
       <a class="tool-card" href="calendar-1406.html" data-keywords="تقویم 1406 تقویم سال ۱۴۰۶ تعطیلات رسمی مناسبت‌ها ماه"><span class="icon">📆</span><h3>تقویم ۱۴۰۶</h3><p>تقویم سال ۱۴۰۶ با تعطیلات رسمی و مناسبت‌ها</p></a>
       <a class="tool-card" href="occasions.html" data-keywords="مناسبت‌ها مناسبت ملی مذهبی عید فطر عید قربان عاشورا شب یلدا چهارشنبه سوری"><span class="icon">🎉</span><h3>مناسبت‌های ۱۴۰۶</h3><p>مناسبت‌های ملی، مذهبی و فصلی سال ۱۴۰۶</p></a>
       <a class="tool-card" href="prayer-times.html" data-keywords="اوقات شرعی اذان صبح ظهر مغرب عشاء نماز طلوع آفتاب"><span class="icon">🕌</span><h3>اوقات شرعی</h3><p>اذان صبح، ظهر، مغرب و عشاء شهرهای ایران</p></a>
+      <a class="tool-card" href="age-calculator.html" data-keywords="سن محاسبه سن تاریخ تولد سال ماه روز چند سالمه تولد"><span class="icon">🎂</span><h3>محاسبه دقیق سن</h3><p>سن به سال، ماه و روز — شمسی و میلادی</p></a>
     </div>
 
     <div class="cat-title">🔄 تبدیل‌ها</div>
@@ -259,10 +263,20 @@
       });
       strip.hidden = false;
       document.getElementById('priceSoon').style.display = 'none';
-      var meta = '';
-      if (d.source) meta += 'منبع: ' + d.source + ' · ';
-      if (d.updated_at) meta += 'آخرین به‌روزرسانی: ' + d.updated_at;
-      document.getElementById('priceMeta').textContent = meta;
+      var metaEl = document.getElementById('priceMeta');
+      metaEl.innerHTML = '';
+      if (d.source) {
+        metaEl.appendChild(document.createTextNode('منبع: '));
+        if (d.source_url) {
+          var a = document.createElement('a');
+          a.href = d.source_url; a.textContent = d.source; a.target = '_blank'; a.rel = 'noopener';
+          metaEl.appendChild(a);
+        } else {
+          metaEl.appendChild(document.createTextNode(d.source));
+        }
+        metaEl.appendChild(document.createTextNode(' · '));
+      }
+      if (d.updated_at) metaEl.appendChild(document.createTextNode('آخرین به‌روزرسانی: ' + d.updated_at));
     })
     .catch(function () { /* prices not available yet — «به‌زودی» state stays */ });
 })();

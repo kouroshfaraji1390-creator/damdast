@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>محاسبه حقوق و مالیات ۱۴۰۵ | جدول پلکانی و معافیت ۴۰ میلیونی</title>
+<meta name="description" content="محاسبه مالیات حقوق ۱۴۰۵ با جدول پلکانی: معافیت ماهانه ۴۰ میلیون تومان و نرخ‌های ۱۰ تا ۳۰ درصد؛ با کسر بیمه تأمین اجتماعی.">
+<meta property="og:title" content="محاسبه حقوق و مالیات ۱۴۰۵ | جدول پلکانی و معافیت ۴۰ میلیونی">
+<meta property="og:description" content="مالیات حقوق ماهانه و سالانه ۱۴۰۵ را با جدول پلکانی و معافیت ۴۰ میلیون تومانی حساب کنید.">
+<meta property="og:type" content="website">
+<link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+<header class="site-header">
+  <div class="inner">
+    <a class="brand" href="index.html">دم‌دست<small>ابزار، قیمت و خبر؛ همه در یک‌جا</small></a>
+    <nav>
+      <a href="index.html#tools">ابزارها</a>
+      <a href="index.html#prices">قیمت‌ها</a>
+      <a href="index.html#briefing">مرور صبحگاهی</a>
+      <a href="about.html">درباره ما</a>
+    </nav>
+  </div>
+</header>
+
+<div class="wrap">
+  <p class="breadcrumb"><a href="index.html">دم‌دست</a> ← <a href="index.html#tools">ابزارها</a> ← محاسبه حقوق و مالیات</p>
+  <h1>محاسبه حقوق و مالیات ۱۴۰۵</h1>
+  <p class="sub">مالیات حقوق ماهانه و سالانه با جدول پلکانی قانون بودجه ۱۴۰۵؛ معافیت ماهانه ۴۰ میلیون تومان.</p>
+
+  <div class="card gold">
+    <div class="field">
+      <label for="gross">حقوق ناخالص ماهانه (تومان)</label>
+      <input type="text" id="gross" inputmode="numeric" value="۱۰۰٬۰۰۰٬۰۰۰">
+    </div>
+    <div class="field">
+      <label for="insRate">سهم بیمه تأمین اجتماعی کارمند (٪) — پیش‌فرض ۷٪؛ اگر بیمه ندارید صفر بگذارید</label>
+      <input type="text" id="insRate" inputmode="decimal" value="۷">
+    </div>
+    <p class="hint">مالیات بر «درآمد مشمول» حساب می‌شود: حقوق ناخالص منهای سهم بیمه کارمند و معافیت‌ها. اضافه‌کار، پاداش و کارانه در ۱۴۰۵ در درآمد مشمول حساب می‌شوند.</p>
+    <div class="out" id="out"><small>مالیات ماهانه</small><span class="big">—</span></div>
+    <table class="result" id="resultTable" hidden>
+      <tr><td>سهم بیمه کارمند</td><td id="rIns">—</td></tr>
+      <tr><td>درآمد مشمول ماهانه</td><td id="rTaxable">—</td></tr>
+      <tr><td>مالیات ماهانه</td><td id="rTaxM">—</td></tr>
+      <tr><td>مالیات سالانه</td><td id="rTaxY">—</td></tr>
+      <tr class="total"><td>حقوق خالص ماهانه (پس از بیمه و مالیات)</td><td id="rNet">—</td></tr>
+    </table>
+    <div id="bracketBox" hidden>
+      <h3 style="margin-top:14px">جزئیات پله‌ها</h3>
+      <table class="result" id="bracketTable"></table>
+    </div>
+    <div class="row">
+      <button class="btn-primary" type="button" id="copyBtn">کپی نتیجه</button>
+      <button class="btn-ghost" type="button" id="shareBtn">اشتراک‌گذاری</button>
+    </div>
+    <p class="examples">مثال:
+      <button class="chip" type="button" data-gross="40000000" data-ins="7">ناخالص ۴۰ میلیون</button>
+      <button class="chip" type="button" data-gross="60000000" data-ins="0">مشمول ۶۰ میلیون (بدون بیمه)</button>
+      <button class="chip" type="button" data-gross="100000000" data-ins="0">مشمول ۱۰۰ میلیون (بدون بیمه)</button>
+      <button class="chip" type="button" data-gross="200000000" data-ins="0">مشمول ۲۰۰ میلیون (بدون بیمه)</button>
+    </p>
+  </div>
+
+  <div class="card">
+    <h2>فرمول</h2>
+    <p class="formula">درآمد مشمول = حقوق ناخالص − سهم بیمه کارمند</p>
+    <p class="formula">مالیات = جمع مالیات هر پله (هر بخش از درآمد فقط با نرخ همان پله)</p>
+    <p>مالیات پلکانی است: نرخ بالاتر فقط روی بخشی از درآمد که در آن پله قرار می‌گیرد اعمال می‌شود، نه روی کل درآمد.</p>
+  </div>
+
+  <div class="card">
+    <h2>جدول پلکانی مالیات حقوق ۱۴۰۵</h2>
+    <table class="result">
+      <tr><td>تا ۴۰ میلیون تومان در ماه</td><td>معاف</td></tr>
+      <tr><td>مازاد ۴۰ تا ۸۰ میلیون</td><td>۱۰٪</td></tr>
+      <tr><td>مازاد ۸۰ تا ۱۰۰ میلیون</td><td>۱۵٪</td></tr>
+      <tr><td>مازاد ۱۰۰ تا ۱۲۰ میلیون</td><td>۲۰٪</td></tr>
+      <tr><td>مازاد ۱۲۰ تا ۱۴۰ میلیون</td><td>۲۵٪</td></tr>
+      <tr><td>مازاد ۱۴۰ میلیون به بالا</td><td>۳۰٪</td></tr>
+    </table>
+    <p>معادل سالانه: معافیت ۴۸۰ میلیون تومان؛ پله‌ها تا ۹۶۰، ۱٬۲۰۰، ۱٬۴۴۰ و ۱٬۶۸۰ میلیون تومان و مازاد آن با همان نرخ‌ها.</p>
+  </div>
+
+  <div class="card">
+    <h2>مثال عددی</h2>
+    <p>درآمد مشمول ماهانه ۱۰۰ میلیون تومان (بدون بیمه):</p>
+    <table class="result">
+      <tr><td>۴۰ میلیون اول</td><td>معاف — ۰ تومان</td></tr>
+      <tr><td>۴۰ میلیون بعدی (۴۰ تا ۸۰)</td><td>۱۰٪ — ۴٬۰۰۰٬۰۰۰ تومان</td></tr>
+      <tr><td>۲۰ میلیون بعدی (۸۰ تا ۱۰۰)</td><td>۱۵٪ — ۳٬۰۰۰٬۰۰۰ تومان</td></tr>
+      <tr class="total"><td>مالیات ماهانه</td><td>۷٬۰۰۰٬۰۰۰ تومان</td></tr>
+    </table>
+    <p>مثال‌های دیگر با همین جدول: مشمول ۶۰ میلیون ← مالیات ۲٬۰۰۰٬۰۰۰ تومان در ماه؛ مشمول ۲۰۰ میلیون ← ۳۴٬۰۰۰٬۰۰۰ تومان در ماه.</p>
+    <p class="meta">مثال‌های این صفحه با جدول بالا محاسبه و بازبینی شده‌اند.</p>
+  </div>
+
+  <div class="card">
+    <h2>ورودی و خروجی یعنی چه</h2>
+    <ul class="tight">
+      <li><strong>حقوق ناخالص ماهانه:</strong> جمع حقوق و مزایای مشمول پیش از هر کسری.</li>
+      <li><strong>سهم بیمه کارمند:</strong> معمولاً ۷٪ حقوق؛ کارفرما ۲۳٪ جداگانه می‌پردازد. اگر بیمه ندارید صفر وارد کنید.</li>
+      <li><strong>درآمد مشمول:</strong> مبنای محاسبه مالیات؛ ناخالص منهای بیمه و معافیت‌های قانونی.</li>
+      <li><strong>حقوق خالص:</strong> مبلغی که پس از کسر بیمه و مالیات به دست کارمند می‌رسد.</li>
+    </ul>
+  </div>
+
+  <div class="card">
+    <h2>این ابزار برای چه مواردی مناسب نیست</h2>
+    <ul class="tight">
+      <li>مشاوره مالیاتی — این ابزار فقط محاسبه می‌کند؛ عیدی، سنوات، مزایای غیرنقدی و معافیت‌های ماده ۹۱ شرایط جداگانه دارند. برای فیش حقوقی رسمی با حسابدار یا سازمان امور مالیاتی مشورت کنید.</li>
+      <li>مالیات مشاغل و شرکت‌ها — این صفحه فقط مالیات حقوق بگیران است.</li>
+      <li>اعضای هیأت علمی و قضات — طبق قانون بودجه ۱۴۰۵ نرخ مالیات حقوق آن‌ها ۱۰٪ ثابت است و جدول پلکانی شاملشان نمی‌شود.</li>
+    </ul>
+  </div>
+
+  <div class="card faq">
+    <h2>پرسش‌های متداول</h2>
+    <details>
+      <summary>سقف معافیت مالیات حقوق ۱۴۰۵ چقدر است؟</summary>
+      <p>۴۸۰ میلیون تومان در سال، یعنی ۴۰ میلیون تومان در ماه (ردیف ۱ جدول الزامات منابع قانون بودجه ۱۴۰۵، ماده ۸۴ قانون مالیات‌های مستقیم).</p>
+    </details>
+    <details>
+      <summary>آیا اضافه‌کار و پاداش هم مالیات دارد؟</summary>
+      <p>بله؛ در ۱۴۰۵ اضافه‌کار، پاداش، کارانه و پرداخت‌های رفاهی در جمع درآمد مشمول و با همان جدول پلکانی محاسبه می‌شوند. نرخ ثابت ۱۰٪ اضافه‌کار مربوط به قانون بودجه ۱۴۰۴ بود.</p>
+    </details>
+    <details>
+      <summary>چرا مالیات را سالانه حساب می‌کنند و ماهانه کسر می‌شود؟</summary>
+      <p>جدول قانون سالانه است؛ با فرض حقوق ثابت، حقوق ماهانه × ۱۲ در جدول سالانه گذاشته و نتیجه بر ۱۲ تقسیم می‌شود — همان پله‌های ماهانه ۴۰، ۸۰، ۱۰۰، ۱۲۰ و ۱۴۰ میلیون تومان.</p>
+    </details>
+    <details>
+      <summary>عیدی هم مالیات دارد؟</summary>
+      <p>عیدی و پاداش پایان سال جمعاً تا یک‌دوازدهم معافیت سالانه — یعنی ۴۰ میلیون تومان در ۱۴۰۵ — معاف است و مازاد آن به درآمد مشمول اضافه می‌شود.</p>
+    </details>
+  </div>
+
+  <div class="card">
+    <h2>منابع و تاریخ بازبینی</h2>
+    <ul class="tight">
+      <li>سقف معافیت ۴۰ میلیون تومان در ماه و جدول پلکانی ۱۰٪ تا ۳۰٪ (قانون بودجه ۱۴۰۵، جدول الزامات منابع؛ مواد ۸۲ تا ۹۲ و ۸۴ قانون مالیات‌های مستقیم): dadyar.pro، m.haghnava.com، systemgroup.net.</li>
+      <li>مثال‌های عددی (۶۰ میلیون ← ۲ میلیون؛ ۱۰۰ میلیون ← ۷ میلیون؛ ۲۰۰ میلیون ← ۳۴ میلیون تومان مالیات ماهانه): dadyar.pro و m.haghnava.com.</li>
+      <li>شمول اضافه‌کار و پاداش در درآمد مشمول ۱۴۰۵ و نرخ ۱۰٪ اعضای هیأت علمی و قضات: m.haghnava.com.</li>
+    </ul>
+    <p class="meta">آخرین بازبینی: ۶ آذر ۱۴۰۵</p>
+  </div>
+
+  <div class="card">
+    <h2>ابزارهای مرتبط</h2>
+    <div class="related">
+      <a href="percentage.html">محاسبه درصد</a>
+      <a href="vat.html">محاسبه مالیات بر ارزش افزوده</a>
+      <a href="loan-installment.html">محاسبه اقساط وام</a>
+      <a href="deposit-interest.html">محاسبه سود سپرده بانکی</a>
+      <a href="index.html">همه ابزارها</a>
+    </div>
+  </div>
+
+  <footer>
+    دم‌دست — ابزار، قیمت و خبر؛ همه در یک‌جا<br>
+    ساخته‌شده توسط کوروش فرجی (KouroshLabs) ·
+    <a href="about.html">درباره ما</a> · <a href="contact.html">تماس</a> · <a href="privacy.html">حریم خصوصی</a><br>
+    <span style="font-size:12px">پردازش اطلاعات این ابزار در مرورگر شما انجام می‌شود و محتوای واردشده برای پردازش به سرور ارسال نمی‌شود.</span>
+  </footer>
+</div>
+
+<script src="assets/common.js"></script>
+<script>
+(function () {
+  var grossEl = document.getElementById('gross');
+  var insEl = document.getElementById('insRate');
+  var out = document.getElementById('out');
+  var table = document.getElementById('resultTable');
+  var bracketBox = document.getElementById('bracketBox');
+  var bracketTable = document.getElementById('bracketTable');
+  var lastText = '';
+  // Monthly brackets (Toman): [upper limit, rate]
+  var BRACKETS = [
+    [40000000, 0], [80000000, 0.10], [100000000, 0.15],
+    [120000000, 0.20], [140000000, 0.25], [Infinity, 0.30]
+  ];
+  function calc() {
+    var gross = parseFaNum(grossEl.value);
+    var insRate = parseFaNum(insEl.value);
+    if (!(gross > 0) || isNaN(insRate) || insRate < 0 || insRate > 30) {
+      out.innerHTML = '<small>لطفاً حقوق ناخالص (بیشتر از صفر) و نرخ بیمه (۰ تا ۳۰ درصد) را درست وارد کنید.</small>';
+      table.hidden = true; bracketBox.hidden = true; lastText = ''; return;
+    }
+    var ins = Math.round(gross * insRate / 100);
+    var taxable = Math.max(0, gross - ins);
+    var tax = 0, prev = 0, rows = [];
+    BRACKETS.forEach(function (b) {
+      if (taxable <= prev) return;
+      var cap = b[0], rate = b[1];
+      var amount = Math.min(taxable, cap) - prev;
+      var t = Math.round(amount * rate);
+      tax += t;
+      var range = cap === Infinity
+        ? 'مازاد ' + faMoney(prev)
+        : faMoney(prev) + ' تا ' + faMoney(cap);
+      rows.push('<tr><td>' + range + ' (' + faNum(rate * 100) + '٪)</td><td>' + faMoney(t) + ' تومان</td></tr>');
+      prev = cap;
+    });
+    tax = Math.round(tax);
+    var net = gross - ins - tax;
+    out.innerHTML = '<small>مالیات ماهانه</small><span class="big">' + faMoney(tax) + ' تومان</span>';
+    document.getElementById('rIns').textContent = faMoney(ins) + ' تومان';
+    document.getElementById('rTaxable').textContent = faMoney(taxable) + ' تومان';
+    document.getElementById('rTaxM').textContent = faMoney(tax) + ' تومان';
+    document.getElementById('rTaxY').textContent = faMoney(tax * 12) + ' تومان';
+    document.getElementById('rNet').textContent = faMoney(net) + ' تومان';
+    table.hidden = false;
+    bracketTable.innerHTML = rows.join('');
+    bracketBox.hidden = false;
+    lastText = 'محاسبه مالیات حقوق ۱۴۰۵ — حقوق ناخالص ماهانه: ' + faMoney(gross) + ' تومان، بیمه (' + faNum(insRate) + '٪): ' + faMoney(ins) + ' تومان، درآمد مشمول: ' + faMoney(taxable) + ' تومان، مالیات ماهانه: ' + faMoney(tax) + ' تومان، حقوق خالص: ' + faMoney(net) + ' تومان. (دم‌دست)';
+  }
+  [grossEl, insEl].forEach(function (el) { el.addEventListener('input', calc); });
+  document.querySelectorAll('.examples .chip').forEach(function (chip) {
+    chip.addEventListener('click', function () {
+      grossEl.value = faMoney(parseFloat(chip.dataset.gross));
+      insEl.value = faNum(chip.dataset.ins);
+      calc();
+    });
+  });
+  document.getElementById('copyBtn').addEventListener('click', function () {
+    if (lastText) copyText(lastText, this);
+  });
+  document.getElementById('shareBtn').addEventListener('click', function () {
+    if (lastText) shareText(lastText, this);
+  });
+  calc();
+})();
+</script>
+</body>
+</html>
