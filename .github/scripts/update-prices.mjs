@@ -7,24 +7,27 @@
 //
 // Endpoint (from public docs at https://docs.nerkh.io):
 //   GET https://api.nerkh.io/v2/prices/json/lite
-// The docs list the paths but not the auth scheme, so this script tries the
-// three common ways of sending a token, in order, and remembers the one that
-// works in .github/nerkh-auth-method.txt:
-//   1. Authorization: Bearer <token>
-//   2. X-API-Key: <token>
-//   3. ?token=<token> query parameter
-// A request with no token to this endpoint returns 401, which confirms the
-// endpoint exists and requires authentication.
+// Auth scheme PROVEN by workflow run #1 (2026-11-27): Authorization: Bearer
+// <token> works ("OK with method: bearer"); the other two methods stay as
+// fallbacks, and the working one is remembered in
+// .github/nerkh-auth-method.txt. A request with no token to this endpoint
+// returns 401, which confirms the endpoint exists and requires authentication.
 //
-// The response shape is parsed defensively: the docs do not publish an
-// example body, so the parser accepts an array, { data: [...] },
-// { prices: [...] }, { items: [...] }, or an object keyed by symbol, and
-// reads price/change from several common field names. If the shape is not
-// recognised, the script fails loudly instead of writing wrong data.
+// Response shape PROVEN by run #1: the body is
+//   { "data": { "message": "Success", "status": 200, "count": 43,
+//               "gold": { "GOLD18K": { "current": "25940500", ... }, ... },
+//               "currency": { "USD": { "current": "...", ... }, ... }, ... } }
+// i.e. data is an object of groups (gold, currency, crypto, ...), each group
+// an object keyed by symbol, each symbol an object with a "current" price
+// field (string) and change fields. The parser walks the whole tree and
+// collects every object that carries a price field, so it also accepts a
+// top-level array or { data/prices/items/result: [...] } shape. If the shape
+// is not recognised, the script fails loudly instead of writing wrong data.
 //
-// Prices are assumed to be in Toman. If the 18k gold value is above
-// 100,000,000 the values are treated as Rial, divided by 10, and a warning
-// is logged. Check the first run's log to confirm the unit.
+// Prices are in Toman — PROVEN by run #1 (GOLD18K = 25,940,500, far below
+// the 100,000,000 Rial threshold). The /10 guard below stays as a safety net:
+// if 18k gold ever comes back above 100,000,000, the values are treated as
+// Rial and divided by 10, with a warning logged.
 
 import { readFileSync, writeFileSync, existsSync, mkdirSync } from 'node:fs';
 
@@ -84,30 +87,49 @@ function toNumber(v) {
   return undefined;
 }
 
+// Prefer an explicitly percent-named field; a bare "change" is only trusted
+// as a percent when it is small (|x| <= 100) — a real daily percent move.
+// (A large bare "change" would be an absolute Toman amount, not a percent.)
+function pickChange(v) {
+  const pct = toNumber(pick(v, ['change_pct', 'change_percent', 'percent', 'change24h_pct', 'change_percentage']));
+  if (pct !== undefined) return pct;
+  const c = toNumber(pick(v, ['change', 'change24h']));
+  if (c !== undefined && Math.abs(c) <= 100) return c;
+  return undefined;
+}
+
 // Extract a flat [{ symbol, price, change_pct }] list from an unknown shape.
+// Walks the whole tree and collects every object that carries a price field:
+//   - keyed by symbol: { "gold": { "GOLD18K": { "current": "25940500" } } }
+//   - array items with an explicit symbol field: [{ "symbol": "USD", "price": 1 }]
 function extractItems(json) {
-  let arr = null;
-  if (Array.isArray(json)) arr = json;
-  else if (json && typeof json === 'object') {
-    for (const key of ['data', 'prices', 'items', 'result']) {
-      if (Array.isArray(json[key])) { arr = json[key]; break; }
-    }
-    if (!arr) {
-      // Object keyed by symbol: { "GOLD18K": { "price": ... }, ... }
-      const entries = Object.entries(json).filter(([, v]) => v && typeof v === 'object');
-      if (entries.length > 0) arr = entries.map(([k, v]) => ({ symbol: k, ...v }));
+  const found = [];
+  const seen = new Set();
+  function collect(symbol, obj) {
+    const s = String(symbol).toUpperCase();
+    if (seen.has(s)) return;
+    seen.add(s);
+    found.push({ symbol: s, price: toNumber(pick(obj, ['current', 'price', 'value', 'rate', 'price_toman', 'amount'])), change_pct: pickChange(obj) });
+  }
+  function walk(node) {
+    if (!node || typeof node !== 'object') return;
+    if (Array.isArray(node)) { for (const el of node) walk(el); return; }
+    // An object that carries its own symbol + price fields (array-item shape).
+    const ownSymbol = pick(node, ['symbol', 'code', 'key', 'name', 'id']);
+    const ownPrice = toNumber(pick(node, ['current', 'price', 'value', 'rate', 'price_toman', 'amount']));
+    if (ownSymbol !== undefined && ownPrice !== undefined) { collect(ownSymbol, node); return; }
+    for (const [k, v] of Object.entries(node)) {
+      if (v && typeof v === 'object' && !Array.isArray(v)) {
+        const price = toNumber(pick(v, ['current', 'price', 'value', 'rate', 'price_toman', 'amount']));
+        if (price !== undefined) { collect(k, v); continue; } // a symbol entry
+        walk(v); // a group (gold, currency, ...) — descend
+      } else if (Array.isArray(v)) {
+        walk(v);
+      }
     }
   }
-  if (!arr) return null;
-  const items = [];
-  for (const raw of arr) {
-    const symbol = String(pick(raw, ['symbol', 'code', 'key', 'name', 'id']) || '').toUpperCase();
-    const price = toNumber(pick(raw, ['price', 'value', 'rate', 'current', 'price_toman', 'amount']));
-    if (!symbol || price === undefined) continue;
-    const change = toNumber(pick(raw, ['change_pct', 'change', 'change24h', 'percent', 'change_percent']));
-    items.push({ symbol, price, change_pct: change });
-  }
-  return items;
+  walk(json);
+  return found.length ? found : null;
 }
 
 // Persian labels for the symbols the homepage strip shows.
