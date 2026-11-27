@@ -1,0 +1,71 @@
+name: Update live prices
+
+# قیمت‌های زنده طلا، سکه و دلار را هر ۱۵ دقیقه از نرخ (nerkh.io) می‌گیرد و
+# در data/prices.json می‌نویسد تا نوار قیمت صفحه اصلی سایت نمایش دهد.
+#
+# ⚠️ نکته‌های مهم (پیش از نخستین اجرا بخوانید):
+# ۱) توکن API باید در GitHub Secrets با نام NERKH_TOKEN تنظیم شده باشد.
+#    مقدار توکن هرگز در این فایل یا هیچ فایل دیگری نوشته نمی‌شود.
+# ۲) آدرس پایه API و مسیرها از مستندات عمومی نرخ تأیید شده‌اند:
+#    https://docs.nerkh.io — مسیر /v2/prices/json/lite
+#    و میزبان api.nerkh.io (اعلام‌شده در صفحه افزونه وردپرس نرخ در wordpress.org).
+#    یک درخواست بدون توکن به همین آدرس 401 برمی‌گرداند؛ یعنی آدرس درست است
+#    و فقط احراز هویت لازم دارد.
+# ۳) شیوه دقیق ارسال توکن در مستندات عمومی نرخ ذکر نشده است. اسکریپت
+#    نخست «Authorization: Bearer <token>» را امتحان می‌کند؛ اگر 401 گرفت،
+#    «X-API-Key: <token>» و سپس «?token=<token>» را امتحان می‌کند و شیوه‌ای
+#    را که جواب داد در .github/nerkh-auth-method.txt ثبت می‌کند تا اجراهای
+#    بعدی فقط همان یک شیوه را بفرستند (مصرف سهمیه روزانه بیهوده بالا نرود).
+#    پس از نخستین اجرای موفق، شیوه ثبت‌شده را در لاگ بررسی کنید و اگر لازم
+#    بود همان را به‌صورت ثابت نگه دارید.
+# ۴) فرض قیمت‌ها «تومان» است. اسکریپت اگر مقدار طلای ۱۸ عیار بیش از
+#    ۱۰۰٬۰۰۰٬۰۰۰ بود آن را ریال فرض می‌کند، بر ۱۰ تقسیم می‌کند و در لاگ
+#    هشدار می‌دهد — در نخستین اجرا مقدارها را در لاگ بررسی کنید.
+# ۵) سهمیه بسته رایگان ماهانه نرخ: ۱۵۰ درخواست در روز و ۶ درخواست در ساعت.
+#    این زمان‌بندی ۴ درخواست در ساعت و ۹۶ درخواست در روز می‌سازد و در هر دو
+#    سقف جا می‌شود. اگر روزی سهمیه تمام شد، اجرا ناموفق می‌شود و فایل
+#    قیمت‌ها با آخرین مقدار خوب باقی می‌ماند؛ نوار قیمت صفحه اصلی در آن
+#    صورت همان مقدار قبلی را نشان می‌دهد.
+
+on:
+  schedule:
+    - cron: '*/15 * * * *'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: update-prices
+  cancel-in-progress: false
+
+jobs:
+  update-prices:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Check NERKH_TOKEN secret
+        run: |
+          if [ -z "${{ secrets.NERKH_TOKEN }}" ]; then
+            echo "::error::GitHub secret NERKH_TOKEN is not set. Add the Nerkh API token in the repository Settings → Secrets and variables → Actions, then re-run this workflow."
+            exit 1
+          fi
+
+      - name: Fetch prices and write data/prices.json
+        env:
+          NERKH_TOKEN: ${{ secrets.NERKH_TOKEN }}
+        run: node .github/scripts/update-prices.mjs
+
+      - name: Commit prices if changed
+        run: |
+          git config user.name "damdast-price-bot"
+          git config user.email "damdast-price-bot@users.noreply.github.com"
+          git add data/prices.json .github/nerkh-auth-method.txt
+          if git diff --cached --quiet; then
+            echo "No price change — nothing to commit."
+          else
+            git commit -m "قیمت‌های زنده را به‌روز کن"
+            git push
+          fi
