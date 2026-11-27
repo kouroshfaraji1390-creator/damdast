@@ -4,9 +4,9 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>دم‌دست | ابزار، قیمت و خبر؛ همه در یک‌جا</title>
-<meta name="description" content="دم‌دست — ابزارهای دقیق مالی و روزمره، قیمت طلا و سکه و دلار، مبدل تاریخ، عدد به حروف و مرور صبحگاهی اخبار. رایگان و بدون ثبت‌نام.">
+<meta name="description" content="دم‌دست — ابزارهای دقیق مالی و روزمره، قیمت طلا و سکه و دلار، مبدل تاریخ، عدد به حروف. رایگان و بدون ثبت‌نام.">
 <meta property="og:title" content="دم‌دست | ابزار، قیمت و خبر؛ همه در یک‌جا">
-<meta property="og:description" content="ابزارهای دقیق مالی و روزمره، قیمت طلا و سکه و دلار، مبدل تاریخ و مرور صبحگاهی اخبار — رایگان و بدون ثبت‌نام.">
+<meta property="og:description" content="ابزارهای دقیق مالی و روزمره، قیمت طلا و سکه و دلار، مبدل تاریخ — رایگان و بدون ثبت‌نام.">
 <meta property="og:type" content="website">
 <link rel="stylesheet" href="assets/style.css">
 </head>
@@ -17,7 +17,6 @@
     <nav>
       <a href="index.html#tools">ابزارها</a>
       <a href="index.html#prices">قیمت‌ها</a>
-      <a href="index.html#briefing">مرور صبحگاهی</a>
       <a href="about.html">درباره ما</a>
     </nav>
   </div>
@@ -58,22 +57,6 @@
       <a class="tool-card" href="date-converter.html" data-keywords="تاریخ مبدل تاریخ شمسی میلادی تبدیل تاریخ سن فاصله تاریخ تقویم">
         <span class="icon">📅</span><h3>مبدل تاریخ شمسی و میلادی</h3><p>تبدیل تاریخ، محاسبه سن و فاصله دو تاریخ</p>
       </a>
-    </div>
-  </section>
-
-  <!-- (4) Morning briefing — structure only, no fake news -->
-  <section id="briefing" aria-label="مرور صبحگاهی">
-    <div class="section-head"><h2>مرور صبحگاهی</h2><span class="more" id="briefDate"></span></div>
-    <div class="card">
-      <div class="brief-cats">
-        <span class="chip active">همه</span>
-        <span class="chip">هوش مصنوعی و فناوری</span>
-        <span class="chip">ایران و جهان</span>
-        <span class="chip">اقتصاد و بازار</span>
-        <span class="chip">علم و پژوهش</span>
-        <span class="chip">جنگ و امنیت</span>
-      </div>
-      <p style="color:var(--muted)">مرور صبحگاهی اخبار — ۵ تا ۸ خبر منتخب روزانه با منبع مشخص و برچسب اعتبار — به‌زودی از ساعت ۷:۳۰ صبح اینجا منتشر می‌شود. هیچ خبری بدون بازبینی انسانی منتشر نمی‌شود.</p>
     </div>
   </section>
 
@@ -204,8 +187,6 @@
     wd + '، ' + faNum(t.jd) + ' ' + J_MONTHS[t.jm - 1] + ' ' + faNum(t.jy);
   document.getElementById('todayGregorian').textContent =
     faNum(n.getDate()) + ' ' + G_MONTHS[n.getMonth()] + ' ' + faNum(n.getFullYear()) + ' میلادی';
-  document.getElementById('briefDate').textContent =
-    faNum(t.jd) + ' ' + J_MONTHS[t.jm - 1] + ' ' + faNum(t.jy);
 })();
 
 // Global search: filter tool cards client-side
