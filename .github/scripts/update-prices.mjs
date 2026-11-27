@@ -193,6 +193,13 @@ if (workingMethod !== pinned) {
   mkdirSync('.github', { recursive: true });
   writeFileSync(METHOD_FILE, workingMethod + '\n');
   console.log(`Pinned auth method "${workingMethod}" in ${METHOD_FILE}.`);
+} else {
+  // Record the proven method even when it equals the default pin: the
+  // workflow's commit step adds this file, and a missing file used to break
+  // `git add` (run #2, 2026-11-27) and lose an otherwise good price fetch.
+  mkdirSync('.github', { recursive: true });
+  writeFileSync(METHOD_FILE, workingMethod + '\n');
+  console.log(`Auth method "${workingMethod}" recorded in ${METHOD_FILE}.`);
 }
 
 const extracted = extractItems(payload);
