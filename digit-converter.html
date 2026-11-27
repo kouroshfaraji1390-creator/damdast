@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>تبدیل اعداد فارسی به انگلیسی و برعکس | ۱۲۳ ↔ 123</title>
+<meta name="description" content="تبدیل اعداد فارسی به انگلیسی و برعکس در متن؛ ارقام ۱۲۳۴۵ را به 12345 تبدیل کنید یا برعکس. رایگان و بدون ثبت‌نام.">
+<meta property="og:title" content="تبدیل اعداد فارسی به انگلیسی و برعکس | ۱۲۳ ↔ 123">
+<meta property="og:description" content="ارقام فارسی و انگلیسی را در متن به هم تبدیل کنید؛ ارقام عربی هم پشتیبانی می‌شود.">
+<meta property="og:type" content="website">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;500;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+<header class="site-header">
+  <div class="inner">
+    <a class="brand" href="index.html">دم‌دست<small>ابزار، قیمت و خبر؛ همه در یک‌جا</small></a>
+    <nav>
+      <a href="index.html#tools">ابزارها</a>
+      <a href="index.html#prices">قیمت‌ها</a>
+      <a href="index.html#briefing">مرور صبحگاهی</a>
+      <a href="about.html">درباره ما</a>
+    </nav>
+  </div>
+</header>
+
+<div class="wrap">
+  <p class="breadcrumb"><a href="index.html">دم‌دست</a> ← <a href="index.html#tools">ابزارها</a> ← تبدیل اعداد فارسی و انگلیسی</p>
+  <h1>تبدیل اعداد فارسی به انگلیسی و برعکس</h1>
+  <p class="sub">ارقام فارسی (۱۲۳۴۵) را به انگلیسی (12345) تبدیل کنید یا برعکس — در متن کامل، بدون تغییر بقیه متن.</p>
+
+  <div class="card">
+    <div class="field">
+      <label for="mode">جهت تبدیل</label>
+      <select id="mode">
+        <option value="fa-to-en" selected>فارسی به انگلیسی (۱۲۳ ← 123)</option>
+        <option value="en-to-fa">انگلیسی به فارسی (123 ← ۱۲۳)</option>
+      </select>
+    </div>
+    <div class="field">
+      <label for="inText">متن ورودی</label>
+      <textarea id="inText" placeholder="مثلاً: قیمت ۱۲۳۴۵ تومان است" style="width:100%;font-size:16px;padding:12px 14px;border:2px solid var(--line);border-radius:10px;font-family:inherit;min-height:110px;resize:vertical;line-height:2">قیمت ۱۲۳۴۵ تومان است</textarea>
+    </div>
+    <label style="margin-top:4px">متن تبدیل‌شده</label>
+    <div class="out" id="outText" style="white-space:pre-wrap;word-wrap:break-word;min-height:80px">متن تبدیل‌شده اینجا نمایش داده می‌شود.</div>
+    <div class="row">
+      <button class="btn-primary" type="button" id="copyBtn">کپی متن تبدیل‌شده</button>
+      <button class="btn-ghost" type="button" id="swapBtn">جابه‌جایی جهت</button>
+      <button class="btn-ghost" type="button" id="clearBtn">پاک کردن</button>
+    </div>
+    <p class="examples">مثال:
+      <button class="chip" type="button" data-t="قیمت ۱۲۳۴۵ تومان است" data-mode="fa-to-en">فارسی به انگلیسی</button>
+      <button class="chip" type="button" data-t="The price is 12345 tomans" data-mode="en-to-fa">انگلیسی به فارسی</button>
+      <button class="chip" type="button" data-t="سال ۱۴۰۵، ۲۵۰۰ تومان" data-mode="fa-to-en">سال و مبلغ</button>
+    </p>
+  </div>
+
+  <div class="card">
+    <h2>فرمول</h2>
+    <p class="formula">۱۲۳۴۵۶۷۸۹۰ ← 1234567890</p>
+    <p>هر رقم فارسی با رقم انگلیسی هم‌ارزش خودش جایگزین می‌شود و بقیه متن دست نمی‌خورد:</p>
+    <p class="formula">۰←0 ، ۱←1 ، ۲←2 ، ۳←3 ، ۴←4 ، ۵←5 ، ۶←6 ، ۷←7 ، ۸←8 ، ۹←9</p>
+    <p>ارقام عربی (٠١٢٣٤٥٦٧٨٩) هم به همین شکل تبدیل می‌شوند.</p>
+  </div>
+
+  <div class="card">
+    <h2>مثال عددی</h2>
+    <p>متن «قیمت ۱۲۳۴۵ تومان است» در جهت فارسی به انگلیسی:</p>
+    <table class="result">
+      <tr><td>ورودی</td><td>قیمت ۱۲۳۴۵ تومان است</td></tr>
+      <tr class="total"><td>خروجی</td><td>قیمت 12345 تومان است</td></tr>
+    </table>
+    <p>و متن «The price is 12345 tomans» در جهت انگلیسی به فارسی:</p>
+    <table class="result">
+      <tr><td>ورودی</td><td>The price is 12345 tomans</td></tr>
+      <tr class="total"><td>خروجی</td><td>The price is ۱۲۳۴۵ tomans</td></tr>
+    </table>
+  </div>
+
+  <div class="card">
+    <h2>ورودی و خروجی یعنی چه</h2>
+    <ul class="tight">
+      <li><strong>متن ورودی:</strong> هر متنی که ارقام دارد؛ فقط ارقام تبدیل می‌شوند و حروف و نشانه‌ها دست نمی‌خورند.</li>
+      <li><strong>فارسی به انگلیسی:</strong> ارقام ۰ تا ۹ فارسی به 0 تا 9 انگلیسی تبدیل می‌شوند.</li>
+      <li><strong>انگلیسی به فارسی:</strong> ارقام 0 تا 9 انگلیسی به ۰ تا ۹ فارسی تبدیل می‌شوند.</li>
+      <li><strong>ارقام عربی:</strong> ارقام ٠ تا ٩ عربی هم در جهت فارسی به انگلیسی تبدیل می‌شوند.</li>
+    </ul>
+  </div>
+
+  <div class="card">
+    <h2>این ابزار برای چه مواردی مناسب نیست</h2>
+    <ul class="tight">
+      <li>تبدیل عدد به حروف — برای نوشتن عدد به صورت حروف فارسی از <a href="number-to-words.html">عدد به حروف فارسی</a> استفاده کنید.</li>
+      <li>تبدیل واحد یا ارز — این ابزار فقط شکل ارقام را عوض می‌کند، نه مقدار عدد را.</li>
+    </ul>
+  </div>
+
+  <div class="card faq">
+    <h2>پرسش‌های متداول</h2>
+    <details>
+      <summary>ارقام عربی (٠١٢٣) هم تبدیل می‌شوند؟</summary>
+      <p>بله؛ ارقام عربی ٠ تا ٩ هم در جهت فارسی به انگلیسی به 0 تا 9 تبدیل می‌شوند.</p>
+    </details>
+    <details>
+      <summary>آیا بقیه متن دست می‌خورد؟</summary>
+      <p>نه؛ فقط ارقام جایگزین می‌شوند. حروف فارسی و انگلیسی، فاصله‌ها و نشانه‌ها دقیقاً همان‌طور که بودند می‌مانند.</p>
+    </details>
+    <details>
+      <summary>چرا بعضی سایت‌ها و فرم‌ها ارقام انگلیسی می‌خواهند؟</summary>
+      <p>بیشتر سامانه‌های بانکی و دولتی ارقام را فقط به شکل انگلیسی (0 تا 9) قبول می‌کنند؛ با این ابزار می‌توانید متن فارسی را پیش از کپی کردن تبدیل کنید.</p>
+    </details>
+  </div>
+
+  <div class="card">
+    <h2>منابع و تاریخ بازبینی</h2>
+    <ul class="tight">
+      <li>نگاشت ارقام فارسی و عربی به انگلیسی — جدول استاندارد یونیکد ارقام.</li>
+      <li>مثال‌های عددی این صفحه با همین نگاشت محاسبه و بازبینی شده‌اند.</li>
+    </ul>
+    <p class="meta">آخرین بازبینی: ۶ آذر ۱۴۰۵</p>
+  </div>
+
+  <div class="card">
+    <h2>ابزارهای مرتبط</h2>
+    <div class="related">
+      <a href="number-to-words.html">عدد به حروف فارسی</a>
+      <a href="word-counter.html">شمارش کلمات متن فارسی</a>
+      <a href="persian-text-fixer.html">اصلاح نگارشی متن فارسی</a>
+      <a href="date-converter.html">مبدل تاریخ شمسی و میلادی</a>
+      <a href="index.html">همه ابزارها</a>
+    </div>
+  </div>
+
+  <footer>
+    دم‌دست — ابزار، قیمت و خبر؛ همه در یک‌جا<br>
+    ساخته‌شده توسط کوروش فرجی (KouroshLabs) ·
+    <a href="about.html">درباره ما</a> · <a href="contact.html">تماس</a> · <a href="privacy.html">حریم خصوصی</a><br>
+    <span style="font-size:12px">پردازش اطلاعات این ابزار در مرورگر شما انجام می‌شود و محتوای واردشده برای پردازش به سرور ارسال نمی‌شود.</span>
+  </footer>
+</div>
+
+<script src="assets/common.js"></script>
+<script>
+(function () {
+  var FA = '۰۱۲۳۴۵۶۷۸۹';
+  var AR = '٠١٢٣٤٥٦٧٨٩';
+  var modeEl = document.getElementById('mode');
+  var input = document.getElementById('inText');
+  var out = document.getElementById('outText');
+  function convert(t) {
+    if (modeEl.value === 'fa-to-en') {
+      return String(t)
+        .replace(/[۰-۹]/g, function (d) { return FA.indexOf(d); })
+        .replace(/[٠-٩]/g, function (d) { return AR.indexOf(d); });
+    }
+    return String(t).replace(/[0-9]/g, function (d) { return FA[+d]; });
+  }
+  function render() {
+    var v = input.value;
+    out.textContent = v ? convert(v) : 'متن تبدیل‌شده اینجا نمایش داده می‌شود.';
+  }
+  input.addEventListener('input', render);
+  modeEl.addEventListener('change', render);
+  document.querySelectorAll('.examples .chip').forEach(function (b) {
+    b.addEventListener('click', function () {
+      input.value = b.dataset.t;
+      modeEl.value = b.dataset.mode;
+      render(); input.focus();
+    });
+  });
+  document.getElementById('swapBtn').addEventListener('click', function () {
+    modeEl.value = modeEl.value === 'fa-to-en' ? 'en-to-fa' : 'fa-to-en';
+    render();
+  });
+  document.getElementById('clearBtn').addEventListener('click', function () { input.value = ''; render(); input.focus(); });
+  document.getElementById('copyBtn').addEventListener('click', function () {
+    var t = out.textContent;
+    if (t && input.value) copyText(t, this);
+  });
+  render();
+})();
+</script>
+</body>
+</html>

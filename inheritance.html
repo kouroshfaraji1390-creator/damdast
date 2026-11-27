@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>محاسبه ارث | سهم همسر و فرزندان از ترکه</title>
+<meta name="description" content="محاسبه سهم همسر و فرزندان از ترکه بر اساس قانون مدنی — مبلغ ترکه و ورثه درجه اول را وارد کنید تا سهم هر وارث محاسبه شود.">
+<meta property="og:title" content="محاسبه ارث | دم‌دست">
+<meta property="og:description" content="سهم همسر و فرزندان از ترکه بر اساس قانون مدنی — رایگان و بدون ثبت‌نام.">
+<meta property="og:type" content="website">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;500;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+<header class="site-header">
+  <div class="inner">
+    <a class="brand" href="index.html">دم‌دست<small>ابزار، قیمت و خبر؛ همه در یک‌جا</small></a>
+    <nav>
+      <a href="index.html#tools">ابزارها</a>
+      <a href="index.html#prices">قیمت‌ها</a>
+      <a href="index.html#briefing">مرور صبحگاهی</a>
+      <a href="about.html">درباره ما</a>
+    </nav>
+  </div>
+</header>
+
+<div class="wrap">
+  <p class="breadcrumb"><a href="index.html">دم‌دست</a> ← <a href="index.html#tools">ابزارها</a> ← محاسبه ارث</p>
+  <h1>محاسبه ارث</h1>
+  <p class="sub">سهم همسر و فرزندان از ترکه، بر اساس قانون مدنی — رایگان، بدون ثبت‌نام.</p>
+
+  <div class="note" style="margin-bottom:16px"><strong>محدوده این ابزار:</strong> این ابزار فقط ساده‌ترین حالت را پوشش می‌دهد — ورثهٔ درجه اول (همسر و فرزندان، با یا بدون پدر و مادر) وقتی متوفی فرزند دارد. حالت‌های پیچیده (بدون فرزند، ورثهٔ درجه دوم، وصیت، بدهی) نیازمند مراجعه به وکیل یا دفتر اسناد رسمی است.</div>
+
+  <div class="card">
+    <div class="field">
+      <label for="total">مبلغ کل ترکه (تومان)</label>
+      <input type="text" id="total" inputmode="numeric" autocomplete="off" placeholder="مثلاً 12000000000">
+      <p class="hint">ترکه پس از پرداخت بدهی‌ها، مهریه همسر و هزینه کفن‌ودفن تقسیم می‌شود؛ مبلغی را وارد کنید که پس از این پرداخت‌ها باقی مانده است.</p>
+    </div>
+    <div class="fields">
+      <div>
+        <label for="spouse">همسر متوفی</label>
+        <select id="spouse">
+          <option value="wife">زن (همسر متوفی مرد است)</option>
+          <option value="husband">شوهر (همسر متوفی زن است)</option>
+          <option value="none">ندارد</option>
+        </select>
+      </div>
+      <div>
+        <label for="sons">تعداد پسران</label>
+        <input type="number" id="sons" min="0" max="20" value="0" inputmode="numeric">
+      </div>
+      <div>
+        <label for="daughters">تعداد دختران</label>
+        <input type="number" id="daughters" min="0" max="20" value="0" inputmode="numeric">
+      </div>
+    </div>
+    <div class="row" style="margin-top:4px">
+      <label style="display:flex;align-items:center;gap:6px;font-weight:400;margin:0"><input type="checkbox" id="father" style="width:auto"> پدر در قید حیات است</label>
+      <label style="display:flex;align-items:center;gap:6px;font-weight:400;margin:0"><input type="checkbox" id="mother" style="width:auto"> مادر در قید حیات است</label>
+    </div>
+
+    <div class="out" id="out">مبلغ ترکه و ورثه را وارد کنید.</div>
+    <div class="row">
+      <button class="btn-ghost" id="copyBtn" type="button">کپی نتیجه</button>
+      <button class="btn-ghost" id="shareBtn" type="button">اشتراک‌گذاری</button>
+    </div>
+    <div class="examples">مثال:
+      <button class="chip" type="button" id="exampleChip">ترکه ۱۲ میلیارد، همسر + ۱ پسر + ۱ دختر</button>
+    </div>
+  </div>
+
+  <div class="card">
+    <h2>فرمول</h2>
+    <p>سهم‌ها طبق قانون مدنی (وقتی متوفی فرزند دارد):</p>
+    <div class="formula">همسر زن با فرزند: ۱/۸ ترکه — همسر مرد (شوهر) با فرزند: ۱/۴ ترکه<br>پدر و مادر (هرکدام، در صورت حیات): ۱/۶ ترکه<br>باقی‌مانده بین فرزندان: پسر ۲ سهم، دختر ۱ سهم</div>
+    <p>یعنی نخست سهم همسر و سهم پدر و مادر (در صورت حیات) از ترکه کسر می‌شود و باقی‌مانده میان فرزندان تقسیم می‌شود؛ به‌گونه‌ای که هر پسر دو برابر هر دختر می‌برد.</p>
+  </div>
+
+  <div class="card">
+    <h2>مثال عددی</h2>
+    <p>ترکه <strong>۱۲٬۰۰۰٬۰۰۰٬۰۰۰ تومان</strong>، همسر (زن) + ۱ پسر + ۱ دختر:</p>
+    <table class="result">
+      <tr><td>همسر (۱/۸ ترکه)</td><td>۱٬۵۰۰٬۰۰۰٬۰۰۰ تومان</td></tr>
+      <tr><td>پسر (۲ سهم از باقی‌مانده)</td><td>۷٬۰۰۰٬۰۰۰٬۰۰۰ تومان</td></tr>
+      <tr><td>دختر (۱ سهم از باقی‌مانده)</td><td>۳٬۵۰۰٬۰۰۰٬۰۰۰ تومان</td></tr>
+      <tr class="total"><td>جمع</td><td>۱۲٬۰۰۰٬۰۰۰٬۰۰۰ تومان</td></tr>
+    </table>
+    <p>محاسبه: سهم همسر ۱۲٬۰۰۰٬۰۰۰٬۰۰۰ ÷ ۸ = ۱٬۵۰۰٬۰۰۰٬۰۰۰ تومان است؛ باقی‌مانده ۱۰٬۵۰۰٬۰۰۰٬۰۰۰ تومان میان پسر و دختر با نسبت ۲ به ۱ تقسیم می‌شود (پسر ۷٬۰۰۰٬۰۰۰٬۰۰۰ و دختر ۳٬۵۰۰٬۰۰۰٬۰۰۰ تومان). برای دیدن محاسبه زنده، روی مثال در ابزار بالا بزنید.</p>
+  </div>
+
+  <div class="card">
+    <h2>ورودی و خروجی یعنی چه</h2>
+    <ul class="tight">
+      <li><strong>ورودی:</strong> مبلغ کل ترکه (تومان)، همسر متوفی (زن، شوهر یا ندارد)، تعداد پسران و دختران (۰ تا ۲۰) و اینکه پدر و مادر در قید حیات‌اند یا نه.</li>
+      <li><strong>خروجی:</strong> سهم هر وارث به تومان، به‌همراه کسر قانونی آن (مثلاً ۱/۸ برای همسر زن با فرزند). مبالغ به نزدیک‌ترین تومان گرد می‌شوند.</li>
+      <li><strong>اگر فرزندی وارد نشود:</strong> ابزار محاسبه نمی‌کند و پیام می‌دهد که حالت بدون فرزند را پوشش نمی‌دهد — چون سهم‌ها در آن حالت فرق می‌کند و محاسبه اشتباه تحویل داده نمی‌شود.</li>
+    </ul>
+    <div class="note" style="margin-top:12px"><strong>پیش از تقسیم:</strong> بدهی‌های متوفی، مهریه همسر و هزینه کفن‌ودفن پیش از تقسیم ترکه پرداخت می‌شود؛ وصیت هم حداکثر تا یک‌سوم ترکه نافذ است.</div>
+  </div>
+
+  <div class="card">
+    <h2>این ابزار برای چه مواردی مناسب نیست</h2>
+    <ul class="tight">
+      <li><strong>متوفی بدون فرزند</strong> — سهم همسر و پدر و مادر در آن حالت متفاوت است و این ابزار آن را محاسبه نمی‌کند.</li>
+      <li><strong>ورثهٔ درجه دوم</strong> (برادر، خواهر، پدربزرگ و مادربزرگ و…) و مواردی که وارث درجه اول وجود ندارد.</li>
+      <li>موارد دارای <strong>وصیت، بدهی سنگین یا اختلاف میان ورثه</strong> — این‌ها نیازمند وکیل یا دفتر اسناد رسمی است.</li>
+      <li>اموال غیرنقدی (ملک، خودرو، سهام) که پیش از تقسیم نیازمند قیمت‌گذاری کارشناسی‌اند.</li>
+    </ul>
+  </div>
+
+  <div class="card faq">
+    <h2>پرسش‌های متداول</h2>
+    <details>
+      <summary>سهم همسر زن با فرزند چقدر است؟</summary>
+      <p>یک‌هشتم (۱/۸) ترکه. اگر متوفی فرزند نداشته باشد، سهم همسر زن یک‌چهارم (۱/۴) می‌شود؛ اما حالت بدون فرزند در این ابزار پوشش داده نمی‌شود.</p>
+    </details>
+    <details>
+      <summary>سهم شوهر با فرزند چقدر است؟</summary>
+      <p>یک‌چهارم (۱/۴) ترکه. بدون فرزند، سهم شوهر یک‌دوم (۱/۲) است.</p>
+    </details>
+    <details>
+      <summary>پدر و مادر چقدر می‌برند؟</summary>
+      <p>وقتی متوفی فرزند دارد، پدر و مادر (در صورت حیات) هرکدام یک‌ششم (۱/۶) ترکه می‌برند و باقی‌مانده میان فرزندان تقسیم می‌شود.</p>
+    </details>
+    <details>
+      <summary>چرا پسر دو برابر دختر می‌برد؟</summary>
+      <p>طبق قانون مدنی، در تقسیم باقی‌مانده ترکه میان فرزندان، پسر دو سهم و دختر یک سهم می‌برد. این نسبت فقط میان فرزندان اعمال می‌شود؛ سهم همسر و پدر و مادر پیش از آن کسر شده است.</p>
+    </details>
+  </div>
+
+  <div class="card">
+    <h2>منابع و تاریخ بازبینی</h2>
+    <ul class="tight">
+      <li>قانون مدنی جمهوری اسلامی ایران، مواد ۸۶۱ تا ۹۴۹ (موانع ارث و سهام ورثه).</li>
+    </ul>
+    <p class="meta">آخرین بازبینی: ۶ آذر ۱۴۰۵</p>
+  </div>
+
+  <div class="card">
+    <h2>ابزارهای مرتبط</h2>
+    <div class="related">
+      <a href="date-converter.html">مبدل تاریخ شمسی و میلادی</a>
+      <a href="number-to-words.html">عدد به حروف فارسی</a>
+      <a href="mehrieh.html">محاسبه مهریه</a>
+      <a href="loan-installment.html">محاسبه اقساط وام</a>
+      <a href="gold-price.html">محاسبه قیمت طلای ساخته‌شده</a>
+      <a href="coin-bubble.html">حباب سکه</a>
+      <a href="index.html">همه ابزارها</a>
+    </div>
+  </div>
+
+  <footer>
+    دم‌دست — ابزار، قیمت و خبر؛ همه در یک‌جا<br>
+    ساخته‌شده توسط کوروش فرجی (KouroshLabs) ·
+    <a href="about.html">درباره ما</a> · <a href="contact.html">تماس</a> · <a href="privacy.html">حریم خصوصی</a><br>
+    <span style="font-size:12px">پردازش اطلاعات این ابزار در مرورگر شما انجام می‌شود و محتوای واردشده برای پردازش به سرور ارسال نمی‌شود.</span>
+  </footer>
+</div>
+
+<script src="assets/common.js"></script>
+<script>
+(function () {
+  var totalEl = document.getElementById('total');
+  var spouseEl = document.getElementById('spouse');
+  var sonsEl = document.getElementById('sons');
+  var daughtersEl = document.getElementById('daughters');
+  var fatherEl = document.getElementById('father');
+  var motherEl = document.getElementById('mother');
+  var out = document.getElementById('out');
+
+  function clampCount(el) {
+    var v = parseFaNum(el.value);
+    if (!isFinite(v)) return 0;
+    v = Math.floor(v);
+    if (v < 0) return 0;
+    if (v > 20) return 20;
+    return v;
+  }
+
+  function render() {
+    var total = parseFaNum(totalEl.value);
+    var spouse = spouseEl.value;
+    var sons = clampCount(sonsEl);
+    var daughters = clampCount(daughtersEl);
+    var father = fatherEl.checked;
+    var mother = motherEl.checked;
+
+    if (totalEl.value.trim() === '') { out.textContent = 'مبلغ ترکه و ورثه را وارد کنید.'; return; }
+    if (!isFinite(total) || total <= 0) { out.textContent = 'مبلغ ترکه باید عددی بزرگ‌تر از صفر باشد.'; return; }
+
+    var children = sons + daughters;
+    var hasAnyHeir = spouse !== 'none' || children > 0 || father || mother;
+    if (!hasAnyHeir) { out.textContent = 'هیچ وارثی وارد نشده است — دست‌کم یک وارث (همسر، فرزند، پدر یا مادر) را مشخص کنید.'; return; }
+    if (children === 0) {
+      out.textContent = 'این ابزار فقط حالتی را پوشش می‌دهد که متوفی فرزند داشته باشد. در حالت بدون فرزند، سهم همسر و پدر و مادر متفاوت است؛ برای محاسبه به وکیل یا دفتر اسناد رسمی مراجعه کنید.';
+      return;
+    }
+
+    // Shares under the Civil Code (deceased HAS children):
+    // wife 1/8, husband 1/4; father and mother 1/6 each if alive;
+    // remainder among children: son 2 units, daughter 1 unit.
+    var spouseShare = spouse === 'wife' ? 1 / 8 : spouse === 'husband' ? 1 / 4 : 0;
+    var fatherShare = father ? 1 / 6 : 0;
+    var motherShare = mother ? 1 / 6 : 0;
+    var remainder = 1 - spouseShare - fatherShare - motherShare;
+    var units = sons * 2 + daughters;
+    var sonShare = remainder * 2 / units;
+    var daughterShare = remainder * 1 / units;
+
+    function row(label, fracLabel, amount) {
+      return '<tr><td>' + label + (fracLabel ? ' (' + fracLabel + ')' : '') + '</td><td>' + faMoney(amount) + ' تومان</td></tr>';
+    }
+    var html = '<table class="result">';
+    if (spouse === 'wife') html += row('همسر (زن)', '۱/۸', Math.round(spouseShare * total));
+    if (spouse === 'husband') html += row('همسر (شوهر)', '۱/۴', Math.round(spouseShare * total));
+    if (father) html += row('پدر', '۱/۶', Math.round(fatherShare * total));
+    if (mother) html += row('مادر', '۱/۶', Math.round(motherShare * total));
+    if (sons > 0) html += row('هر پسر' + (sons > 1 ? ' (×' + faNum(sons) + ')' : ''), '۲ سهم', Math.round(sonShare * total));
+    if (daughters > 0) html += row('هر دختر' + (daughters > 1 ? ' (×' + faNum(daughters) + ')' : ''), '۱ سهم', Math.round(daughterShare * total));
+    html += '<tr class="total"><td>جمع ترکه</td><td>' + faMoney(total) + ' تومان</td></tr></table>';
+    html += '<small style="display:block;margin-top:8px;color:var(--muted)">مبالغ به نزدیک‌ترین تومان گرد شده‌اند. پیش از تقسیم، بدهی‌ها، مهریه همسر و هزینه کفن‌ودفن پرداخت می‌شود.</small>';
+    out.innerHTML = html;
+  }
+
+  [totalEl, spouseEl, sonsEl, daughtersEl, fatherEl, motherEl].forEach(function (el) {
+    el.addEventListener('input', render);
+    el.addEventListener('change', render);
+  });
+  document.getElementById('exampleChip').addEventListener('click', function () {
+    totalEl.value = '12000000000';
+    spouseEl.value = 'wife';
+    sonsEl.value = '1';
+    daughtersEl.value = '1';
+    fatherEl.checked = false;
+    motherEl.checked = false;
+    render();
+  });
+  document.getElementById('copyBtn').addEventListener('click', function () { copyText(out.innerText, this); });
+  document.getElementById('shareBtn').addEventListener('click', function () { shareText(out.innerText, this); });
+})();
+</script>
+</body>
+</html>

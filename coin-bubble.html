@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>حباب سکه | محاسبه حباب سکه امامی و بهار آزادی</title>
+<meta name="description" content="ارزش ذاتی و حباب سکه امامی و بهار آزادی را حساب کنید؛ قیمت اونس جهانی طلا، نرخ دلار و قیمت بازار سکه را وارد کنید.">
+<meta property="og:title" content="حباب سکه | محاسبه حباب سکه امامی و بهار آزادی">
+<meta property="og:description" content="ارزش ذاتی سکه و میزان حباب آن را از روی قیمت اونس و نرخ دلار حساب کنید.">
+<meta property="og:type" content="website">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;500;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+<header class="site-header">
+  <div class="inner">
+    <a class="brand" href="index.html">دم‌دست<small>ابزار، قیمت و خبر؛ همه در یک‌جا</small></a>
+    <nav>
+      <a href="index.html#tools">ابزارها</a>
+      <a href="index.html#prices">قیمت‌ها</a>
+      <a href="index.html#briefing">مرور صبحگاهی</a>
+      <a href="about.html">درباره ما</a>
+    </nav>
+  </div>
+</header>
+
+<div class="wrap">
+  <p class="breadcrumb"><a href="index.html">دم‌دست</a> ← <a href="index.html#tools">ابزارها</a> ← حباب سکه</p>
+  <h1>حباب سکه</h1>
+  <p class="sub">ارزش ذاتی سکه و میزان حباب آن را از روی قیمت اونس جهانی طلا و نرخ دلار حساب کنید.</p>
+
+  <div class="card gold">
+    <div class="fields">
+      <div class="field">
+        <label for="ounce">قیمت اونس جهانی طلا (دلار)</label>
+        <input type="text" id="ounce" inputmode="decimal" value="۳٬۶۵۷">
+      </div>
+      <div class="field">
+        <label for="dollar">نرخ دلار (تومان)</label>
+        <input type="text" id="dollar" inputmode="numeric" value="۲۹۲٬۸۹۰">
+      </div>
+    </div>
+    <div class="field">
+      <label for="market">قیمت بازار سکه (تومان)</label>
+      <input type="text" id="market" inputmode="numeric" value="۲۶۴٬۷۳۵٬۰۰۰">
+    </div>
+    <div class="field">
+      <label for="coinType">نوع سکه</label>
+      <select id="coinType">
+        <option value="8.133" selected>تمام بهار آزادی — ۸٫۱۳۳ گرم</option>
+        <option value="4.0665">نیم‌سکه — ۴٫۰۶۶۵ گرم</option>
+        <option value="2.03225">ربع‌سکه — ۲٫۰۳۲۲۵ گرم</option>
+      </select>
+    </div>
+    <p class="hint">قیمت اونس و نرخ دلار را خودتان وارد کنید؛ این ابزار قیمت لحظه‌ای نشان نمی‌دهد.</p>
+    <div class="out" id="out"><small>حباب سکه</small><span class="big">—</span></div>
+    <table class="result" id="resultTable" hidden>
+      <tr><td>قیمت هر گرم طلای خالص</td><td id="rGram">—</td></tr>
+      <tr><td>ارزش ذاتی سکه</td><td id="rIntrinsic">—</td></tr>
+      <tr><td>قیمت بازار سکه</td><td id="rMarket">—</td></tr>
+      <tr><td>حباب سکه</td><td id="rBubble">—</td></tr>
+      <tr class="total"><td>حباب درصدی</td><td id="rBubblePct">—</td></tr>
+    </table>
+    <div class="row">
+      <button class="btn-primary" type="button" id="copyBtn">کپی نتیجه</button>
+      <button class="btn-ghost" type="button" id="shareBtn">اشتراک‌گذاری</button>
+    </div>
+    <p class="examples">مثال:
+      <button class="chip" type="button" data-ounce="3657" data-dollar="292890" data-market="264735000" data-type="8.133">سکه تمام — اونس ۳٬۶۵۷ دلار</button>
+      <button class="chip" type="button" data-ounce="3657" data-dollar="292890" data-market="132367500" data-type="4.0665">نیم‌سکه — همان اونس و دلار</button>
+      <button class="chip" type="button" data-ounce="3657" data-dollar="292890" data-market="66183750" data-type="2.03225">ربع‌سکه — همان اونس و دلار</button>
+    </p>
+  </div>
+
+  <div class="card">
+    <h2>فرمول</h2>
+    <p class="formula">قیمت هر گرم طلای خالص = (اونس × نرخ دلار) ÷ ۳۱٫۱۰۳۵</p>
+    <p class="formula">ارزش ذاتی = قیمت گرم خالص × وزن سکه × ۰٫۹</p>
+    <p class="formula">حباب = قیمت بازار − ارزش ذاتی</p>
+    <p class="formula">حباب درصدی = حباب ÷ ارزش ذاتی × ۱۰۰</p>
+    <p>عیار سکه ۹۰۰ است، یعنی سکه ۹۰٪ طلای خالص دارد؛ به همین دلیل ارزش ذاتی در ۰٫۹ ضرب می‌شود. عدد ۳۱٫۱۰۳۵ وزن یک اونس تروا بر حسب گرم است.</p>
+  </div>
+
+  <div class="card">
+    <h2>مثال عددی</h2>
+    <p>سکه تمام بهار آزادی با اونس ۳٬۶۵۷ دلار، دلار ۲۹۲٬۸۹۰ تومان و قیمت بازار ۲۶۴٬۷۳۵٬۰۰۰ تومان:</p>
+    <table class="result">
+      <tr><td>قیمت هر گرم طلای خالص</td><td>۳۴٬۴۳۶٬۶۲۴ تومان</td></tr>
+      <tr><td>ارزش ذاتی (۸٫۱۳۳ گرم × ۰٫۹)</td><td>۲۵۲٬۰۶۵٬۷۵۵ تومان</td></tr>
+      <tr><td>قیمت بازار</td><td>۲۶۴٬۷۳۵٬۰۰۰ تومان</td></tr>
+      <tr><td>حباب</td><td>۱۲٬۶۶۹٬۲۴۵ تومان</td></tr>
+      <tr class="total"><td>حباب درصدی</td><td>۵٫۰۳٪</td></tr>
+    </table>
+    <p class="meta">اعداد میانی گرد شده‌اند؛ محاسبه زنده ابزار ممکن است در چند صد تومان آخر تفاوت جزئی داشته باشد.</p>
+  </div>
+
+  <div class="card">
+    <h2>ورودی و خروجی یعنی چه</h2>
+    <ul class="tight">
+      <li><strong>قیمت اونس جهانی طلا (دلار):</strong> قیمت هر اونس طلا در بازار جهانی که خودتان وارد می‌کنید.</li>
+      <li><strong>نرخ دلار (تومان):</strong> نرخ دلاری که برای تبدیل اونس به تومان استفاده می‌شود؛ خودتان وارد کنید.</li>
+      <li><strong>قیمت بازار سکه (تومان):</strong> قیمتی که سکه در بازار معامله می‌شود.</li>
+      <li><strong>نوع سکه:</strong> وزن سکه انتخابی — تمام بهار آزادی ۸٫۱۳۳ گرم، نیم‌سکه ۴٫۰۶۶۵ گرم، ربع‌سکه ۲٫۰۳۲۲۵ گرم.</li>
+      <li><strong>ارزش ذاتی:</strong> ارزش طلای خالص داخل سکه بر اساس اونس و دلار.</li>
+      <li><strong>حباب:</strong> تفاوت قیمت بازار با ارزش ذاتی؛ اگر قیمت بازار بالاتر باشد حباب مثبت است.</li>
+      <li><strong>حباب درصدی:</strong> حباب نسبت به ارزش ذاتی، به درصد.</li>
+    </ul>
+  </div>
+
+  <div class="card">
+    <h2>این ابزار برای چه مواردی مناسب نیست</h2>
+    <ul class="tight">
+      <li>سکه‌های پارسیان و طلای آب‌شده فرمول متفاوتی دارند و با این ابزار حساب نمی‌شوند.</li>
+      <li>حباب منفی یا مثبت به‌تنهایی سیگنال خرید یا فروش نیست؛ حباب می‌تواند مدت‌ها بالا یا پایین بماند.</li>
+      <li>این ابزار قیمت لحظه‌ای اونس، دلار یا سکه را نشان نمی‌دهد؛ همه قیمت‌ها را خودتان وارد کنید.</li>
+    </ul>
+  </div>
+
+  <div class="card faq">
+    <h2>پرسش‌های متداول</h2>
+    <details>
+      <summary>حباب سکه یعنی چه؟</summary>
+      <p>حباب یعنی قیمت بازار سکه چقدر از ارزش طلای خالص داخل آن بیشتر است. این اختلاف معمولاً به‌خاطر تقاضا، انتظارات و هزینه‌های ضرب و توزیع سکه ایجاد می‌شود.</p>
+    </details>
+    <details>
+      <summary>چرا ارزش ذاتی در ۰٫۹ ضرب می‌شود؟</summary>
+      <p>چون عیار سکه بهار آزادی ۹۰۰ است؛ یعنی سکه ۹۰٪ طلای خالص دارد و بقیه آن فلزات دیگر است.</p>
+    </details>
+    <details>
+      <summary>حباب منفی یعنی چه؟</summary>
+      <p>یعنی قیمت بازار سکه کمتر از ارزش طلای داخل آن است. این وضعیت کمتر پیش می‌آید و معمولاً ماندگار نیست.</p>
+    </details>
+    <details>
+      <summary>آیا حباب بالا یعنی سکه گران است و نباید خرید؟</summary>
+      <p>نه لزوماً. حباب به‌تنهایی سیگنال خرید یا فروش نیست؛ حباب می‌تواند به‌خاطر تقاضای بالا مدت‌ها بالا بماند یا با تغییر قیمت اونس و دلار تغییر کند.</p>
+    </details>
+  </div>
+
+  <div class="card">
+    <h2>منابع و تاریخ بازبینی</h2>
+    <ul class="tight">
+      <li>فرمول استاندارد ارزش ذاتی سکه: اونس تروا ۳۱٫۱۰۳۵ گرم، عیار سکه بهار آزادی ۹۰۰، وزن سکه تمام ۸٫۱۳۳ گرم.</li>
+      <li>مثال عددی این صفحه با همین فرمول محاسبه و بازبینی شده است.</li>
+    </ul>
+    <p class="meta">آخرین بازبینی: ۶ آذر ۱۴۰۵</p>
+  </div>
+
+  <div class="card">
+    <h2>ابزارهای مرتبط</h2>
+    <div class="related">
+      <a href="loan-installment.html">محاسبه اقساط وام</a>
+      <a href="gold-price.html">محاسبه قیمت طلای ساخته‌شده</a>
+      <a href="date-converter.html">مبدل تاریخ شمسی و میلادی</a>
+      <a href="number-to-words.html">عدد به حروف فارسی</a>
+      <a href="mehrieh.html">محاسبه مهریه</a>
+      <a href="inheritance.html">محاسبه ارث</a>
+      <a href="index.html">همه ابزارها</a>
+    </div>
+  </div>
+
+  <footer>
+    دم‌دست — ابزار، قیمت و خبر؛ همه در یک‌جا<br>
+    ساخته‌شده توسط کوروش فرجی (KouroshLabs) ·
+    <a href="about.html">درباره ما</a> · <a href="contact.html">تماس</a> · <a href="privacy.html">حریم خصوصی</a><br>
+    <span style="font-size:12px">پردازش اطلاعات این ابزار در مرورگر شما انجام می‌شود و محتوای واردشده برای پردازش به سرور ارسال نمی‌شود.</span>
+  </footer>
+</div>
+
+<script src="assets/common.js"></script>
+<script>
+(function () {
+  var ounceEl = document.getElementById('ounce');
+  var dollarEl = document.getElementById('dollar');
+  var marketEl = document.getElementById('market');
+  var typeEl = document.getElementById('coinType');
+  var out = document.getElementById('out');
+  var table = document.getElementById('resultTable');
+  var lastText = '';
+  function calc() {
+    var ounce = parseFaNum(ounceEl.value);
+    var dollar = parseFaNum(dollarEl.value);
+    var market = parseFaNum(marketEl.value);
+    var weight = parseFloat(typeEl.value);
+    if (!(ounce > 0) || !(dollar > 0) || !(market > 0)) {
+      out.innerHTML = '<small>لطفاً قیمت اونس، نرخ دلار و قیمت بازار سکه (همه بیشتر از صفر) را درست وارد کنید.</small>';
+      table.hidden = true;
+      lastText = '';
+      return;
+    }
+    var gram = (ounce * dollar) / 31.1035;
+    var intrinsic = gram * weight * 0.9;
+    var bubble = market - intrinsic;
+    var bubblePct = bubble / intrinsic * 100;
+    var sign = bubble >= 0 ? '' : '−';
+    out.innerHTML = '<small>حباب سکه (' + typeEl.options[typeEl.selectedIndex].text + ')</small><span class="big">' + sign + faMoney(Math.abs(bubble)) + ' تومان (' + faNum(Math.abs(bubblePct).toFixed(2)) + '٪)</span>';
+    document.getElementById('rGram').textContent = faMoney(gram) + ' تومان';
+    document.getElementById('rIntrinsic').textContent = faMoney(intrinsic) + ' تومان';
+    document.getElementById('rMarket').textContent = faMoney(market) + ' تومان';
+    document.getElementById('rBubble').textContent = (bubble < 0 ? '−' : '') + faMoney(Math.abs(bubble)) + ' تومان';
+    document.getElementById('rBubblePct').textContent = faNum(bubblePct.toFixed(2)) + '٪';
+    table.hidden = false;
+    lastText = 'حباب سکه — ' + typeEl.options[typeEl.selectedIndex].text + '، اونس: ' + faNum(ounce) + ' دلار، دلار: ' + faMoney(dollar) + ' تومان، قیمت بازار: ' + faMoney(market) + ' تومان. ارزش ذاتی: ' + faMoney(intrinsic) + ' تومان، حباب: ' + faMoney(bubble) + ' تومان (' + faNum(bubblePct.toFixed(2)) + '٪). (دم‌دست)';
+  }
+  [ounceEl, dollarEl, marketEl, typeEl].forEach(function (el) { el.addEventListener('input', calc); el.addEventListener('change', calc); });
+  document.querySelectorAll('.examples .chip').forEach(function (chip) {
+    chip.addEventListener('click', function () {
+      ounceEl.value = faMoney(parseFloat(chip.dataset.ounce));
+      dollarEl.value = faMoney(parseFloat(chip.dataset.dollar));
+      marketEl.value = faMoney(parseFloat(chip.dataset.market));
+      typeEl.value = chip.dataset.type;
+      calc();
+    });
+  });
+  document.getElementById('copyBtn').addEventListener('click', function () {
+    if (lastText) copyText(lastText, this);
+  });
+  document.getElementById('shareBtn').addEventListener('click', function () {
+    if (lastText) shareText(lastText, this);
+  });
+  calc();
+})();
+</script>
+</body>
+</html>

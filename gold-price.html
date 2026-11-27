@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>محاسبه قیمت طلای ساخته‌شده | اجرت و مالیات طلا</title>
+<meta name="description" content="قیمت طلای ساخته‌شده را با اجرت ساخت، سود فروشنده و مالیات بر ارزش افزوده حساب کنید؛ قیمت هر گرم طلای ۱۸ عیار و وزن را وارد کنید.">
+<meta property="og:title" content="محاسبه قیمت طلای ساخته‌شده | اجرت و مالیات طلا">
+<meta property="og:description" content="قیمت طلا با اجرت ساخت، سود فروشنده و مالیات — قیمت هر گرم و وزن را وارد کنید.">
+<meta property="og:type" content="website">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;500;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+<header class="site-header">
+  <div class="inner">
+    <a class="brand" href="index.html">دم‌دست<small>ابزار، قیمت و خبر؛ همه در یک‌جا</small></a>
+    <nav>
+      <a href="index.html#tools">ابزارها</a>
+      <a href="index.html#prices">قیمت‌ها</a>
+      <a href="index.html#briefing">مرور صبحگاهی</a>
+      <a href="about.html">درباره ما</a>
+    </nav>
+  </div>
+</header>
+
+<div class="wrap">
+  <p class="breadcrumb"><a href="index.html">دم‌دست</a> ← <a href="index.html#tools">ابزارها</a> ← محاسبه قیمت طلای ساخته‌شده</p>
+  <h1>محاسبه قیمت طلای ساخته‌شده</h1>
+  <p class="sub">قیمت نهایی طلا را با اجرت ساخت، سود فروشنده و مالیات بر ارزش افزوده حساب کنید.</p>
+
+  <div class="card gold">
+    <div class="field">
+      <label for="gramPrice">قیمت هر گرم طلای ۱۸ عیار (تومان)</label>
+      <input type="text" id="gramPrice" inputmode="numeric" value="۲۵٬۸۰۰٬۰۰۰">
+      <p class="hint">این ابزار قیمت لحظه‌ای طلا را نشان نمی‌دهد؛ قیمت روز هر گرم را خودتان وارد کنید.</p>
+    </div>
+    <div class="fields">
+      <div class="field">
+        <label for="weight">وزن (گرم)</label>
+        <input type="text" id="weight" inputmode="decimal" value="۵">
+      </div>
+      <div class="field">
+        <label for="wage">درصد اجرت ساخت (٪)</label>
+        <input type="text" id="wage" inputmode="decimal" value="۲۰">
+      </div>
+    </div>
+    <div class="fields">
+      <div class="field">
+        <label for="profit">درصد سود فروشنده (٪)</label>
+        <input type="text" id="profit" inputmode="decimal" value="۷">
+      </div>
+      <div class="field">
+        <label for="tax">نرخ مالیات (٪)</label>
+        <input type="text" id="tax" inputmode="decimal" value="۱۰">
+      </div>
+    </div>
+    <div class="out" id="out"><small>قیمت نهایی</small><span class="big">—</span></div>
+    <table class="result" id="resultTable" hidden>
+      <tr><td>قیمت طلا</td><td id="rGold">—</td></tr>
+      <tr><td>اجرت ساخت</td><td id="rWage">—</td></tr>
+      <tr><td>سود فروشنده</td><td id="rProfit">—</td></tr>
+      <tr><td>مالیات</td><td id="rTax">—</td></tr>
+      <tr class="total"><td>مجموع</td><td id="rTotal">—</td></tr>
+    </table>
+    <div class="row">
+      <button class="btn-primary" type="button" id="copyBtn">کپی نتیجه</button>
+      <button class="btn-ghost" type="button" id="shareBtn">اشتراک‌گذاری</button>
+    </div>
+    <p class="examples">مثال:
+      <button class="chip" type="button" data-gram="25800000" data-weight="5" data-wage="20" data-profit="7" data-tax="10">۵ گرم، اجرت ۲۰٪</button>
+      <button class="chip" type="button" data-gram="25800000" data-weight="2.5" data-wage="15" data-profit="7" data-tax="10">۲٫۵ گرم، اجرت ۱۵٪</button>
+      <button class="chip" type="button" data-gram="25800000" data-weight="10" data-wage="25" data-profit="7" data-tax="10">۱۰ گرم، اجرت ۲۵٪</button>
+    </p>
+  </div>
+
+  <div class="card">
+    <h2>فرمول</h2>
+    <p class="formula">قیمت طلا = قیمت هر گرم × وزن</p>
+    <p class="formula">اجرت = قیمت طلا × درصد اجرت</p>
+    <p class="formula">سود = (قیمت طلا + اجرت) × ۷٪</p>
+    <p class="formula">مالیات = (اجرت + سود) × ۱۰٪</p>
+    <p class="formula">مجموع = قیمت طلا + اجرت + سود + مالیات</p>
+    <p>طبق قانون، مالیات بر ارزش افزوده از سال ۱۴۰۰ فقط روی اجرت ساخت و سود فروشنده حساب می‌شود، نه روی اصل طلا.</p>
+  </div>
+
+  <div class="card">
+    <h2>مثال عددی</h2>
+    <p>۵ گرم طلای ۱۸ عیار، قیمت هر گرم ۲۵٬۸۰۰٬۰۰۰ تومان، اجرت ساخت ۲۰٪، سود فروشنده ۷٪ و مالیات ۱۰٪:</p>
+    <table class="result">
+      <tr><td>قیمت طلا (۵ × ۲۵٬۸۰۰٬۰۰۰)</td><td>۱۲۹٬۰۰۰٬۰۰۰ تومان</td></tr>
+      <tr><td>اجرت ساخت (۲۰٪)</td><td>۲۵٬۸۰۰٬۰۰۰ تومان</td></tr>
+      <tr><td>سود فروشنده (۷٪)</td><td>۱۰٬۸۳۶٬۰۰۰ تومان</td></tr>
+      <tr><td>مالیات (۱۰٪ روی اجرت + سود)</td><td>۳٬۶۶۳٬۶۰۰ تومان</td></tr>
+      <tr class="total"><td>مجموع</td><td>۱۶۹٬۲۹۹٬۶۰۰ تومان</td></tr>
+    </table>
+  </div>
+
+  <div class="card">
+    <h2>ورودی و خروجی یعنی چه</h2>
+    <ul class="tight">
+      <li><strong>قیمت هر گرم طلای ۱۸ عیار:</strong> قیمت روز هر گرم طلا که فروشنده اعلام می‌کند؛ این عدد را خودتان وارد کنید.</li>
+      <li><strong>وزن (گرم):</strong> وزن قطعه طلا که معمولاً روی فاکتور نوشته می‌شود.</li>
+      <li><strong>درصد اجرت ساخت:</strong> دستمزد ساخت قطعه که بسته به ظرافت کار متفاوت است و فروشنده اعلام می‌کند.</li>
+      <li><strong>درصد سود فروشنده:</strong> سود قانونی فروشنده که پیش‌فرض آن ۷٪ است.</li>
+      <li><strong>نرخ مالیات:</strong> مالیات بر ارزش افزوده که فقط روی اجرت و سود حساب می‌شود؛ پیش‌فرض آن ۱۰٪ است.</li>
+      <li><strong>مجموع:</strong> قیمت نهایی که برای قطعه طلا می‌پردازید.</li>
+    </ul>
+  </div>
+
+  <div class="card">
+    <h2>این ابزار برای چه مواردی مناسب نیست</h2>
+    <ul class="tight">
+      <li>قیمت لحظه‌ای طلا را نشان نمی‌دهد — قیمت هر گرم را خودتان وارد کنید.</li>
+      <li>طلای دست‌دوم — طلای دست‌دوم اجرت ساخت ندارد و فرمول آن متفاوت است.</li>
+      <li>سکه — سکه فرمول دیگری دارد؛ برای آن از ابزار «حباب سکه» استفاده کنید.</li>
+    </ul>
+  </div>
+
+  <div class="card faq">
+    <h2>پرسش‌های متداول</h2>
+    <details>
+      <summary>چرا مالیات فقط روی اجرت و سود حساب می‌شود، نه روی اصل طلا؟</summary>
+      <p>طبق قانون مالیات بر ارزش افزوده که از سال ۱۴۰۰ اجرا شد، مالیات طلا فقط روی اجرت ساخت و سود فروشنده تعلق می‌گیرد، نه روی ارزش اصل طلا.</p>
+    </details>
+    <details>
+      <summary>اجرت ساخت چقدر است؟</summary>
+      <p>اجرت ساخت ثابت نیست و بسته به ظرافت و پیچیدگی قطعه متفاوت است؛ فروشنده درصد آن را اعلام می‌کند و شما همان عدد را وارد کنید.</p>
+    </details>
+    <details>
+      <summary>سود فروشنده چقدر باید باشد؟</summary>
+      <p>سود قانونی فروشنده طلا ۷٪ است و روی مجموع قیمت طلا و اجرت حساب می‌شود.</p>
+    </details>
+    <details>
+      <summary>قیمت هر گرم طلا را از کجا بدانم؟</summary>
+      <p>قیمت روز طلا را از فروشنده یا از بخش قیمت‌های دم‌دست بگیرید و همان عدد را اینجا وارد کنید؛ این ابزار خودش قیمت لحظه‌ای ندارد.</p>
+    </details>
+  </div>
+
+  <div class="card">
+    <h2>منابع و تاریخ بازبینی</h2>
+    <ul class="tight">
+      <li>قانون مالیات بر ارزش افزوده — مالیات طلا از سال ۱۴۰۰ فقط روی اجرت ساخت و سود فروشنده.</li>
+      <li>فرمول رایج محاسبه قیمت طلای ساخته‌شده در بازار طلا (قیمت طلا + اجرت + سود ۷٪ + مالیات).</li>
+      <li>مثال عددی این صفحه با همین فرمول محاسبه و بازبینی شده است.</li>
+    </ul>
+    <p class="meta">آخرین بازبینی: ۶ آذر ۱۴۰۵</p>
+  </div>
+
+  <div class="card">
+    <h2>ابزارهای مرتبط</h2>
+    <div class="related">
+      <a href="loan-installment.html">محاسبه اقساط وام</a>
+      <a href="coin-bubble.html">حباب سکه</a>
+      <a href="date-converter.html">مبدل تاریخ شمسی و میلادی</a>
+      <a href="number-to-words.html">عدد به حروف فارسی</a>
+      <a href="mehrieh.html">محاسبه مهریه</a>
+      <a href="inheritance.html">محاسبه ارث</a>
+      <a href="index.html">همه ابزارها</a>
+    </div>
+  </div>
+
+  <footer>
+    دم‌دست — ابزار، قیمت و خبر؛ همه در یک‌جا<br>
+    ساخته‌شده توسط کوروش فرجی (KouroshLabs) ·
+    <a href="about.html">درباره ما</a> · <a href="contact.html">تماس</a> · <a href="privacy.html">حریم خصوصی</a><br>
+    <span style="font-size:12px">پردازش اطلاعات این ابزار در مرورگر شما انجام می‌شود و محتوای واردشده برای پردازش به سرور ارسال نمی‌شود.</span>
+  </footer>
+</div>
+
+<script src="assets/common.js"></script>
+<script>
+(function () {
+  var gramEl = document.getElementById('gramPrice');
+  var weightEl = document.getElementById('weight');
+  var wageEl = document.getElementById('wage');
+  var profitEl = document.getElementById('profit');
+  var taxEl = document.getElementById('tax');
+  var out = document.getElementById('out');
+  var table = document.getElementById('resultTable');
+  var lastText = '';
+  function calc() {
+    var gram = parseFaNum(gramEl.value);
+    var w = parseFaNum(weightEl.value);
+    var wagePct = parseFaNum(wageEl.value);
+    var profitPct = parseFaNum(profitEl.value);
+    var taxPct = parseFaNum(taxEl.value);
+    if (!(gram > 0) || !(w > 0) || isNaN(wagePct) || wagePct < 0 || isNaN(profitPct) || profitPct < 0 || isNaN(taxPct) || taxPct < 0) {
+      out.innerHTML = '<small>لطفاً قیمت هر گرم و وزن (بیشتر از صفر) و درصدها (صفر یا بیشتر) را درست وارد کنید.</small>';
+      table.hidden = true;
+      lastText = '';
+      return;
+    }
+    var gold = gram * w;
+    var wage = gold * wagePct / 100;
+    var profit = (gold + wage) * profitPct / 100;
+    var tax = (wage + profit) * taxPct / 100;
+    var total = gold + wage + profit + tax;
+    out.innerHTML = '<small>قیمت نهایی</small><span class="big">' + faMoney(total) + ' تومان</span>';
+    document.getElementById('rGold').textContent = faMoney(gold) + ' تومان';
+    document.getElementById('rWage').textContent = faMoney(wage) + ' تومان';
+    document.getElementById('rProfit').textContent = faMoney(profit) + ' تومان';
+    document.getElementById('rTax').textContent = faMoney(tax) + ' تومان';
+    document.getElementById('rTotal').textContent = faMoney(total) + ' تومان';
+    table.hidden = false;
+    lastText = 'محاسبه قیمت طلای ساخته‌شده — قیمت هر گرم: ' + faMoney(gram) + ' تومان، وزن: ' + faNum(w) + ' گرم، اجرت: ' + faNum(wagePct) + '٪. قیمت طلا: ' + faMoney(gold) + ' تومان، اجرت: ' + faMoney(wage) + ' تومان، سود: ' + faMoney(profit) + ' تومان، مالیات: ' + faMoney(tax) + ' تومان، مجموع: ' + faMoney(total) + ' تومان. (دم‌دست)';
+  }
+  [gramEl, weightEl, wageEl, profitEl, taxEl].forEach(function (el) { el.addEventListener('input', calc); });
+  document.querySelectorAll('.examples .chip').forEach(function (chip) {
+    chip.addEventListener('click', function () {
+      gramEl.value = faMoney(parseFloat(chip.dataset.gram));
+      weightEl.value = faNum(chip.dataset.weight);
+      wageEl.value = faNum(chip.dataset.wage);
+      profitEl.value = faNum(chip.dataset.profit);
+      taxEl.value = faNum(chip.dataset.tax);
+      calc();
+    });
+  });
+  document.getElementById('copyBtn').addEventListener('click', function () {
+    if (lastText) copyText(lastText, this);
+  });
+  document.getElementById('shareBtn').addEventListener('click', function () {
+    if (lastText) shareText(lastText, this);
+  });
+  calc();
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>محاسبه اقساط وام | قسط ماهانه و سود وام</title>
+<meta name="description" content="محاسبه قسط ماهانه وام، سود کل و مجموع پرداختی با فرمول استاندارد استهلاک؛ مبلغ وام، نرخ سود سالانه و مدت بازپرداخت را وارد کنید.">
+<meta property="og:title" content="محاسبه اقساط وام | قسط ماهانه و سود وام">
+<meta property="og:description" content="قسط ماهانه، سود کل و مجموع پرداختی وام را با فرمول استاندارد استهلاک حساب کنید.">
+<meta property="og:type" content="website">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;500;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+<header class="site-header">
+  <div class="inner">
+    <a class="brand" href="index.html">دم‌دست<small>ابزار، قیمت و خبر؛ همه در یک‌جا</small></a>
+    <nav>
+      <a href="index.html#tools">ابزارها</a>
+      <a href="index.html#prices">قیمت‌ها</a>
+      <a href="index.html#briefing">مرور صبحگاهی</a>
+      <a href="about.html">درباره ما</a>
+    </nav>
+  </div>
+</header>
+
+<div class="wrap">
+  <p class="breadcrumb"><a href="index.html">دم‌دست</a> ← <a href="index.html#tools">ابزارها</a> ← محاسبه اقساط وام</p>
+  <h1>محاسبه اقساط وام</h1>
+  <p class="sub">قسط ماهانه، سود کل و مجموع پرداختی وام را با فرمول استاندارد استهلاک حساب کنید.</p>
+
+  <div class="card gold">
+    <div class="field">
+      <label for="amount">مبلغ وام (تومان)</label>
+      <input type="text" id="amount" inputmode="numeric" value="۱۰۰٬۰۰۰٬۰۰۰">
+    </div>
+    <div class="fields">
+      <div class="field">
+        <label for="rate">نرخ سود سالانه (٪)</label>
+        <input type="text" id="rate" inputmode="decimal" value="۲۳">
+      </div>
+      <div class="field">
+        <label for="months">مدت بازپرداخت (ماه)</label>
+        <input type="text" id="months" inputmode="numeric" value="۳۶">
+      </div>
+    </div>
+    <p class="hint">مبلغ وام باید بیشتر از صفر، نرخ سود صفر یا بیشتر، و مدت بازپرداخت بین ۱ تا ۶۰۰ ماه باشد.</p>
+    <div class="out" id="out"><small>قسط ماهانه</small><span class="big">—</span></div>
+    <table class="result" id="resultTable" hidden>
+      <tr><td>قسط ماهانه</td><td id="rMonthly">—</td></tr>
+      <tr><td>مجموع پرداختی</td><td id="rTotal">—</td></tr>
+      <tr><td>سود کل</td><td id="rInterest">—</td></tr>
+      <tr><td>مبلغ وام</td><td id="rPrincipal">—</td></tr>
+    </table>
+    <div class="row">
+      <button class="btn-primary" type="button" id="copyBtn">کپی نتیجه</button>
+      <button class="btn-ghost" type="button" id="shareBtn">اشتراک‌گذاری</button>
+    </div>
+    <p class="examples">مثال:
+      <button class="chip" type="button" data-amount="100000000" data-rate="23" data-months="36">وام ۱۰۰ میلیون، ۲۳٪، ۳۶ ماه</button>
+      <button class="chip" type="button" data-amount="50000000" data-rate="18" data-months="24">وام ۵۰ میلیون، ۱۸٪، ۲۴ ماه</button>
+      <button class="chip" type="button" data-amount="200000000" data-rate="23" data-months="60">وام ۲۰۰ میلیون، ۲۳٪، ۶۰ ماه</button>
+    </p>
+  </div>
+
+  <div class="card">
+    <h2>فرمول</h2>
+    <p class="formula">A = P × r(1+r)^n ÷ ((1+r)^n − 1)</p>
+    <p>در این فرمول، <strong>P</strong> مبلغ وام، <strong>r</strong> نرخ سود ماهانه و <strong>n</strong> تعداد ماه‌های بازپرداخت است:</p>
+    <p class="formula">r = نرخ سالانه ÷ ۱۲ ÷ ۱۰۰</p>
+    <p>مجموع پرداختی برابر است با قسط ماهانه ضرب‌در تعداد ماه‌ها (<strong>A × n</strong>) و سود کل برابر است با مجموع پرداختی منهای مبلغ وام. اگر نرخ سود صفر باشد، قسط ماهانه برابر است با مبلغ وام تقسیم بر تعداد ماه‌ها (<strong>A = P ÷ n</strong>).</p>
+  </div>
+
+  <div class="card">
+    <h2>مثال عددی</h2>
+    <p>وام ۱۰۰٬۰۰۰٬۰۰۰ تومان با نرخ ۲۳٪ سالانه و بازپرداخت ۳۶ ماهه:</p>
+    <table class="result">
+      <tr><td>نرخ سود ماهانه</td><td>۱٫۹۱۶۷٪</td></tr>
+      <tr><td>قسط ماهانه</td><td>۳٬۸۷۰٬۹۷۲ تومان</td></tr>
+      <tr><td>مجموع پرداختی</td><td>۱۳۹٬۳۵۴٬۹۹۸ تومان</td></tr>
+      <tr class="total"><td>سود کل</td><td>۳۹٬۳۵۴٬۹۹۸ تومان</td></tr>
+    </table>
+    <p class="meta">یعنی در ۳۶ ماه، ۳۹٬۳۵۴٬۹۹۸ تومان سود روی ۱۰۰٬۰۰۰٬۰۰۰ تومان وام پرداخت می‌شود.</p>
+  </div>
+
+  <div class="card">
+    <h2>ورودی و خروجی یعنی چه</h2>
+    <ul class="tight">
+      <li><strong>مبلغ وام (تومان):</strong> اصل پولی که از بانک یا مؤسسه دریافت می‌کنید.</li>
+      <li><strong>نرخ سود سالانه (٪):</strong> نرخ سودی که بانک برای یک سال اعلام می‌کند؛ در فرمول به نرخ ماهانه تبدیل می‌شود.</li>
+      <li><strong>مدت بازپرداخت (ماه):</strong> تعداد قسط‌هایی که وام را در آن بازمی‌گردانید.</li>
+      <li><strong>قسط ماهانه:</strong> مبلغ ثابتی که هر ماه پرداخت می‌کنید.</li>
+      <li><strong>مجموع پرداختی:</strong> همه اقساط با هم؛ یعنی اصل وام به‌علاوه سود کل.</li>
+      <li><strong>سود کل:</strong> هزینه‌ای که بابت گرفتن وام، علاوه بر اصل وام، می‌پردازید.</li>
+    </ul>
+  </div>
+
+  <div class="card">
+    <h2>این ابزار برای چه مواردی مناسب نیست</h2>
+    <ul class="tight">
+      <li>قرض‌الحسنه با کارمزد ثابت — این وام‌ها سود درصدی ندارند و فرمول دیگری دارند.</li>
+      <li>وام‌هایی با اقساط غیرمساوی یا دوره تنفس — این ابزار فرض می‌کند همه اقساط برابرند.</li>
+      <li>محاسبه دقیق بانکی — بانک‌ها ممکن است روش محاسبه متفاوتی (مثلاً جریمه دیرکرد یا کارمزد) داشته باشند؛ این ابزار فرمول استاندارد استهلاک را حساب می‌کند و عدد نهایی بانک می‌تواند کمی متفاوت باشد.</li>
+    </ul>
+  </div>
+
+  <div class="card faq">
+    <h2>پرسش‌های متداول</h2>
+    <details>
+      <summary>چرا با بیشتر شدن مدت وام، سود کل بیشتر می‌شود؟</summary>
+      <p>چون سود روی مانده بدهی حساب می‌شود و هرچه بازپرداخت طولانی‌تر باشد، مدت بیشتری سود پرداخت می‌کنید؛ هرچند قسط ماهانه کمتر می‌شود.</p>
+    </details>
+    <details>
+      <summary>اگر نرخ سود صفر باشد چه اتفاقی می‌افتد؟</summary>
+      <p>قسط ماهانه برابر است با مبلغ وام تقسیم بر تعداد ماه‌ها و سود کل صفر می‌شود.</p>
+    </details>
+    <details>
+      <summary>آیا این عدد دقیقاً همان قسطی است که بانک اعلام می‌کند؟</summary>
+      <p>این ابزار فرمول استاندارد استهلاک را حساب می‌کند. بانک ممکن است کارمزد، بیمه یا روش گرد کردن متفاوتی داشته باشد، پس عدد نهایی بانک می‌تواند کمی متفاوت باشد.</p>
+    </details>
+    <details>
+      <summary>نرخ سود سالانه را از کجا بدانم؟</summary>
+      <p>نرخ سود در قرارداد وام یا در اطلاع‌رسانی بانک نوشته شده است؛ همان عدد را اینجا وارد کنید.</p>
+    </details>
+  </div>
+
+  <div class="card">
+    <h2>منابع و تاریخ بازبینی</h2>
+    <ul class="tight">
+      <li>فرمول استاندارد استهلاک وام (annuity) — فرمول رایج محاسبه اقساط در بانکداری.</li>
+      <li>مثال عددی این صفحه با همین فرمول محاسبه و بازبینی شده است.</li>
+    </ul>
+    <p class="meta">آخرین بازبینی: ۶ آذر ۱۴۰۵</p>
+  </div>
+
+  <div class="card">
+    <h2>ابزارهای مرتبط</h2>
+    <div class="related">
+      <a href="gold-price.html">محاسبه قیمت طلای ساخته‌شده</a>
+      <a href="coin-bubble.html">حباب سکه</a>
+      <a href="date-converter.html">مبدل تاریخ شمسی و میلادی</a>
+      <a href="number-to-words.html">عدد به حروف فارسی</a>
+      <a href="mehrieh.html">محاسبه مهریه</a>
+      <a href="inheritance.html">محاسبه ارث</a>
+      <a href="index.html">همه ابزارها</a>
+    </div>
+  </div>
+
+  <footer>
+    دم‌دست — ابزار، قیمت و خبر؛ همه در یک‌جا<br>
+    ساخته‌شده توسط کوروش فرجی (KouroshLabs) ·
+    <a href="about.html">درباره ما</a> · <a href="contact.html">تماس</a> · <a href="privacy.html">حریم خصوصی</a><br>
+    <span style="font-size:12px">پردازش اطلاعات این ابزار در مرورگر شما انجام می‌شود و محتوای واردشده برای پردازش به سرور ارسال نمی‌شود.</span>
+  </footer>
+</div>
+
+<script src="assets/common.js"></script>
+<script>
+(function () {
+  var amountEl = document.getElementById('amount');
+  var rateEl = document.getElementById('rate');
+  var monthsEl = document.getElementById('months');
+  var out = document.getElementById('out');
+  var table = document.getElementById('resultTable');
+  var lastText = '';
+  function calc() {
+    var P = parseFaNum(amountEl.value);
+    var rate = parseFaNum(rateEl.value);
+    var n = parseFaNum(monthsEl.value);
+    if (!(P > 0) || isNaN(rate) || rate < 0 || !(n >= 1 && n <= 600) || Math.floor(n) !== n) {
+      out.innerHTML = '<small>لطفاً مبلغ وام (بیشتر از صفر)، نرخ سود (صفر یا بیشتر) و مدت بازپرداخت (۱ تا ۶۰۰ ماه) را درست وارد کنید.</small>';
+      table.hidden = true;
+      lastText = '';
+      return;
+    }
+    var A;
+    if (rate === 0) { A = P / n; }
+    else {
+      var r = rate / 12 / 100;
+      var f = Math.pow(1 + r, n);
+      A = P * r * f / (f - 1);
+    }
+    var total = A * n;
+    var interest = total - P;
+    out.innerHTML = '<small>قسط ماهانه</small><span class="big">' + faMoney(A) + ' تومان</span>';
+    document.getElementById('rMonthly').textContent = faMoney(A) + ' تومان';
+    document.getElementById('rTotal').textContent = faMoney(total) + ' تومان';
+    document.getElementById('rInterest').textContent = faMoney(interest) + ' تومان';
+    document.getElementById('rPrincipal').textContent = faMoney(P) + ' تومان';
+    table.hidden = false;
+    lastText = 'محاسبه اقساط وام — مبلغ وام: ' + faMoney(P) + ' تومان، نرخ سود سالانه: ' + faNum(rate) + '٪، مدت: ' + faNum(n) + ' ماه. قسط ماهانه: ' + faMoney(A) + ' تومان، مجموع پرداختی: ' + faMoney(total) + ' تومان، سود کل: ' + faMoney(interest) + ' تومان. (دم‌دست)';
+  }
+  [amountEl, rateEl, monthsEl].forEach(function (el) { el.addEventListener('input', calc); });
+  document.querySelectorAll('.examples .chip').forEach(function (chip) {
+    chip.addEventListener('click', function () {
+      amountEl.value = faMoney(parseFloat(chip.dataset.amount));
+      rateEl.value = faNum(chip.dataset.rate);
+      monthsEl.value = faNum(chip.dataset.months);
+      calc();
+    });
+  });
+  document.getElementById('copyBtn').addEventListener('click', function () {
+    if (lastText) copyText(lastText, this);
+  });
+  document.getElementById('shareBtn').addEventListener('click', function () {
+    if (lastText) shareText(lastText, this);
+  });
+  calc();
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>تاریخ امروز | تاریخ شمسی، میلادی و قمری امروز</title>
+<meta name="description" content="تاریخ امروز به شمسی، میلادی و قمری با روز هفته — محاسبه زنده در مرورگر شما. امروز چندم است؟">
+<meta property="og:title" content="تاریخ امروز — دم‌دست">
+<meta property="og:description" content="تاریخ امروز به شمسی، میلادی و قمری با روز هفته.">
+<meta property="og:type" content="website">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;500;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+<header class="site-header">
+  <div class="inner">
+    <a class="brand" href="index.html">دم‌دست<small>ابزار، قیمت و خبر؛ همه در یک‌جا</small></a>
+    <nav>
+      <a href="index.html#tools">ابزارها</a>
+      <a href="index.html#prices">قیمت‌ها</a>
+      <a href="index.html#briefing">مرور صبحگاهی</a>
+      <a href="about.html">درباره ما</a>
+    </nav>
+  </div>
+</header>
+<div class="wrap">
+  <p class="breadcrumb"><a href="index.html">دم‌دست</a> ← <a href="calendar-1406.html">تقویم</a> ← تاریخ امروز</p>
+  <h1>تاریخ امروز</h1>
+  <p class="sub">تاریخ امروز در سه تقویم — محاسبه زنده در مرورگر شما.</p>
+
+  <div class="card today-box">
+    <p style="margin-bottom:2px;color:var(--muted)">امروز</p>
+    <p class="big-date" id="todayWeekday">—</p>
+    <p class="big-date" id="todayJalali" style="font-size:28px">—</p>
+    <p id="todayGregorian" style="font-size:18px">—</p>
+    <p id="todayHijri" style="font-size:18px">—</p>
+    <p class="meta" id="todayMeta"></p>
+  </div>
+
+  <div class="card" id="occasionCard" hidden>
+    <h2>مناسبت امروز</h2>
+    <p id="todayOccasion" style="margin-bottom:0"></p>
+  </div>
+
+  <div class="card">
+    <h2>تقویم و تاریخ در دم‌دست</h2>
+    <div class="related">
+      <a href="calendar-1406.html">تقویم ۱۴۰۶</a>
+      <a href="occasions.html">مناسبت‌های ۱۴۰۶</a>
+      <a href="prayer-times.html">اوقات شرعی</a>
+      <a href="date-converter.html">مبدل تاریخ شمسی و میلادی</a>
+    </div>
+  </div>
+
+  <div class="card">
+    <h2>درباره تاریخ قمری</h2>
+    <p style="font-size:14px;color:var(--muted)">تاریخ قمری اینجا با تقویم محاسباتی ام‌القری نمایش داده می‌شود. تقویم رسمی ایران بر پایهٔ رؤیت هلال است و ممکن است تاریخ قمری آن یک روز با این محاسبه تفاوت داشته باشد.</p>
+    <p class="meta">منابع: الگوریتم تبدیل تاریخ شمسی (jalaali-js)؛ تقویم قمری محاسباتی (ام‌القری / جدولی). آخرین بازبینی: ۶ آذر ۱۴۰۵</p>
+  </div>
+
+  <footer>
+    دم‌دست — ابزار، قیمت و خبر؛ همه در یک‌جا<br>
+    <a href="about.html">درباره ما</a> · <a href="contact.html">تماس</a> · <a href="privacy.html">حریم خصوصی</a><br>
+    <span style="font-size:12px">پردازش اطلاعات این ابزار در مرورگر شما انجام می‌شود و محتوای واردشده برای پردازش به سرور ارسال نمی‌شود.</span>
+  </footer>
+</div>
+
+<script src="assets/common.js"></script>
+<script src="assets/praytimes.js"></script>
+<script src="assets/occasions1406.js"></script>
+<script>
+(function () {
+  var n = new Date();
+  var gy = n.getFullYear(), gm = n.getMonth() + 1, gd = n.getDate();
+  var j = toJalaali(gy, gm, gd);
+  var wd = weekdayFa(gy, gm, gd);
+  document.getElementById('todayWeekday').textContent = wd;
+  document.getElementById('todayJalali').textContent = faNum(j.jd) + ' ' + J_MONTHS[j.jm - 1] + ' ' + faNum(j.jy) + ' هجری شمسی';
+  document.getElementById('todayGregorian').textContent = faNum(gd) + ' ' + G_MONTHS[gm - 1] + ' ' + faNum(gy) + ' میلادی';
+  // Hijri: prefer Intl Umm al-Qura calendar, fall back to tabular calculation
+  var hijriText = '';
+  try {
+    var parts = new Intl.DateTimeFormat('fa-IR-u-ca-islamic-umalqura', { day: 'numeric', month: 'long', year: 'numeric' }).format(n);
+    hijriText = parts + ' هجری قمری';
+  } catch (e) {
+    var h = hijriFromJD(j2d(j.jy, j.jm, j.jd));
+    hijriText = faNum(h.d) + ' ' + h.monthName + ' ' + faNum(h.y) + ' هجری قمری';
+  }
+  document.getElementById('todayHijri').textContent = hijriText;
+  var dayOfYear = j2d(j.jy, j.jm, j.jd) - j2d(j.jy, 1, 1) + 1;
+  var yearLen = isLeapJalaaliYear(j.jy) ? 366 : 365;
+  document.getElementById('todayMeta').textContent =
+    'روز ' + faNum(dayOfYear) + ' از سال ' + faNum(j.jy) + ' — ' + faNum(yearLen - dayOfYear) + ' روز تا پایان سال مانده است.';
+  // Today's occasion (only when the date is inside 1406, the year we have verified data for)
+  if (j.jy === 1406 && OCCASIONS_1406[j.jm]) {
+    var occ = OCCASIONS_1406[j.jm].filter(function (o) { return o.d === j.jd; });
+    if (occ.length) {
+      document.getElementById('occasionCard').hidden = false;
+      document.getElementById('todayOccasion').textContent = occ.map(function (o) {
+        return o.t + (o.h ? ' (تعطیل رسمی)' : '');
+      }).join(' — ');
+    }
+  }
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>محاسبه رهن و اجاره | تبدیل رهن به اجاره و برعکس</title>
+<meta name="description" content="تبدیل رهن به اجاره و اجاره به رهن با عرف بازار مسکن ایران؛ رهن کامل، اجاره ماهانه و حالت ترکیبی را با نرخ قابل‌تنظیم حساب کنید.">
+<meta property="og:title" content="محاسبه رهن و اجاره | تبدیل رهن به اجاره و برعکس">
+<meta property="og:description" content="رهن کامل را به اجاره ماهانه تبدیل کنید یا برعکس؛ با نرخ عرف بازار و حالت ترکیبی.">
+<meta property="og:type" content="website">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;500;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+<header class="site-header">
+  <div class="inner">
+    <a class="brand" href="index.html">دم‌دست<small>ابزار، قیمت و خبر؛ همه در یک‌جا</small></a>
+    <nav>
+      <a href="index.html#tools">ابزارها</a>
+      <a href="index.html#prices">قیمت‌ها</a>
+      <a href="index.html#briefing">مرور صبحگاهی</a>
+      <a href="about.html">درباره ما</a>
+    </nav>
+  </div>
+</header>
+
+<div class="wrap">
+  <p class="breadcrumb"><a href="index.html">دم‌دست</a> ← <a href="index.html#tools">ابزارها</a> ← محاسبه رهن و اجاره</p>
+  <h1>محاسبه رهن و اجاره</h1>
+  <p class="sub">رهن کامل را به اجاره ماهانه تبدیل کنید، برعکس آن را حساب کنید، یا حالت ترکیبی (بخشی رهن، بخشی اجاره) را بسنجید.</p>
+
+  <div class="card gold">
+    <div class="field">
+      <label for="mode">حالت محاسبه</label>
+      <select id="mode">
+        <option value="deposit-to-rent" selected>رهن کامل ← اجاره ماهانه</option>
+        <option value="rent-to-deposit">اجاره ماهانه ← رهن کامل</option>
+        <option value="combined">ترکیبی: رهن + اجاره ← معادل کل</option>
+      </select>
+    </div>
+    <div class="field" id="mainField">
+      <label for="amount" id="amountLabel">مبلغ رهن کامل (تومان)</label>
+      <input type="text" id="amount" inputmode="numeric" value="۳۰۰٬۰۰۰٬۰۰۰">
+    </div>
+    <div id="combinedFields" hidden>
+      <div class="fields">
+        <div class="field">
+          <label for="depPart">رهن پرداختی (تومان)</label>
+          <input type="text" id="depPart" inputmode="numeric" value="۵۰۰٬۰۰۰٬۰۰۰">
+        </div>
+        <div class="field">
+          <label for="rentPart">اجاره پرداختی (تومان در ماه)</label>
+          <input type="text" id="rentPart" inputmode="numeric" value="۵٬۰۰۰٬۰۰۰">
+        </div>
+      </div>
+    </div>
+    <div class="field">
+      <label for="rate">نرخ تبدیل ماهانه (٪) — عرف بازار: ۳٪</label>
+      <input type="text" id="rate" inputmode="decimal" value="۳">
+    </div>
+    <p class="hint">نرخ تبدیل یک عرف بازار است، نه عدد قانونی؛ معمولاً بین ۲ تا ۴ درصد است و با توافق طرفین و عرف منطقه تغییر می‌کند.</p>
+    <div class="out" id="out"><small>اجاره ماهانه معادل</small><span class="big">—</span></div>
+    <table class="result" id="resultTable" hidden>
+      <tbody id="resultBody"></tbody>
+    </table>
+    <div class="row">
+      <button class="btn-primary" type="button" id="copyBtn">کپی نتیجه</button>
+      <button class="btn-ghost" type="button" id="shareBtn">اشتراک‌گذاری</button>
+    </div>
+    <p class="examples">مثال:
+      <button class="chip" type="button" data-mode="deposit-to-rent" data-amount="300000000" data-rate="3">رهن ۳۰۰ میلیون ← اجاره</button>
+      <button class="chip" type="button" data-mode="rent-to-deposit" data-amount="9000000" data-rate="3">اجاره ۹ میلیون ← رهن</button>
+      <button class="chip" type="button" data-mode="combined" data-dep="500000000" data-rent="5000000" data-rate="3">۵۰۰ میلیون رهن + ۵ میلیون اجاره</button>
+    </p>
+  </div>
+
+  <div class="card">
+    <h2>فرمول</h2>
+    <p class="formula">اجاره ماهانه = مبلغ رهن × نرخ تبدیل ÷ ۱۰۰</p>
+    <p>عرف رایج بازار مسکن ایران — که به آن «صدی سه» هم می‌گویند — این است که <strong>هر ۱ میلیون تومان رهن معادل ۳۰ هزار تومان اجاره ماهانه</strong> است؛ یعنی نرخ تبدیل ماهانه ۳٪.</p>
+    <p class="formula">رهن معادل = اجاره ماهانه ÷ نرخ تبدیل × ۱۰۰</p>
+    <p>در حالت ترکیبی، اجاره معادل کل برابر است با اجاره پرداختی به‌علاوه اجاره معادلِ رهن پرداختی:</p>
+    <p class="formula">اجاره معادل کل = اجاره پرداختی + (رهن پرداختی × نرخ تبدیل ÷ ۱۰۰)</p>
+    <p>و رهن معادل کل برابر است با رهن پرداختی به‌علاوه رهن معادلِ اجاره پرداختی.</p>
+  </div>
+
+  <div class="card">
+    <h2>مثال عددی</h2>
+    <p>با نرخ تبدیل ۳٪ (عرف رایج):</p>
+    <table class="result">
+      <tr><td>رهن کامل ۳۰۰٬۰۰۰٬۰۰۰ تومان</td><td>اجاره معادل ۹٬۰۰۰٬۰۰۰ تومان در ماه</td></tr>
+      <tr><td>اجاره ماهانه ۹٬۰۰۰٬۰۰۰ تومان</td><td>رهن معادل ۳۰۰٬۰۰۰٬۰۰۰ تومان</td></tr>
+    </table>
+    <p>حالت ترکیبی — ۵۰۰٬۰۰۰٬۰۰۰ تومان رهن + ۵٬۰۰۰٬۰۰۰ تومان اجاره ماهانه:</p>
+    <table class="result">
+      <tr><td>اجاره معادل رهن پرداختی</td><td>۱۵٬۰۰۰٬۰۰۰ تومان در ماه</td></tr>
+      <tr><td>اجاره معادل کل</td><td>۲۰٬۰۰۰٬۰۰۰ تومان در ماه</td></tr>
+      <tr class="total"><td>رهن معادل کل</td><td>۶۶۶٬۶۶۶٬۶۶۷ تومان</td></tr>
+    </table>
+    <p class="meta">یعنی این قرارداد ترکیبی، معادل اجاره ۲۰ میلیون تومان در ماه بدون هیچ رهنی، یا رهن کامل حدود ۶۶۷ میلیون تومان بدون اجاره است.</p>
+  </div>
+
+  <div class="card">
+    <h2>ورودی و خروجی یعنی چه</h2>
+    <ul class="tight">
+      <li><strong>مبلغ رهن کامل (تومان):</strong> ودیعه‌ای که مستأجر به موجر می‌دهد و در پایان قرارداد پس می‌گیرد.</li>
+      <li><strong>اجاره ماهانه (تومان):</strong> مبلغی که مستأجر هر ماه می‌پردازد و پس داده نمی‌شود.</li>
+      <li><strong>نرخ تبدیل ماهانه (٪):</strong> چند درصد رهن، معادل یک ماه اجاره است. عرف رایج ۳٪ است؛ در مناطق کم‌تقاضا کمتر (حدود ۲٫۵٪) و در مناطق پرتقاضا بیشتر (حدود ۳٫۵٪) دیده می‌شود.</li>
+      <li><strong>اجاره معادل کل:</strong> در حالت ترکیبی، مجموع اجاره‌ای که مستأجر عملاً هر ماه می‌پردازد (اجاره نقدی + اجاره معادل رهن).</li>
+      <li><strong>رهن معادل کل:</strong> در حالت ترکیبی، مجموع ودیعه‌ای که قرارداد معادل آن است.</li>
+    </ul>
+  </div>
+
+  <div class="card">
+    <h2>این ابزار برای چه مواردی مناسب نیست</h2>
+    <ul class="tight">
+      <li>تعیین قیمت ملک — این ابزار فقط رهن و اجاره را به هم تبدیل می‌کند؛ قیمت واقعی ملک به موقعیت، متراژ و بازار بستگی دارد.</li>
+      <li>قرارداد رسمی — نرخ تبدیل توافقی است و قانون نرخ ثابتی برای همه قراردادها تعیین نکرده است؛ پیش از امضا با مشاور املاک یا وکیل مشورت کنید.</li>
+      <li>محاسبه مالیات اجاره — مالیات اجاره تابع مواد ۵۳ و ۵۴ قانون مالیات‌های مستقیم و جدول املاک مشابه است.</li>
+    </ul>
+    <p class="note"><strong>نکته:</strong> طبق مصوبه سران قوا که ۸ تیر ۱۴۰۵ ابلاغ شد، در تمدید قراردادهای اجاره مسکونی، افزایش اجاره‌بها و ودیعه حداکثر ۲۵ درصد است.</p>
+  </div>
+
+  <div class="card faq">
+    <h2>پرسش‌های متداول</h2>
+    <details>
+      <summary>نرخ تبدیل رهن به اجاره چند درصد است؟</summary>
+      <p>عرف رایج بازار ایران ۳٪ در ماه است؛ یعنی هر ۱ میلیون تومان رهن معادل ۳۰ هزار تومان اجاره. این نرخ قانونی و ثابت نیست و بین ۲ تا ۴ درصد، بسته به منطقه و توافق طرفین، تغییر می‌کند.</p>
+    </details>
+    <details>
+      <summary>رهن کامل بهتر است یا اجاره ماهانه؟</summary>
+      <p>بستگی به نقدینگی شما دارد: رهن کامل در پایان قرارداد پس داده می‌شود اما پول زیادی را ماه‌ها درگیر می‌کند؛ اجاره ماهانه نقدینگی کمتری می‌خواهد ولی برگشتی ندارد. با حالت ترکیبی این ابزار می‌توانید دو پیشنهاد را با هم مقایسه کنید.</p>
+    </details>
+    <details>
+      <summary>آیا نرخ ۳٪ قانونی است؟</summary>
+      <p>نه؛ ۳٪ یک عرف معاملاتی رایج است. قانون نرخ ثابتی برای تبدیل رهن به اجاره تعیین نکرده است و نرخ نهایی با توافق موجر و مستأجر مشخص می‌شود.</p>
+    </details>
+    <details>
+      <summary>چطور دو پیشنهاد اجاره را با هم مقایسه کنم؟</summary>
+      <p>هر دو پیشنهاد را در حالت ترکیبی وارد کنید و «اجاره معادل کل» یا «رهن معادل کل» آن‌ها را با هم مقایسه کنید؛ عدد کمتر، پیشنهاد ارزان‌تر است.</p>
+    </details>
+  </div>
+
+  <div class="card">
+    <h2>منابع و تاریخ بازبینی</h2>
+    <ul class="tight">
+      <li>عرف «صدی سه» و فرمول تبدیل: tabdex.ir و hesabchy.ir — هر ۱ میلیون تومان رهن معادل ۳۰ هزار تومان اجاره ماهانه (نرخ ۳٪).</li>
+      <li>مصوبه تمدید قراردادها (حداکثر افزایش ۲۵٪): نبض قیمت، ۳ آذر ۱۴۰۵.</li>
+      <li>مثال‌های عددی این صفحه با همین فرمول‌ها محاسبه و بازبینی شده‌اند.</li>
+    </ul>
+    <p class="meta">آخرین بازبینی: ۶ آذر ۱۴۰۵</p>
+  </div>
+
+  <div class="card">
+    <h2>ابزارهای مرتبط</h2>
+    <div class="related">
+      <a href="loan-installment.html">محاسبه اقساط وام</a>
+      <a href="deposit-interest.html">محاسبه سود سپرده بانکی</a>
+      <a href="vat.html">محاسبه مالیات بر ارزش افزوده</a>
+      <a href="gold-price.html">محاسبه قیمت طلای ساخته‌شده</a>
+      <a href="index.html">همه ابزارها</a>
+    </div>
+  </div>
+
+  <footer>
+    دم‌دست — ابزار، قیمت و خبر؛ همه در یک‌جا<br>
+    ساخته‌شده توسط کوروش فرجی (KouroshLabs) ·
+    <a href="about.html">درباره ما</a> · <a href="contact.html">تماس</a> · <a href="privacy.html">حریم خصوصی</a><br>
+    <span style="font-size:12px">پردازش اطلاعات این ابزار در مرورگر شما انجام می‌شود و محتوای واردشده برای پردازش به سرور ارسال نمی‌شود.</span>
+  </footer>
+</div>
+
+<script src="assets/common.js"></script>
+<script>
+(function () {
+  var modeEl = document.getElementById('mode');
+  var amountEl = document.getElementById('amount');
+  var amountLabel = document.getElementById('amountLabel');
+  var mainField = document.getElementById('mainField');
+  var combinedFields = document.getElementById('combinedFields');
+  var depPartEl = document.getElementById('depPart');
+  var rentPartEl = document.getElementById('rentPart');
+  var rateEl = document.getElementById('rate');
+  var out = document.getElementById('out');
+  var table = document.getElementById('resultTable');
+  var body = document.getElementById('resultBody');
+  var lastText = '';
+  function modeLabel() { return modeEl.options[modeEl.selectedIndex].text; }
+  function row(k, v) { return '<tr><td>' + k + '</td><td>' + v + '</td></tr>'; }
+  function calc() {
+    var rate = parseFaNum(rateEl.value);
+    if (isNaN(rate) || rate <= 0 || rate > 10) {
+      out.innerHTML = '<small>لطفاً نرخ تبدیل ماهانه را بین ۰ تا ۱۰ درصد وارد کنید.</small>';
+      table.hidden = true; lastText = ''; return;
+    }
+    var r = rate / 100;
+    if (modeEl.value === 'deposit-to-rent') {
+      var dep = parseFaNum(amountEl.value);
+      if (!(dep > 0)) {
+        out.innerHTML = '<small>لطفاً مبلغ رهن کامل (بیشتر از صفر) را وارد کنید.</small>';
+        table.hidden = true; lastText = ''; return;
+      }
+      var rent = dep * r;
+      out.innerHTML = '<small>اجاره ماهانه معادل</small><span class="big">' + faMoney(rent) + ' تومان</span>';
+      body.innerHTML = row('رهن کامل', faMoney(dep) + ' تومان') +
+        row('نرخ تبدیل ماهانه', faNum(rate) + '٪') +
+        row('اجاره ماهانه معادل', faMoney(rent) + ' تومان');
+      table.hidden = false;
+      lastText = 'محاسبه رهن و اجاره — رهن کامل: ' + faMoney(dep) + ' تومان، نرخ تبدیل: ' + faNum(rate) + '٪. اجاره ماهانه معادل: ' + faMoney(rent) + ' تومان. (دم‌دست)';
+    } else if (modeEl.value === 'rent-to-deposit') {
+      var rent2 = parseFaNum(amountEl.value);
+      if (!(rent2 > 0)) {
+        out.innerHTML = '<small>لطفاً اجاره ماهانه (بیشتر از صفر) را وارد کنید.</small>';
+        table.hidden = true; lastText = ''; return;
+      }
+      var dep2 = rent2 / r;
+      out.innerHTML = '<small>رهن کامل معادل</small><span class="big">' + faMoney(dep2) + ' تومان</span>';
+      body.innerHTML = row('اجاره ماهانه', faMoney(rent2) + ' تومان') +
+        row('نرخ تبدیل ماهانه', faNum(rate) + '٪') +
+        row('رهن کامل معادل', faMoney(dep2) + ' تومان');
+      table.hidden = false;
+      lastText = 'محاسبه رهن و اجاره — اجاره ماهانه: ' + faMoney(rent2) + ' تومان، نرخ تبدیل: ' + faNum(rate) + '٪. رهن کامل معادل: ' + faMoney(dep2) + ' تومان. (دم‌دست)';
+    } else {
+      var dp = parseFaNum(depPartEl.value);
+      var rp = parseFaNum(rentPartEl.value);
+      if (!(dp >= 0) || !(rp >= 0) || (dp === 0 && rp === 0)) {
+        out.innerHTML = '<small>لطفاً رهن پرداختی و اجاره پرداختی را وارد کنید (حداقل یکی بیشتر از صفر باشد).</small>';
+        table.hidden = true; lastText = ''; return;
+      }
+      var rentEq = rp + dp * r;
+      var depEq = dp + rp / r;
+      out.innerHTML = '<small>اجاره معادل کل</small><span class="big">' + faMoney(rentEq) + ' تومان در ماه</span>';
+      body.innerHTML = row('رهن پرداختی', faMoney(dp) + ' تومان') +
+        row('اجاره پرداختی', faMoney(rp) + ' تومان در ماه') +
+        row('اجاره معادل رهن پرداختی', faMoney(dp * r) + ' تومان در ماه') +
+        row('اجاره معادل کل', faMoney(rentEq) + ' تومان در ماه') +
+        row('رهن معادل کل', faMoney(depEq) + ' تومان');
+      table.hidden = false;
+      lastText = 'محاسبه رهن و اجاره (ترکیبی) — رهن: ' + faMoney(dp) + ' تومان + اجاره: ' + faMoney(rp) + ' تومان، نرخ تبدیل: ' + faNum(rate) + '٪. اجاره معادل کل: ' + faMoney(rentEq) + ' تومان در ماه، رهن معادل کل: ' + faMoney(depEq) + ' تومان. (دم‌دست)';
+    }
+  }
+  function syncMode() {
+    var m = modeEl.value;
+    if (m === 'combined') {
+      mainField.hidden = true;
+      combinedFields.hidden = false;
+    } else {
+      mainField.hidden = false;
+      combinedFields.hidden = true;
+      amountLabel.textContent = m === 'deposit-to-rent' ? 'مبلغ رهن کامل (تومان)' : 'اجاره ماهانه (تومان)';
+    }
+    calc();
+  }
+  [amountEl, depPartEl, rentPartEl, rateEl].forEach(function (el) { el.addEventListener('input', calc); });
+  modeEl.addEventListener('change', syncMode);
+  document.querySelectorAll('.examples .chip').forEach(function (chip) {
+    chip.addEventListener('click', function () {
+      modeEl.value = chip.dataset.mode;
+      if (chip.dataset.amount) amountEl.value = faMoney(parseFloat(chip.dataset.amount));
+      if (chip.dataset.dep) depPartEl.value = faMoney(parseFloat(chip.dataset.dep));
+      if (chip.dataset.rent) rentPartEl.value = faMoney(parseFloat(chip.dataset.rent));
+      rateEl.value = faNum(chip.dataset.rate);
+      syncMode();
+    });
+  });
+  document.getElementById('copyBtn').addEventListener('click', function () {
+    if (lastText) copyText(lastText, this);
+  });
+  document.getElementById('shareBtn').addEventListener('click', function () {
+    if (lastText) shareText(lastText, this);
+  });
+  syncMode();
+})();
+</script>
+</body>
+</html>

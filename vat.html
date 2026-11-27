@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>محاسبه مالیات بر ارزش افزوده | نرخ ۱۰٪ سال ۱۴۰۵</title>
+<meta name="description" content="محاسبه مالیات بر ارزش افزوده با نرخ عمومی ۱۰٪ سال ۱۴۰۵؛ مبلغ بدون مالیات را به با مالیات تبدیل کنید یا برعکس.">
+<meta property="og:title" content="محاسبه مالیات بر ارزش افزوده | نرخ ۱۰٪ سال ۱۴۰۵">
+<meta property="og:description" content="مالیات بر ارزش افزوده را با نرخ عمومی ۱۰٪ حساب کنید؛ تبدیل مبلغ با مالیات و بدون مالیات.">
+<meta property="og:type" content="website">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;500;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+<header class="site-header">
+  <div class="inner">
+    <a class="brand" href="index.html">دم‌دست<small>ابزار، قیمت و خبر؛ همه در یک‌جا</small></a>
+    <nav>
+      <a href="index.html#tools">ابزارها</a>
+      <a href="index.html#prices">قیمت‌ها</a>
+      <a href="index.html#briefing">مرور صبحگاهی</a>
+      <a href="about.html">درباره ما</a>
+    </nav>
+  </div>
+</header>
+
+<div class="wrap">
+  <p class="breadcrumb"><a href="index.html">دم‌دست</a> ← <a href="index.html#tools">ابزارها</a> ← محاسبه مالیات بر ارزش افزوده</p>
+  <h1>محاسبه مالیات بر ارزش افزوده</h1>
+  <p class="sub">با نرخ عمومی ۱۰٪ سال ۱۴۰۵؛ مبلغ بدون مالیات را به مبلغ با مالیات تبدیل کنید یا برعکس.</p>
+
+  <div class="card gold">
+    <div class="field">
+      <label for="mode">جهت محاسبه</label>
+      <select id="mode">
+        <option value="add" selected>مبلغ بدون مالیات ← مبلغ با مالیات</option>
+        <option value="remove">مبلغ با مالیات ← مبلغ بدون مالیات</option>
+      </select>
+    </div>
+    <div class="field">
+      <label for="amount" id="amountLabel">مبلغ بدون مالیات (تومان)</label>
+      <input type="text" id="amount" inputmode="numeric" value="۱٬۰۰۰٬۰۰۰">
+    </div>
+    <div class="field">
+      <label for="rate">نرخ مالیات بر ارزش افزوده (٪) — نرخ عمومی ۱۴۰۵: ۱۰٪</label>
+      <input type="text" id="rate" inputmode="decimal" value="۱۰">
+    </div>
+    <p class="hint">نرخ را می‌توانید تغییر دهید؛ برای کالاهای معاف (مثل نان، شیر، دارو و کتاب) نرخ صفر است و برای چند کالای خاص نرخ جداگانه دارد.</p>
+    <div class="out" id="out"><small>مبلغ با مالیات</small><span class="big">—</span></div>
+    <table class="result" id="resultTable" hidden>
+      <tr><td id="rBaseLabel">مبلغ بدون مالیات</td><td id="rBase">—</td></tr>
+      <tr><td>مبلغ مالیات</td><td id="rTax">—</td></tr>
+      <tr><td id="rTotalLabel">مبلغ با مالیات</td><td id="rTotal">—</td></tr>
+    </table>
+    <div class="row">
+      <button class="btn-primary" type="button" id="copyBtn">کپی نتیجه</button>
+      <button class="btn-ghost" type="button" id="shareBtn">اشتراک‌گذاری</button>
+    </div>
+    <p class="examples">مثال:
+      <button class="chip" type="button" data-mode="add" data-amount="1000000" data-rate="10">۱ میلیون بدون مالیات ← با مالیات</button>
+      <button class="chip" type="button" data-mode="remove" data-amount="1100000" data-rate="10">۱٫۱ میلیون با مالیات ← بدون مالیات</button>
+      <button class="chip" type="button" data-mode="add" data-amount="5000000" data-rate="10">۵ میلیون بدون مالیات ← با مالیات</button>
+    </p>
+  </div>
+
+  <div class="card">
+    <h2>فرمول</h2>
+    <p class="formula">مالیات = مبلغ بدون مالیات × نرخ ÷ ۱۰۰</p>
+    <p class="formula">مبلغ با مالیات = مبلغ بدون مالیات × (۱ + نرخ ÷ ۱۰۰)</p>
+    <p>برای مسیر برعکس (از مبلغ با مالیات به مبلغ بدون مالیات)، باید تقسیم کرد:</p>
+    <p class="formula">مبلغ بدون مالیات = مبلغ با مالیات ÷ (۱ + نرخ ÷ ۱۰۰)</p>
+  </div>
+
+  <div class="card">
+    <h2>مثال عددی</h2>
+    <p>مبلغ ۱٬۰۰۰٬۰۰۰ تومان بدون مالیات، با نرخ عمومی ۱۰٪:</p>
+    <table class="result">
+      <tr><td>مبلغ مالیات</td><td>۱۰۰٬۰۰۰ تومان</td></tr>
+      <tr class="total"><td>مبلغ با مالیات</td><td>۱٬۱۰۰٬۰۰۰ تومان</td></tr>
+    </table>
+    <p>و برعکس — مبلغ ۱٬۱۰۰٬۰۰۰ تومان با مالیات:</p>
+    <table class="result">
+      <tr><td>مبلغ بدون مالیات</td><td>۱٬۰۰۰٬۰۰۰ تومان</td></tr>
+      <tr class="total"><td>مبلغ مالیات</td><td>۱۰۰٬۰۰۰ تومان</td></tr>
+    </table>
+    <p class="meta">دقت کنید: مالیاتِ مبلغِ با مالیات، ۱۰٪ آن مبلغ نیست (۱۱۰٬۰۰۰ تومان نمی‌شود)؛ بلکه باید مبلغ را بر ۱٫۱ تقسیم کرد.</p>
+  </div>
+
+  <div class="card">
+    <h2>نرخ ۱۴۰۵ چند درصد است؟</h2>
+    <p><strong>نرخ عمومی مالیات و عوارض ارزش افزوده در سال ۱۴۰۵، ۱۰ درصد است</strong> — همان نرخ سال ۱۴۰۴. در متن ماده ۷ قانون مالیات بر ارزش افزوده نرخ پایه ۹٪ نوشته شده، اما احکام بودجه سنواتی یک واحد درصد به آن افزوده‌اند و نرخ اجرایی ۱۰٪ شده است.</p>
+    <ul class="tight">
+      <li>لایحه بودجه ۱۴۰۵ در ابتدا افزایش بیشتری (تا ۱۲٪) پیشنهاد کرده بود، اما نرخ اجرا شده در ۱۴۰۵ همان ۱۰٪ است و سخنگوی سازمان امور مالیاتی در ۱۲ خرداد ۱۴۰۵ اعلام کرد برنامه‌ای برای افزایش آن نیست.</li>
+      <li>کالاها و خدمات معاف (ماده ۹ قانون) مثل نان، شیر، دارو و کتاب مالیات ندارند؛ نرخ آن‌ها صفر است.</li>
+      <li>در طلا، اصل طلای به‌کاررفته معاف است و فقط اجرت ساخت و سود فروشنده مشمول ۱۰٪ می‌شود.</li>
+    </ul>
+  </div>
+
+  <div class="card">
+    <h2>ورودی و خروجی یعنی چه</h2>
+    <ul class="tight">
+      <li><strong>مبلغ بدون مالیات (تومان):</strong> قیمت کالا یا خدمت پیش از افزودن مالیات.</li>
+      <li><strong>مبلغ با مالیات (تومان):</strong> مبلغ نهایی که خریدار می‌پردازد.</li>
+      <li><strong>نرخ مالیات (٪):</strong> نرخ عمومی ۱۴۰۵ برابر ۱۰٪ است؛ اگر کالا معاف است صفر وارد کنید.</li>
+      <li><strong>مبلغ مالیات:</strong> سهم مالیات از مبلغ نهایی.</li>
+    </ul>
+  </div>
+
+  <div class="card">
+    <h2>این ابزار برای چه مواردی مناسب نیست</h2>
+    <ul class="tight">
+      <li>مشاوره مالیاتی — این ابزار فقط محاسبه می‌کند؛ برای معافیت‌ها، نرخ‌های خاص و تکالیف سامانه مؤدیان با مشاور مالیاتی یا سازمان امور مالیاتی مشورت کنید.</li>
+      <li>صدور فاکتور رسمی — برای صورتحساب رسمی از <a href="invoice-maker.html">فاکتورساز</a> استفاده کنید و الزامات سامانه مؤدیان را بررسی کنید.</li>
+    </ul>
+  </div>
+
+  <div class="card faq">
+    <h2>پرسش‌های متداول</h2>
+    <details>
+      <summary>نرخ مالیات بر ارزش افزوده در سال ۱۴۰۵ چند درصد است؟</summary>
+      <p>نرخ عمومی ۱۰٪ است، مثل سال ۱۴۰۴. متن ماده ۷ قانون ۹٪ نوشته و قانون بودجه یک واحد به آن افزوده است.</p>
+    </details>
+    <details>
+      <summary>چرا بعضی جاها می‌گویند نرخ ۱۲٪ شده است؟</summary>
+      <p>لایحه بودجه ۱۴۰۵ در ابتدا افزایش تا ۱۲٪ را پیشنهاد کرده بود، اما نرخ اجرا شده همان ۱۰٪ ماند. سخنگوی سازمان امور مالیاتی در ۱۲ خرداد ۱۴۰۵ هم گفت برنامه‌ای برای افزایش آن نیست.</p>
+    </details>
+    <details>
+      <summary>کدام کالاها از مالیات بر ارزش افزوده معاف‌اند؟</summary>
+      <p>طبق ماده ۹ قانون، کالاها و خدماتی مثل نان، شیر، دارو و کتاب معاف‌اند. فهرست کامل معافیت‌ها در ماده ۹ قانون آمده است.</p>
+    </details>
+    <details>
+      <summary>مالیات طلا چطور حساب می‌شود؟</summary>
+      <p>اصل طلای به‌کاررفته معاف است و فقط اجرت ساخت و سود فروشنده مشمول مالیات ۱۰٪ می‌شود. برای محاسبه کامل قیمت طلا از <a href="gold-price.html">محاسبه قیمت طلای ساخته‌شده</a> استفاده کنید.</p>
+    </details>
+  </div>
+
+  <div class="card">
+    <h2>منابع و تاریخ بازبینی</h2>
+    <ul class="tight">
+      <li>نرخ عمومی ۱۰٪ در ۱۴۰۵ (ماده ۷: ۹٪ + ۱ واحد درصد احکام بودجه): mactis.ir، omidantax.com، zarinpal.com، rahtakar.com.</li>
+      <li>عدم افزایش نرخ در ۱۴۰۵ و اظهار سخنگوی سازمان امور مالیاتی (۱۲ خرداد ۱۴۰۵): rahtakar.com.</li>
+      <li>مثال‌های عددی این صفحه با همین نرخ محاسبه و بازبینی شده‌اند.</li>
+    </ul>
+    <p class="meta">آخرین بازبینی: ۶ آذر ۱۴۰۵</p>
+  </div>
+
+  <div class="card">
+    <h2>ابزارهای مرتبط</h2>
+    <div class="related">
+      <a href="invoice-maker.html">فاکتورساز فارسی</a>
+      <a href="gold-price.html">محاسبه قیمت طلای ساخته‌شده</a>
+      <a href="loan-installment.html">محاسبه اقساط وام</a>
+      <a href="deposit-interest.html">محاسبه سود سپرده بانکی</a>
+      <a href="index.html">همه ابزارها</a>
+    </div>
+  </div>
+
+  <footer>
+    دم‌دست — ابزار، قیمت و خبر؛ همه در یک‌جا<br>
+    ساخته‌شده توسط کوروش فرجی (KouroshLabs) ·
+    <a href="about.html">درباره ما</a> · <a href="contact.html">تماس</a> · <a href="privacy.html">حریم خصوصی</a><br>
+    <span style="font-size:12px">پردازش اطلاعات این ابزار در مرورگر شما انجام می‌شود و محتوای واردشده برای پردازش به سرور ارسال نمی‌شود.</span>
+  </footer>
+</div>
+
+<script src="assets/common.js"></script>
+<script>
+(function () {
+  var modeEl = document.getElementById('mode');
+  var amountEl = document.getElementById('amount');
+  var amountLabel = document.getElementById('amountLabel');
+  var rateEl = document.getElementById('rate');
+  var out = document.getElementById('out');
+  var table = document.getElementById('resultTable');
+  var lastText = '';
+  function calc() {
+    var amount = parseFaNum(amountEl.value);
+    var rate = parseFaNum(rateEl.value);
+    if (!(amount > 0) || isNaN(rate) || rate < 0 || rate > 100) {
+      out.innerHTML = '<small>لطفاً مبلغ (بیشتر از صفر) و نرخ مالیات (۰ تا ۱۰۰ درصد) را درست وارد کنید.</small>';
+      table.hidden = true; lastText = ''; return;
+    }
+    var r = rate / 100, base, tax, total;
+    if (modeEl.value === 'add') {
+      base = amount;
+      tax = base * r;
+      total = base + tax;
+      out.innerHTML = '<small>مبلغ با مالیات</small><span class="big">' + faMoney(total) + ' تومان</span>';
+      document.getElementById('rBaseLabel').textContent = 'مبلغ بدون مالیات';
+      document.getElementById('rTotalLabel').textContent = 'مبلغ با مالیات';
+      lastText = 'محاسبه مالیات بر ارزش افزوده — مبلغ بدون مالیات: ' + faMoney(base) + ' تومان، نرخ: ' + faNum(rate) + '٪. مالیات: ' + faMoney(tax) + ' تومان، مبلغ با مالیات: ' + faMoney(total) + ' تومان. (دم‌دست)';
+    } else {
+      total = amount;
+      base = total / (1 + r);
+      tax = total - base;
+      out.innerHTML = '<small>مبلغ بدون مالیات</small><span class="big">' + faMoney(base) + ' تومان</span>';
+      document.getElementById('rBaseLabel').textContent = 'مبلغ بدون مالیات';
+      document.getElementById('rTotalLabel').textContent = 'مبلغ با مالیات';
+      lastText = 'محاسبه مالیات بر ارزش افزوده — مبلغ با مالیات: ' + faMoney(total) + ' تومان، نرخ: ' + faNum(rate) + '٪. مبلغ بدون مالیات: ' + faMoney(base) + ' تومان، مالیات: ' + faMoney(tax) + ' تومان. (دم‌دست)';
+    }
+    document.getElementById('rBase').textContent = faMoney(base) + ' تومان';
+    document.getElementById('rTax').textContent = faMoney(tax) + ' تومان';
+    document.getElementById('rTotal').textContent = faMoney(total) + ' تومان';
+    table.hidden = false;
+  }
+  function syncMode() {
+    amountLabel.textContent = modeEl.value === 'add' ? 'مبلغ بدون مالیات (تومان)' : 'مبلغ با مالیات (تومان)';
+    calc();
+  }
+  [amountEl, rateEl].forEach(function (el) { el.addEventListener('input', calc); });
+  modeEl.addEventListener('change', syncMode);
+  document.querySelectorAll('.examples .chip').forEach(function (chip) {
+    chip.addEventListener('click', function () {
+      modeEl.value = chip.dataset.mode;
+      amountEl.value = faMoney(parseFloat(chip.dataset.amount));
+      rateEl.value = faNum(chip.dataset.rate);
+      syncMode();
+    });
+  });
+  document.getElementById('copyBtn').addEventListener('click', function () {
+    if (lastText) copyText(lastText, this);
+  });
+  document.getElementById('shareBtn').addEventListener('click', function () {
+    if (lastText) shareText(lastText, this);
+  });
+  syncMode();
+})();
+</script>
+</body>
+</html>

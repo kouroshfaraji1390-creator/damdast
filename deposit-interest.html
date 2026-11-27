@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>محاسبه سود سپرده بانکی | سود ساده و مرکب سپرده</title>
+<meta name="description" content="محاسبه سود سپرده بانکی به‌صورت ساده و مرکب؛ مبلغ سپرده، نرخ سود سالانه و مدت را وارد کنید تا سود و مبلغ نهایی را ببینید.">
+<meta property="og:title" content="محاسبه سود سپرده بانکی | سود ساده و مرکب">
+<meta property="og:description" content="سود ساده و مرکب سپرده بانکی را با فرمول استاندارد حساب کنید.">
+<meta property="og:type" content="website">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;500;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+<header class="site-header">
+  <div class="inner">
+    <a class="brand" href="index.html">دم‌دست<small>ابزار، قیمت و خبر؛ همه در یک‌جا</small></a>
+    <nav>
+      <a href="index.html#tools">ابزارها</a>
+      <a href="index.html#prices">قیمت‌ها</a>
+      <a href="index.html#briefing">مرور صبحگاهی</a>
+      <a href="about.html">درباره ما</a>
+    </nav>
+  </div>
+</header>
+
+<div class="wrap">
+  <p class="breadcrumb"><a href="index.html">دم‌دست</a> ← <a href="index.html#tools">ابزارها</a> ← محاسبه سود سپرده بانکی</p>
+  <h1>محاسبه سود سپرده بانکی</h1>
+  <p class="sub">سود ساده و مرکب سپرده را با فرمول استاندارد حساب کنید.</p>
+
+  <div class="card gold">
+    <div class="field">
+      <label for="amount">مبلغ سپرده (تومان)</label>
+      <input type="text" id="amount" inputmode="numeric" value="۱۰۰٬۰۰۰٬۰۰۰">
+    </div>
+    <div class="fields">
+      <div class="field">
+        <label for="rate">نرخ سود سالانه (٪)</label>
+        <input type="text" id="rate" inputmode="decimal" value="۲۰">
+      </div>
+      <div class="field">
+        <label for="months">مدت سپرده (ماه)</label>
+        <input type="text" id="months" inputmode="numeric" value="۱۲">
+      </div>
+    </div>
+    <div class="field">
+      <label for="mode">نوع سود</label>
+      <select id="mode">
+        <option value="simple" selected>ساده (سود فقط روی اصل پول)</option>
+        <option value="compound-monthly">مرکب ماهانه (سود روی سود)</option>
+        <option value="compound-annual">مرکب سالانه (سود روی سود، سالانه)</option>
+      </select>
+    </div>
+    <p class="hint">مبلغ سپرده باید بیشتر از صفر، نرخ سود صفر یا بیشتر، و مدت سپرده بین ۱ تا ۳۶۰ ماه باشد.</p>
+    <div class="out" id="out"><small>سود سپرده</small><span class="big">—</span></div>
+    <table class="result" id="resultTable" hidden>
+      <tr><td>سود سپرده</td><td id="rInterest">—</td></tr>
+      <tr><td>مبلغ نهایی (اصل + سود)</td><td id="rTotal">—</td></tr>
+      <tr><td>میانگین سود ماهانه</td><td id="rMonthly">—</td></tr>
+      <tr><td>مبلغ سپرده</td><td id="rPrincipal">—</td></tr>
+    </table>
+    <div class="row">
+      <button class="btn-primary" type="button" id="copyBtn">کپی نتیجه</button>
+      <button class="btn-ghost" type="button" id="shareBtn">اشتراک‌گذاری</button>
+    </div>
+    <p class="examples">مثال:
+      <button class="chip" type="button" data-amount="100000000" data-rate="20" data-months="12" data-mode="simple">۱۰۰ میلیون، ۲۰٪، ۱۲ ماه، ساده</button>
+      <button class="chip" type="button" data-amount="100000000" data-rate="20" data-months="12" data-mode="compound-monthly">۱۰۰ میلیون، ۲۰٪، ۱۲ ماه، مرکب ماهانه</button>
+      <button class="chip" type="button" data-amount="100000000" data-rate="20" data-months="36" data-mode="compound-annual">۱۰۰ میلیون، ۲۰٪، ۳ سال، مرکب سالانه</button>
+    </p>
+  </div>
+
+  <div class="card">
+    <h2>فرمول</h2>
+    <p class="formula">سود ساده: I = P × r × t</p>
+    <p>در سود ساده، <strong>P</strong> مبلغ سپرده، <strong>r</strong> نرخ سود سالانه (به‌صورت اعشاری) و <strong>t</strong> مدت سپرده به سال است. مبلغ نهایی برابر است با <strong>P + I</strong>.</p>
+    <p class="formula">سود مرکب: A = P × (1 + r ÷ n)^(n × t)</p>
+    <p>در سود مرکب، سود هر دوره به اصل پول اضافه می‌شود و در دوره بعد روی آن هم سود می‌آید. <strong>n</strong> تعداد دوره‌های ترکیب در سال است (مرکب ماهانه: ۱۲، مرکب سالانه: ۱). مبلغ نهایی <strong>A</strong> و سود برابر است با <strong>A − P</strong>.</p>
+    <p>در سود روزشمار، مدت به روز حساب می‌شود: سود = اصل × نرخ × تعداد روز ÷ ۳۶۵.</p>
+  </div>
+
+  <div class="card">
+    <h2>مثال عددی</h2>
+    <p>سپرده ۱۰۰٬۰۰۰٬۰۰۰ تومان با نرخ ۲۰٪ سالانه و مدت ۱۲ ماه:</p>
+    <table class="result">
+      <tr><td>سود ساده</td><td>۲۰٬۰۰۰٬۰۰۰ تومان</td></tr>
+      <tr><td>مبلغ نهایی (ساده)</td><td>۱۲۰٬۰۰۰٬۰۰۰ تومان</td></tr>
+      <tr><td>سود مرکب ماهانه</td><td>۲۱٬۹۳۹٬۱۰۸ تومان</td></tr>
+      <tr><td>مبلغ نهایی (مرکب ماهانه)</td><td>۱۲۱٬۹۳۹٬۱۰۸ تومان</td></tr>
+    </table>
+    <p>و برای ۳ سال با همان مبلغ و نرخ، به‌صورت مرکب سالانه:</p>
+    <table class="result">
+      <tr><td>سود مرکب سالانه (۳ سال)</td><td>۷۲٬۸۰۰٬۰۰۰ تومان</td></tr>
+      <tr class="total"><td>مبلغ نهایی (۳ سال)</td><td>۱۷۲٬۸۰۰٬۰۰۰ تومان</td></tr>
+    </table>
+    <p class="meta">یعنی در ۱۲ ماه، سود مرکب ماهانه ۱٬۹۳۹٬۱۰۸ تومان بیشتر از سود ساده است.</p>
+  </div>
+
+  <div class="card">
+    <h2>ورودی و خروجی یعنی چه</h2>
+    <ul class="tight">
+      <li><strong>مبلغ سپرده (تومان):</strong> پولی که در بانک می‌گذارید.</li>
+      <li><strong>نرخ سود سالانه (٪):</strong> نرخی که بانک برای یک سال اعلام می‌کند؛ نرخ واقعی را از بانک خود بپرسید.</li>
+      <li><strong>مدت سپرده (ماه):</strong> مدتی که پول در بانک می‌ماند.</li>
+      <li><strong>سود ساده:</strong> سود فقط روی اصل پول حساب می‌شود.</li>
+      <li><strong>سود مرکب:</strong> سود هر دوره به اصل اضافه می‌شود و دوره بعد روی آن هم سود می‌آید؛ به همین دلیل در بلندمدت بیشتر است.</li>
+      <li><strong>مبلغ نهایی:</strong> اصل پول به‌علاوه سود کل.</li>
+    </ul>
+  </div>
+
+  <div class="card">
+    <h2>این ابزار برای چه مواردی مناسب نیست</h2>
+    <ul class="tight">
+      <li>محاسبه سود دقیق بانکی — بانک‌ها معمولاً سود علی‌الحساب می‌دهند و ممکن است روش روزشمار، کسر کارمزد یا شرایط برداشت زودهنگام داشته باشند؛ عدد نهایی بانک می‌تواند کمی متفاوت باشد.</li>
+      <li>سپرده‌های ارزی یا با نرخ شناور — این ابزار فرض می‌کند نرخ در کل مدت ثابت است.</li>
+      <li>تصمیم سرمایه‌گذاری — این ابزار فقط محاسبه می‌کند؛ سود سپرده را با تورم و گزینه‌های دیگر بسنجید.</li>
+    </ul>
+    <p class="note"><strong>نکته مالیاتی:</strong> سود سپرده بانکی اشخاص حقیقی طبق ماده ۱۴۵ قانون مالیات‌های مستقیم از مالیات معاف است.</p>
+  </div>
+
+  <div class="card faq">
+    <h2>پرسش‌های متداول</h2>
+    <details>
+      <summary>تفاوت سود ساده و مرکب چیست؟</summary>
+      <p>در سود ساده فقط روی اصل پول سود می‌آید؛ در سود مرکب، سود هر دوره به اصل اضافه می‌شود و دوره بعد روی آن هم سود می‌آید. به همین دلیل سود مرکب در مدت‌های طولانی بیشتر است.</p>
+    </details>
+    <details>
+      <summary>سود روزشمار یعنی چه؟</summary>
+      <p>یعنی سود بر اساس تعداد روزهایی که پول در بانک بوده حساب می‌شود: سود = اصل × نرخ × تعداد روز ÷ ۳۶۵. اگر سپرده را زودتر برداشت کنید، سود فقط برای روزهای واقعی محاسبه می‌شود.</p>
+    </details>
+    <details>
+      <summary>نرخ سود سپرده را از کجا بدانم؟</summary>
+      <p>نرخ سود مصوب را بانک مرکزی اعلام می‌کند و هر بانک نرخ سپرده‌های خود را در شعب و سایتش می‌نویسد؛ همان عدد را اینجا وارد کنید.</p>
+    </details>
+    <details>
+      <summary>چرا سود مرکب ماهانه بیشتر از سود ساده است؟</summary>
+      <p>چون در مرکب ماهانه، سود هر ماه به اصل اضافه می‌شود و ماه بعد روی مجموع آن سود می‌آید؛ در مثال ۱۲ ماهه بالا این اختلاف ۱٬۹۳۹٬۱۰۸ تومان است.</p>
+    </details>
+  </div>
+
+  <div class="card">
+    <h2>منابع و تاریخ بازبینی</h2>
+    <ul class="tight">
+      <li>فرمول‌های استاندارد سود ساده و مرکب.</li>
+      <li>معافیت سود سپرده: ماده ۱۴۵ قانون مالیات‌های مستقیم.</li>
+      <li>مثال‌های عددی این صفحه با همین فرمول‌ها محاسبه و بازبینی شده‌اند.</li>
+    </ul>
+    <p class="meta">آخرین بازبینی: ۶ آذر ۱۴۰۵</p>
+  </div>
+
+  <div class="card">
+    <h2>ابزارهای مرتبط</h2>
+    <div class="related">
+      <a href="loan-installment.html">محاسبه اقساط وام</a>
+      <a href="rent-deposit.html">محاسبه رهن و اجاره</a>
+      <a href="vat.html">محاسبه مالیات بر ارزش افزوده</a>
+      <a href="gold-price.html">محاسبه قیمت طلای ساخته‌شده</a>
+      <a href="coin-bubble.html">حباب سکه</a>
+      <a href="index.html">همه ابزارها</a>
+    </div>
+  </div>
+
+  <footer>
+    دم‌دست — ابزار، قیمت و خبر؛ همه در یک‌جا<br>
+    ساخته‌شده توسط کوروش فرجی (KouroshLabs) ·
+    <a href="about.html">درباره ما</a> · <a href="contact.html">تماس</a> · <a href="privacy.html">حریم خصوصی</a><br>
+    <span style="font-size:12px">پردازش اطلاعات این ابزار در مرورگر شما انجام می‌شود و محتوای واردشده برای پردازش به سرور ارسال نمی‌شود.</span>
+  </footer>
+</div>
+
+<script src="assets/common.js"></script>
+<script>
+(function () {
+  var amountEl = document.getElementById('amount');
+  var rateEl = document.getElementById('rate');
+  var monthsEl = document.getElementById('months');
+  var modeEl = document.getElementById('mode');
+  var out = document.getElementById('out');
+  var table = document.getElementById('resultTable');
+  var lastText = '';
+  function modeLabel() {
+    return modeEl.options[modeEl.selectedIndex].text;
+  }
+  function calc() {
+    var P = parseFaNum(amountEl.value);
+    var rate = parseFaNum(rateEl.value);
+    var m = parseFaNum(monthsEl.value);
+    if (!(P > 0) || isNaN(rate) || rate < 0 || !(m >= 1 && m <= 360) || Math.floor(m) !== m) {
+      out.innerHTML = '<small>لطفاً مبلغ سپرده (بیشتر از صفر)، نرخ سود (صفر یا بیشتر) و مدت سپرده (۱ تا ۳۶۰ ماه) را درست وارد کنید.</small>';
+      table.hidden = true;
+      lastText = '';
+      return;
+    }
+    var t = m / 12, interest, total;
+    if (modeEl.value === 'simple') {
+      interest = P * (rate / 100) * t;
+      total = P + interest;
+    } else if (modeEl.value === 'compound-monthly') {
+      total = P * Math.pow(1 + rate / 1200, m);
+      interest = total - P;
+    } else {
+      total = P * Math.pow(1 + rate / 100, t);
+      interest = total - P;
+    }
+    var monthly = interest / m;
+    out.innerHTML = '<small>سود سپرده (' + modeLabel() + ')</small><span class="big">' + faMoney(interest) + ' تومان</span>';
+    document.getElementById('rInterest').textContent = faMoney(interest) + ' تومان';
+    document.getElementById('rTotal').textContent = faMoney(total) + ' تومان';
+    document.getElementById('rMonthly').textContent = faMoney(monthly) + ' تومان';
+    document.getElementById('rPrincipal').textContent = faMoney(P) + ' تومان';
+    table.hidden = false;
+    lastText = 'محاسبه سود سپرده — مبلغ: ' + faMoney(P) + ' تومان، نرخ سالانه: ' + faNum(rate) + '٪، مدت: ' + faNum(m) + ' ماه (' + modeLabel() + '). سود: ' + faMoney(interest) + ' تومان، مبلغ نهایی: ' + faMoney(total) + ' تومان. (دم‌دست)';
+  }
+  [amountEl, rateEl, monthsEl].forEach(function (el) { el.addEventListener('input', calc); });
+  modeEl.addEventListener('change', calc);
+  document.querySelectorAll('.examples .chip').forEach(function (chip) {
+    chip.addEventListener('click', function () {
+      amountEl.value = faMoney(parseFloat(chip.dataset.amount));
+      rateEl.value = faNum(chip.dataset.rate);
+      monthsEl.value = faNum(chip.dataset.months);
+      modeEl.value = chip.dataset.mode;
+      calc();
+    });
+  });
+  document.getElementById('copyBtn').addEventListener('click', function () {
+    if (lastText) copyText(lastText, this);
+  });
+  document.getElementById('shareBtn').addEventListener('click', function () {
+    if (lastText) shareText(lastText, this);
+  });
+  calc();
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>فاکتورساز فارسی رایگان | ساخت فاکتور فروش با مبلغ به حروف</title>
+<meta name="description" content="ساخت رایگان فاکتور فروش فارسی با محاسبه خودکار جمع، تخفیف و مالیات و مبلغ به حروف. چاپ A4.">
+<meta property="og:title" content="فاکتورساز فارسی رایگان | ساخت فاکتور فروش با مبلغ به حروف">
+<meta property="og:description" content="ساخت فاکتور فروش فارسی با مبلغ به حروف و چاپ تمیز. رایگان و بدون ثبت‌نام.">
+<meta property="og:type" content="website">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;500;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/style.css">
+<style>
+  .grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  @media (max-width: 560px) { .grid2 { grid-template-columns: 1fr; } }
+  .items-table { width: 100%; border-collapse: collapse; margin-top: 8px; }
+  .items-table th, .items-table td { border: 1px solid var(--line); padding: 6px 8px; text-align: right; font-size: 14px; }
+  .items-table th { background: #eef4ff; }
+  .items-table td input { border: none; padding: 4px; font-size: 14px; }
+  .items-table td input:focus { border: none; outline: 1px solid var(--turq); }
+  .num { text-align: left; direction: ltr; }
+  .totals { margin-top: 16px; max-width: 320px; margin-right: auto; }
+  .totals .trow { display: flex; justify-content: space-between; padding: 5px 0; border-bottom: 1px dashed var(--line); }
+  .totals .trow.grand { font-weight: bold; font-size: 18px; border-bottom: 2px solid var(--ink); }
+  .words { margin-top: 14px; background: #eef4ff; border: 1px dashed var(--turq); border-radius: 10px; padding: 12px 16px; font-size: 17px; }
+  .btn-del { background: #fff; border: 1px solid #f0c0c0; color: #c0392b; padding: 4px 10px; font-size: 13px; }
+  .disclaimer { margin-top: 16px; background: #fff8e6; border: 1px solid #f0d48a; border-radius: 10px; padding: 10px 14px; font-size: 13px; color: #6b5518; line-height: 1.9; }
+  .print-val { display: none; }
+  .calc-error { display: none; color: #c0392b; font-weight: bold; font-size: 14px; margin-top: 10px; }
+  input.invalid { border-color: #c0392b !important; }
+  @media screen and (max-width: 560px) {
+    .items-table thead { display: none; }
+    .items-table, .items-table tbody, .items-table tr, .items-table td { display: block; width: 100%; }
+    .items-table { border: none; }
+    .items-table tbody tr { border: 1px solid var(--line); border-radius: 12px; padding: 10px 12px; margin-bottom: 12px; }
+    .items-table td { border: none; padding: 6px 0; }
+    .items-table td[data-label]::before { content: attr(data-label); display: block; font-size: 12px; color: var(--muted); font-weight: bold; margin-bottom: 3px; }
+    .items-table td input { width: 100%; font-size: 16px; padding: 10px 12px; border: 2px solid var(--line); border-radius: 10px; }
+    .items-table td .amount { font-size: 16px; font-weight: bold; }
+    .items-table td .btn-del { width: 100%; padding: 10px; font-size: 14px; }
+  }
+  @media print {
+    body { background: #fff; }
+    .wrap { max-width: 100%; padding: 0; }
+    .no-print { display: none !important; }
+    .card { box-shadow: none; border: 1px solid #999; break-inside: avoid; }
+    input { border: none !important; padding: 0 !important; }
+    .items-table td input { border: none !important; }
+    a { color: #000; }
+    .print-val { display: block; font-size: 15px; }
+    .print-val:empty { display: none; }
+    #itemsBody td .print-val { display: inline; }
+    input.sync-print, #itemsBody td input { display: none !important; }
+    input::placeholder { color: transparent !important; }
+  }
+</style>
+</head>
+<body>
+<header class="site-header no-print">
+  <div class="inner">
+    <a class="brand" href="index.html">دم‌دست<small>ابزار، قیمت و خبر؛ همه در یک‌جا</small></a>
+    <nav>
+      <a href="index.html#tools">ابزارها</a>
+      <a href="index.html#prices">قیمت‌ها</a>
+      <a href="index.html#briefing">مرور صبحگاهی</a>
+      <a href="about.html">درباره ما</a>
+    </nav>
+  </div>
+</header>
+
+<div class="wrap">
+  <p class="breadcrumb no-print"><a href="index.html">دم‌دست</a> ← <a href="index.html#tools">ابزارها</a> ← فاکتورساز فارسی</p>
+  <h1>فاکتورساز فارسی</h1>
+  <p class="sub no-print">فاکتور فروش بسازید، چاپ کنید — رایگان، بدون ثبت‌نام.</p>
+
+  <div class="card" id="invoiceCard">
+    <div class="grid2">
+      <div>
+        <label>فروشنده</label>
+        <input type="text" id="sellerName" class="sync-print" placeholder="نام فروشگاه یا شخص"><span class="print-val" data-for="sellerName"></span>
+        <input type="text" id="sellerPhone" class="sync-print" placeholder="تلفن" style="margin-top:8px"><span class="print-val" data-for="sellerPhone"></span>
+        <input type="text" id="sellerAddr" class="sync-print" placeholder="آدرس" style="margin-top:8px"><span class="print-val" data-for="sellerAddr"></span>
+      </div>
+      <div>
+        <label>خریدار</label>
+        <input type="text" id="buyerName" class="sync-print" placeholder="نام خریدار"><span class="print-val" data-for="buyerName"></span>
+        <input type="text" id="buyerPhone" class="sync-print" placeholder="تلفن" style="margin-top:8px"><span class="print-val" data-for="buyerPhone"></span>
+        <input type="text" id="buyerAddr" class="sync-print" placeholder="آدرس" style="margin-top:8px"><span class="print-val" data-for="buyerAddr"></span>
+      </div>
+    </div>
+    <div class="grid2" style="margin-top:14px">
+      <div><label>شماره فاکتور</label><input type="text" id="invNo" class="sync-print" placeholder="مثلاً ۱۰۱"><span class="print-val" data-for="invNo"></span></div>
+      <div><label>تاریخ</label><input type="text" id="invDate" readonly></div>
+    </div>
+
+    <div style="margin-top:18px">
+      <label>اقلام فاکتور</label>
+      <p class="hint no-print" style="margin-top:0">همه مبلغ‌ها به <strong>تومان</strong> وارد می‌شوند.</p>
+      <table class="items-table">
+        <thead><tr><th style="width:40%">شرح کالا / خدمت</th><th>تعداد</th><th>قیمت واحد (تومان)</th><th>مبلغ (تومان)</th><th class="no-print"></th></tr></thead>
+        <tbody id="itemsBody"></tbody>
+      </table>
+      <div class="row no-print"><button class="btn-ghost" id="addRowBtn">+ افزودن ردیف</button>
+      <button class="btn-ghost" id="sampleBtn">پر کردن با مثال</button></div>
+    </div>
+
+    <div class="totals">
+      <div class="trow"><span>جمع اقلام</span><span id="sumItems">۰ تومان</span></div>
+      <div class="trow"><span>تخفیف (تومان)</span><span><input type="number" id="discount" class="sync-print" value="0" min="0" style="width:130px; text-align:left; direction:ltr"><span class="print-val" id="discountPrint"></span></span></div>
+      <div class="trow"><span>مالیات (٪) — اختیاری</span><span><input type="number" id="taxRate" class="sync-print" value="0" min="0" max="100" style="width:90px; text-align:left; direction:ltr"><span class="print-val" id="taxPrint"></span></span></div>
+      <div class="trow"><span>مبلغ مالیات</span><span id="taxAmount">۰ تومان</span></div>
+      <div class="trow grand"><span>مبلغ نهایی</span><span id="grandTotal">۰ تومان</span></div>
+      <div class="calc-error" id="calcError"></div>
+    </div>
+    <p class="hint no-print">نرخ مالیات را خودتان تعیین کنید؛ ۰ یعنی بدون مالیات. اگر معافیت یا نرخ دیگری دارید، همان را وارد کنید.</p>
+    <div class="words" id="wordsOut">مبلغ به حروف اینجا نمایش داده می‌شود.</div>
+  </div>
+  <p class="disclaimer">این ابزار برای تهیه فاکتور ساده است و به سامانه مؤدیان متصل نیست. برای صدور صورتحساب رسمی، الزامات قانونی مربوط را بررسی کنید.</p>
+
+  <div class="row no-print">
+    <button class="btn-primary" id="printBtn">چاپ / ذخیره PDF</button>
+    <button class="btn-ghost" id="copyBtn">کپی مبلغ نهایی</button>
+  </div>
+  <p class="hint no-print">برای ذخیره به‌صورت PDF، در پنجره چاپ گزینه «Save as PDF» را انتخاب کنید.</p>
+
+  <div class="card no-print">
+    <h2>فرمول</h2>
+    <p class="formula">جمع اقلام = Σ (تعداد × قیمت واحد)</p>
+    <p>مبلغ نهایی در سه مرحله حساب می‌شود:</p>
+    <p class="formula">مبلغ نهایی = (جمع اقلام − تخفیف) × (۱ + نرخ مالیات ÷ ۱۰۰)</p>
+    <p>یعنی اول تخفیف از جمع اقلام کم می‌شود، بعد مالیات روی مبلغِ پس از تخفیف حساب می‌شود و به آن اضافه می‌گردد. مبلغ نهایی به حروف هم نوشته می‌شود.</p>
+  </div>
+
+  <div class="card no-print">
+    <h2>مثال عددی</h2>
+    <p>فاکتوری با سه قلم — طراحی سایت ۹۰۰٬۰۰۰ تومان، اسکریپت پایتون ۷۵۰٬۰۰۰ تومان، ترجمه ۵۰۰٬۰۰۰ تومان — بدون تخفیف و بدون مالیات:</p>
+    <table class="result">
+      <tr><td>جمع اقلام</td><td>۲٬۱۵۰٬۰۰۰ تومان</td></tr>
+      <tr><td>مبلغ به حروف</td><td>دو میلیون و صد و پنجاه هزار تومان</td></tr>
+    </table>
+    <p>با مالیات ۱۰٪:</p>
+    <table class="result">
+      <tr><td>مبلغ مالیات</td><td>۲۱۵٬۰۰۰ تومان</td></tr>
+      <tr class="total"><td>مبلغ نهایی</td><td>۲٬۳۶۵٬۰۰۰ تومان (دو میلیون و سیصد و شصت و پنج هزار تومان)</td></tr>
+    </table>
+  </div>
+
+  <div class="card no-print">
+    <h2>ورودی و خروجی یعنی چه</h2>
+    <ul class="tight">
+      <li><strong>اقلام فاکتور:</strong> هر ردیف یک کالا یا خدمت است با شرح، تعداد و قیمت واحد؛ مبلغ هر ردیف خودکار حساب می‌شود.</li>
+      <li><strong>تخفیف (تومان):</strong> مبلغی که از جمع اقلام کم می‌شود؛ نمی‌تواند بیشتر از جمع اقلام باشد.</li>
+      <li><strong>مالیات (٪):</strong> نرخ مالیات روی مبلغ پس از تخفیف؛ ۰ یعنی بدون مالیات. نرخ عمومی مالیات بر ارزش افزوده در ۱۴۰۵، ۱۰٪ است — برای جزئیات به <a href="vat.html">محاسبه مالیات بر ارزش افزوده</a> سر بزنید.</li>
+      <li><strong>مبلغ به حروف:</strong> مبلغ نهایی به حروف فارسی نوشته می‌شود؛ برای فاکتور و چک.</li>
+    </ul>
+  </div>
+
+  <div class="card no-print">
+    <h2>این ابزار برای چه مواردی مناسب نیست</h2>
+    <ul class="tight">
+      <li>صدور صورتحساب رسمی — این فاکتور به سامانه مؤدیان متصل نیست؛ برای صورتحساب رسمی، الزامات قانونی مربوط را بررسی کنید.</li>
+      <li>فاکتور ارزی یا چندواحدی — همه مبلغ‌ها به تومان وارد می‌شوند.</li>
+    </ul>
+  </div>
+
+  <div class="card faq no-print">
+    <h2>پرسش‌های متداول</h2>
+    <details>
+      <summary>چطور فاکتور را به PDF تبدیل کنم؟</summary>
+      <p>روی «چاپ / ذخیره PDF» بزنید و در پنجره چاپ، گزینه «Save as PDF» را انتخاب کنید.</p>
+    </details>
+    <details>
+      <summary>مالیات روی چه مبلغی حساب می‌شود؟</summary>
+      <p>روی مبلغ پس از تخفیف؛ یعنی اول تخفیف از جمع اقلام کم می‌شود، بعد مالیات روی باقی‌مانده حساب می‌شود.</p>
+    </details>
+    <details>
+      <summary>اگر تخفیف بیشتر از جمع اقلام باشد چه می‌شود؟</summary>
+      <p>ابزار خطا نشان می‌دهد و مبلغ نهایی را حساب نمی‌کند؛ تخفیف نمی‌تواند بیشتر از جمع اقلام باشد.</p>
+    </details>
+    <details>
+      <summary>آیا این فاکتور برای اداره مالیات کافی است؟</summary>
+      <p>نه؛ این ابزار برای تهیه فاکتور ساده است و به سامانه مؤدیان متصل نیست. برای صدور صورتحساب رسمی، الزامات قانونی مربوط را بررسی کنید.</p>
+    </details>
+  </div>
+
+  <div class="card no-print">
+    <h2>منابع و تاریخ بازبینی</h2>
+    <ul class="tight">
+      <li>فرمول محاسبه: جمع اقلام، کسر تخفیف، افزودن مالیات — روش استاندارد فاکتور فروش.</li>
+      <li>نرخ عمومی مالیات بر ارزش افزوده ۱۴۰۵: ۱۰٪ (ماده ۷ قانون: ۹٪ + ۱ واحد درصد احکام بودجه).</li>
+      <li>مثال عددی این صفحه با همین فرمول‌ها محاسبه و بازبینی شده است.</li>
+    </ul>
+    <p class="meta">آخرین بازبینی: ۶ آذر ۱۴۰۵</p>
+  </div>
+
+  <div class="card no-print">
+    <h2>ابزارهای مرتبط</h2>
+    <div class="related">
+      <a href="vat.html">محاسبه مالیات بر ارزش افزوده</a>
+      <a href="number-to-words.html">عدد به حروف فارسی</a>
+      <a href="qr-generator.html">ساخت کد QR</a>
+      <a href="persian-text-fixer.html">اصلاح نگارشی متن فارسی</a>
+      <a href="index.html">همه ابزارها</a>
+    </div>
+  </div>
+
+  <footer class="no-print">
+    دم‌دست — ابزار، قیمت و خبر؛ همه در یک‌جا<br>
+    ساخته‌شده توسط کوروش فرجی (KouroshLabs) ·
+    <a href="about.html">درباره ما</a> · <a href="contact.html">تماس</a> · <a href="privacy.html">حریم خصوصی</a><br>
+    <span style="font-size:12px">پردازش اطلاعات این ابزار در مرورگر شما انجام می‌شود و محتوای واردشده برای پردازش به سرور ارسال نمی‌شود.</span>
+  </footer>
+</div>
+
+<script src="assets/invoice-app.js"></script>
+</body>
+</html>

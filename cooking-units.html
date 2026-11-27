@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>تبدیل واحد آشپزی | پیمانه به گرم، قاشق به گرم</title>
+<meta name="description" content="تبدیل واحد آشپزی: پیمانه، قاشق غذاخوری و قاشق چای‌خوری به گرم برای آرد، شکر، برنج، روغن، کره، شیر و مواد دیگر.">
+<meta property="og:title" content="تبدیل واحد آشپزی | پیمانه به گرم، قاشق به گرم">
+<meta property="og:description" content="پیمانه و قاشق را به گرم تبدیل کنید؛ برای آرد، شکر، برنج، روغن، کره و شیر.">
+<meta property="og:type" content="website">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;500;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+<header class="site-header">
+  <div class="inner">
+    <a class="brand" href="index.html">دم‌دست<small>ابزار، قیمت و خبر؛ همه در یک‌جا</small></a>
+    <nav>
+      <a href="index.html#tools">ابزارها</a>
+      <a href="index.html#prices">قیمت‌ها</a>
+      <a href="index.html#briefing">مرور صبحگاهی</a>
+      <a href="about.html">درباره ما</a>
+    </nav>
+  </div>
+</header>
+
+<div class="wrap">
+  <p class="breadcrumb"><a href="index.html">دم‌دست</a> ← <a href="index.html#tools">ابزارها</a> ← تبدیل واحد آشپزی</p>
+  <h1>تبدیل واحد آشپزی</h1>
+  <p class="sub">پیمانه، قاشق غذاخوری و قاشق چای‌خوری را به گرم تبدیل کنید — برای آرد، شکر، برنج، روغن، کره، شیر و مواد دیگر.</p>
+
+  <div class="card">
+    <div class="field">
+      <label for="ingredient">ماده غذایی</label>
+      <select id="ingredient"></select>
+    </div>
+    <div class="fields">
+      <div class="field">
+        <label for="amount">مقدار</label>
+        <input type="text" id="amount" inputmode="decimal" value="۲">
+      </div>
+      <div class="field">
+        <label for="fromUnit">از واحد</label>
+        <select id="fromUnit">
+          <option value="cup" selected>پیمانه (۲۴۰ میلی‌لیتر)</option>
+          <option value="tbsp">قاشق غذاخوری (۱۵ میلی‌لیتر)</option>
+          <option value="tsp">قاشق چای‌خوری (۵ میلی‌لیتر)</option>
+          <option value="gram">گرم</option>
+        </select>
+      </div>
+      <div class="field">
+        <label for="toUnit">به واحد</label>
+        <select id="toUnit">
+          <option value="gram" selected>گرم</option>
+          <option value="cup">پیمانه</option>
+          <option value="tbsp">قاشق غذاخوری</option>
+          <option value="tsp">قاشق چای‌خوری</option>
+        </select>
+      </div>
+    </div>
+    <p class="hint">پیمانه استاندارد آشپزی ۲۴۰ میلی‌لیتر است — تقریباً یک لیوان دسته‌دار فرانسوی پر. ۱ پیمانه = ۱۶ قاشق غذاخوری = ۴۸ قاشق چای‌خوری.</p>
+    <div class="out" id="out"><small>نتیجه</small><span class="big">—</span></div>
+    <table class="result" id="resultTable" hidden>
+      <tr><td>وزن به گرم</td><td id="rGrams">—</td></tr>
+      <tr><td>معادل پیمانه</td><td id="rCups">—</td></tr>
+      <tr><td>معادل قاشق غذاخوری</td><td id="rTbsp">—</td></tr>
+    </table>
+    <div class="row">
+      <button class="btn-primary" type="button" id="copyBtn">کپی نتیجه</button>
+      <button class="btn-ghost" type="button" id="shareBtn">اشتراک‌گذاری</button>
+    </div>
+    <p class="examples">مثال:
+      <button class="chip" type="button" data-ing="flour" data-amount="2" data-from="cup" data-to="gram">۲ پیمانه آرد ← گرم</button>
+      <button class="chip" type="button" data-ing="sugar" data-amount="3" data-from="tbsp" data-to="gram">۳ قاشق غذاخوری شکر ← گرم</button>
+      <button class="chip" type="button" data-ing="rice" data-amount="500" data-from="gram" data-to="cup">۵۰۰ گرم برنج ← پیمانه</button>
+    </p>
+  </div>
+
+  <div class="card">
+    <h2>فرمول</h2>
+    <p class="formula">وزن (گرم) = حجم × وزن یک پیمانه از همان ماده ÷ ۲۴۰</p>
+    <p>پیمانه واحد حجم است، نه وزن؛ به همین دلیل یک پیمانه از مواد مختلف وزن یکسانی ندارد. هر ماده یک «وزن یک پیمانه» مشخص دارد و تبدیل با ضرب و تقسیم ساده انجام می‌شود:</p>
+    <p class="formula">۱ پیمانه = ۱۶ قاشق غذاخوری = ۴۸ قاشق چای‌خوری</p>
+    <p>پس وزن یک قاشق غذاخوری از هر ماده برابر است با وزن یک پیمانه آن ماده تقسیم بر ۱۶، و وزن یک قاشق چای‌خوری برابر است با وزن یک پیمانه تقسیم بر ۴۸.</p>
+  </div>
+
+  <div class="card">
+    <h2>مثال عددی</h2>
+    <p>۲ پیمانه آرد سفید (هر پیمانه ۱۲۵ گرم):</p>
+    <table class="result">
+      <tr><td>۲ پیمانه آرد</td><td>۲۵۰ گرم</td></tr>
+    </table>
+    <p>۳ قاشق غذاخوری شکر (هر پیمانه شکر ۲۰۰ گرم، پس هر قاشق ۱۲٫۵ گرم):</p>
+    <table class="result">
+      <tr><td>۳ قاشق غذاخوری شکر</td><td>۳۷٫۵ گرم (حدود ۳۸ گرم)</td></tr>
+    </table>
+    <p>۵۰۰ گرم برنج خام (هر پیمانه ۱۹۰ گرم):</p>
+    <table class="result">
+      <tr class="total"><td>۵۰۰ گرم برنج</td><td>حدود ۲٫۶ پیمانه</td></tr>
+    </table>
+  </div>
+
+  <div class="card">
+    <h2>جدول وزن یک پیمانه از مواد رایج</h2>
+    <p class="meta">پیمانه استاندارد ۲۴۰ میلی‌لیتر. این وزن‌ها میانگین‌های تقریبی‌اند و بسته به برند، رطوبت و فشردگی ماده کمی فرق می‌کنند.</p>
+    <table class="result" id="refTable"></table>
+  </div>
+
+  <div class="card">
+    <h2>ورودی و خروجی یعنی چه</h2>
+    <ul class="tight">
+      <li><strong>ماده غذایی:</strong> وزنی که تبدیل می‌کنید به ماده بستگی دارد؛ یک پیمانه آرد حدود ۱۲۵ گرم است ولی یک پیمانه شکر حدود ۲۰۰ گرم.</li>
+      <li><strong>پیمانه:</strong> واحد حجم، ۲۴۰ میلی‌لیتر — تقریباً یک لیوان دسته‌دار فرانسوی پر.</li>
+      <li><strong>قاشق غذاخوری:</strong> ۱۵ میلی‌لیتر (۱/۱۶ پیمانه)؛ <strong>قاشق چای‌خوری:</strong> ۵ میلی‌لیتر (۱/۴۸ پیمانه).</li>
+      <li><strong>گرم:</strong> واحد وزن؛ ترازوی آشپزخانه دقیق‌ترین روش اندازه‌گیری است.</li>
+    </ul>
+  </div>
+
+  <div class="card">
+    <h2>این ابزار برای چه مواردی مناسب نیست</h2>
+    <ul class="tight">
+      <li>اندازه‌گیری دقیق دارویی یا آزمایشگاهی — این وزن‌ها میانگین‌های آشپزی‌اند، نه مقادیر آزمایشگاهی.</li>
+      <li>پیمانه پلوپز — پیمانه‌ای که همراه پلوپز می‌آید کوچک‌تر است (حدود ۱۶۰ تا ۱۸۰ میلی‌لیتر) و حدود ۱۳۰ تا ۱۵۰ گرم برنج می‌گیرد.</li>
+      <li>آرد فشرده — وزن آرد الک‌شده با آرد فشرده داخل پاکت فرق می‌کند؛ برای شیرینی‌پزی دقیق از ترازو استفاده کنید.</li>
+    </ul>
+  </div>
+
+  <div class="card faq">
+    <h2>پرسش‌های متداول</h2>
+    <details>
+      <summary>یک پیمانه چند میلی‌لیتر است؟</summary>
+      <p>پیمانه استاندارد آشپزی ۲۴۰ میلی‌لیتر است؛ یعنی تقریباً یک لیوان دسته‌دار فرانسوی پر. پیمانه آمریکایی ۲۳۶٫۶ و پیمانه متریک ۲۵۰ میلی‌لیتر است.</p>
+    </details>
+    <details>
+      <summary>چرا وزن یک پیمانه آرد و شکر فرق می‌کند؟</summary>
+      <p>چون پیمانه واحد حجم است و مواد چگالی متفاوتی دارند؛ شکر سنگین‌تر از آرد است، پس یک پیمانه شکر (۲۰۰ گرم) تقریباً دو برابر یک پیمانه آرد (۱۲۵ گرم) وزن دارد.</p>
+    </details>
+    <details>
+      <summary>یک قاشق غذاخوری چند گرم است؟</summary>
+      <p>به ماده بستگی دارد: برای آرد حدود ۸ گرم، شکر ۱۳ گرم، روغن و کره ۱۴ گرم و شیر ۱۵ گرم است.</p>
+    </details>
+    <details>
+      <summary>برای شیرینی‌پزی دقیق چه کار کنم؟</summary>
+      <p>بهترین کار وزن کردن با ترازوی آشپزخانه است؛ چون فشردگی آرد و رطوبت مواد، وزن پیمانه را تغییر می‌دهد.</p>
+    </details>
+  </div>
+
+  <div class="card">
+    <h2>منابع و تاریخ بازبینی</h2>
+    <ul class="tight">
+      <li>جدول وزن مواد: King Arthur Baking (از طریق ifnix.net)؛ منابع فارسی: lavazemghanadishiraz.com و rahrahmarket.com — یک پیمانه آرد ۱۲۰ تا ۱۳۰ گرم، شکر ۲۰۰ گرم، برنج خام ۱۸۵ تا ۲۰۰ گرم، روغن ۲۲۰ گرم، کره ۲۲۵ گرم.</li>
+      <li>مثال‌های عددی این صفحه با همین جدول محاسبه و بازبینی شده‌اند.</li>
+    </ul>
+    <p class="meta">آخرین بازبینی: ۶ آذر ۱۴۰۵</p>
+  </div>
+
+  <div class="card">
+    <h2>ابزارهای مرتبط</h2>
+    <div class="related">
+      <a href="word-counter.html">شمارش کلمات متن فارسی</a>
+      <a href="digit-converter.html">تبدیل اعداد فارسی و انگلیسی</a>
+      <a href="date-converter.html">مبدل تاریخ شمسی و میلادی</a>
+      <a href="number-to-words.html">عدد به حروف فارسی</a>
+      <a href="index.html">همه ابزارها</a>
+    </div>
+  </div>
+
+  <footer>
+    دم‌دست — ابزار، قیمت و خبر؛ همه در یک‌جا<br>
+    ساخته‌شده توسط کوروش فرجی (KouroshLabs) ·
+    <a href="about.html">درباره ما</a> · <a href="contact.html">تماس</a> · <a href="privacy.html">حریم خصوصی</a><br>
+    <span style="font-size:12px">پردازش اطلاعات این ابزار در مرورگر شما انجام می‌شود و محتوای واردشده برای پردازش به سرور ارسال نمی‌شود.</span>
+  </footer>
+</div>
+
+<script src="assets/common.js"></script>
+<script>
+(function () {
+  // Grams per standard 240ml cup (metric cup). Sources: King Arthur Baking
+  // ingredient weight chart (via ifnix.net) + Persian cooking tables.
+  // Values are approximate averages; tbsp = cup/16, tsp = cup/48.
+  var INGREDIENTS = [
+    { id: 'flour', name: 'آرد سفید', cup: 125 },
+    { id: 'sugar', name: 'شکر سفید', cup: 200 },
+    { id: 'rice', name: 'برنج خام', cup: 190 },
+    { id: 'oil', name: 'روغن مایع', cup: 220 },
+    { id: 'butter', name: 'کره', cup: 225 },
+    { id: 'milk', name: 'شیر', cup: 240 },
+    { id: 'water', name: 'آب', cup: 240 },
+    { id: 'cocoa', name: 'پودر کاکائو', cup: 100 },
+    { id: 'honey', name: 'عسل', cup: 340 },
+    { id: 'powdered-sugar', name: 'پودر قند', cup: 120 }
+  ];
+  var UNITS = {
+    cup: { name: 'پیمانه', grams: function (c) { return c; } },
+    tbsp: { name: 'قاشق غذاخوری', grams: function (c) { return c / 16; } },
+    tsp: { name: 'قاشق چای‌خوری', grams: function (c) { return c / 48; } },
+    gram: { name: 'گرم', grams: function () { return 1; } }
+  };
+  var ingEl = document.getElementById('ingredient');
+  INGREDIENTS.forEach(function (ing) {
+    var o = document.createElement('option');
+    o.value = ing.id; o.textContent = ing.name;
+    ingEl.appendChild(o);
+  });
+  var amountEl = document.getElementById('amount');
+  var fromEl = document.getElementById('fromUnit');
+  var toEl = document.getElementById('toUnit');
+  var out = document.getElementById('out');
+  var table = document.getElementById('resultTable');
+  var lastText = '';
+  function fmt(n) {
+    var r = Math.round(n * 10) / 10;
+    return faNum(r.toString().replace('.', '٫'));
+  }
+  function calc() {
+    var ing = INGREDIENTS.filter(function (i) { return i.id === ingEl.value; })[0];
+    var amount = parseFaNum(amountEl.value);
+    if (isNaN(amount) || amount < 0) {
+      out.innerHTML = '<small>لطفاً مقدار (صفر یا بیشتر) را درست وارد کنید.</small>';
+      table.hidden = true; lastText = ''; return;
+    }
+    var grams;
+    if (fromEl.value === 'gram') grams = amount;
+    else grams = amount * UNITS[fromEl.value].grams(ing.cup);
+    var result;
+    if (toEl.value === 'gram') result = grams;
+    else if (toEl.value === 'cup') result = grams / ing.cup;
+    else if (toEl.value === 'tbsp') result = grams / (ing.cup / 16);
+    else result = grams / (ing.cup / 48);
+    var unitName = UNITS[toEl.value].name;
+    out.innerHTML = '<small>نتیجه</small><span class="big">' + fmt(result) + ' ' + unitName + '</span>';
+    document.getElementById('rGrams').textContent = fmt(grams) + ' گرم';
+    document.getElementById('rCups').textContent = fmt(grams / ing.cup) + ' پیمانه';
+    document.getElementById('rTbsp').textContent = fmt(grams / (ing.cup / 16)) + ' قاشق غذاخوری';
+    table.hidden = false;
+    lastText = 'تبدیل واحد آشپزی — ' + fmt(amount) + ' ' + UNITS[fromEl.value].name + ' ' + ing.name + ' = ' + fmt(result) + ' ' + unitName + ' (' + fmt(grams) + ' گرم). (دم‌دست)';
+  }
+  // Reference table
+  (function () {
+    var html = '<tr><td><strong>ماده</strong></td><td><strong>۱ پیمانه</strong></td><td><strong>۱ قاشق غذاخوری</strong></td><td><strong>۱ قاشق چای‌خوری</strong></td></tr>';
+    INGREDIENTS.forEach(function (ing) {
+      html += '<tr><td>' + ing.name + '</td><td>' + faNum(ing.cup) + ' گرم</td><td>' + fmt(ing.cup / 16) + ' گرم</td><td>' + fmt(ing.cup / 48) + ' گرم</td></tr>';
+    });
+    document.getElementById('refTable').innerHTML = html;
+  })();
+  [amountEl].forEach(function (el) { el.addEventListener('input', calc); });
+  [ingEl, fromEl, toEl].forEach(function (el) { el.addEventListener('change', calc); });
+  document.querySelectorAll('.examples .chip').forEach(function (chip) {
+    chip.addEventListener('click', function () {
+      ingEl.value = chip.dataset.ing;
+      amountEl.value = faNum(chip.dataset.amount);
+      fromEl.value = chip.dataset.from;
+      toEl.value = chip.dataset.to;
+      calc();
+    });
+  });
+  document.getElementById('copyBtn').addEventListener('click', function () {
+    if (lastText) copyText(lastText, this);
+  });
+  document.getElementById('shareBtn').addEventListener('click', function () {
+    if (lastText) shareText(lastText, this);
+  });
+  calc();
+})();
+</script>
+</body>
+</html>

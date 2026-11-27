@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>یکسان‌سازی و اصلاح نگارشی پایه متن فارسی | نیم‌فاصله و فاصله‌گذاری</title>
+<meta name="description" content="یکسان‌سازی و اصلاح نگارشی پایه متن فارسی: نیم‌فاصله، حروف عربی به فارسی، تبدیل ارقام و فاصله‌گذاری. این ابزار غلط‌یاب املایی یا دستوری کامل نیست.">
+<meta property="og:title" content="یکسان‌سازی و اصلاح نگارشی پایه متن فارسی">
+<meta property="og:description" content="نیم‌فاصله، حروف عربی به فارسی، تبدیل ارقام و فاصله‌گذاری درست. پیش‌نمایش اصلاح با تأیید شما؛ رایگان و بدون ثبت‌نام.">
+<meta property="og:type" content="website">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;500;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/style.css">
+<style>
+  textarea { width: 100%; font-size: 16px; padding: 12px 14px; border: 2px solid var(--line); border-radius: 10px; font-family: inherit; min-height: 130px; resize: vertical; line-height: 2; }
+  textarea:focus { outline: none; border-color: var(--turq); }
+  .out { margin-top: 16px; min-height: 110px; background: #eef4ff; border: 1px dashed var(--turq); border-radius: 10px; padding: 14px 16px; font-size: 16px; white-space: pre-wrap; word-wrap: break-word; }
+  .toggle { display: inline-flex; align-items: center; gap: 6px; font-size: 14px; color: var(--muted); }
+  .opts { display: flex; gap: 14px; flex-wrap: wrap; margin-top: 12px; }
+  .opts select { font-size: 14px; padding: 7px 10px; border: 2px solid var(--line); border-radius: 10px; font-family: inherit; }
+</style>
+</head>
+<body>
+<header class="site-header">
+  <div class="inner">
+    <a class="brand" href="index.html">دم‌دست<small>ابزار، قیمت و خبر؛ همه در یک‌جا</small></a>
+    <nav>
+      <a href="index.html#tools">ابزارها</a>
+      <a href="index.html#prices">قیمت‌ها</a>
+      <a href="index.html#briefing">مرور صبحگاهی</a>
+      <a href="about.html">درباره ما</a>
+    </nav>
+  </div>
+</header>
+
+<div class="wrap">
+  <p class="breadcrumb"><a href="index.html">دم‌دست</a> ← <a href="index.html#tools">ابزارها</a> ← اصلاح نگارشی متن فارسی</p>
+  <h1>یکسان‌سازی و اصلاح نگارشی پایهٔ متن فارسی</h1>
+  <p class="sub">نیم‌فاصله، حروف عربی به فارسی، تبدیل ارقام و فاصله‌گذاری — این ابزار غلط‌یاب املایی یا دستوری کامل نیست. متن اصلی شما دست‌نخورده می‌ماند؛ اصلاح را در پیش‌نمایش ببینید و فقط با تأیید خودتان اعمال کنید. رایگان، بدون ثبت‌نام.</p>
+
+  <div class="card">
+    <label for="inText">متن اصلی (دست‌نخورده می‌ماند)</label>
+    <textarea id="inText" placeholder="مثلاً: من می روم به مدرسه ، کتاب های من اينجا است"></textarea>
+    <div class="opts">
+      <label class="toggle"><input type="checkbox" id="optZwnj" checked> نیم‌فاصله (می‌روم، کتاب‌ها)</label>
+      <label class="toggle"><input type="checkbox" id="optArabic" checked> حروف عربی به فارسی (ي ك ة)</label>
+      <label class="toggle"><input type="checkbox" id="optPunct" checked> فاصله نقطه‌گذاری</label>
+      <label class="toggle"><input type="checkbox" id="optSpaces" checked> حذف فاصله‌های اضافه</label>
+      <label class="toggle">ارقام:
+        <select id="optDigits">
+          <option value="keep" selected>بدون تغییر</option>
+          <option value="fa">به فارسی (۱۲۳)</option>
+          <option value="en">به انگلیسی (123)</option>
+        </select>
+      </label>
+    </div>
+    <label style="margin-top:16px">پیش‌نمایش اصلاح‌شده</label>
+    <div class="out" id="outText">متن اصلاح‌شده اینجا نمایش داده می‌شود.</div>
+    <div class="row">
+      <button class="btn-primary" id="applyBtn" disabled>اعمال اصلاحات</button>
+      <button class="btn-ghost" id="undoBtn" disabled>بازگردانی</button>
+      <button class="btn-ghost" id="copyBtn" disabled>کپی متن اصلاح‌شده</button>
+      <button class="btn-ghost" id="copyOrigBtn" disabled>کپی متن اصلی</button>
+      <button class="btn-ghost" id="clearBtn">پاک کردن</button>
+    </div>
+    <div class="examples">مثال‌ها:
+      <button class="chip" data-t="من می روم به مدرسه ، کتاب های من اينجا است">نیم‌فاصله و حروف عربی</button>
+      <button class="chip" data-t="سلام ،  چطورى ؟  قیمت 12345 تومان است">نقطه‌گذاری و ارقام</button>
+      <button class="chip" data-t="او گفته بود که می آید ، من رفته ام">فعل‌ها</button>
+    </div>
+    <p class="hint">نکته: «است» جدا می‌ماند (رفته است) و نیم‌فاصله فقط جایی گذاشته می‌شود که در فارسی درست است. لینک‌ها، ایمیل‌ها و کد داخل متن دست نمی‌خورند.</p>
+  </div>
+
+  <div class="card">
+    <h2>این ابزار چه اصلاحاتی می‌کند</h2>
+    <p class="formula">ي → ی ، ك → ک ، ة → ه ، می روم → می‌روم ، کتاب ها → کتاب‌ها</p>
+    <ul class="tight">
+      <li><strong>نیم‌فاصله:</strong> پیشوند «می‌» و «نمی‌»، پسوندهای «ها»، «تر»، «ترین» و «ام/ای/ایم/اید/اند» با نیم‌فاصله به کلمه می‌چسبند؛ مثل «می‌روم» و «کتاب‌ها».</li>
+      <li><strong>حروف عربی به فارسی:</strong> ی عربی به ی فارسی، ك عربی به ک فارسی و ة به ه تبدیل می‌شود.</li>
+      <li><strong>فاصله نقطه‌گذاری:</strong> فاصله اضافه پیش از «، ؛ : . ! ؟» برداشته و پس از آن‌ها یک فاصله گذاشته می‌شود.</li>
+      <li><strong>حذف فاصله‌های اضافه:</strong> فاصله‌های چندتایی و خط‌های خالی اضافه کم می‌شوند.</li>
+      <li><strong>تبدیل ارقام:</strong> به انتخاب شما، ارقام به فارسی (۱۲۳) یا انگلیسی (123) تبدیل می‌شوند.</li>
+    </ul>
+    <p>لینک‌ها، ایمیل‌ها و کد داخل متن دست نمی‌خورند.</p>
+  </div>
+
+  <div class="card">
+    <h2>مثال عددی</h2>
+    <p>متن ورودی:</p>
+    <p class="formula" style="direction:rtl;text-align:right">من می روم به مدرسه ، کتاب های من اينجا است</p>
+    <p>متن اصلاح‌شده:</p>
+    <table class="result">
+      <tr class="total"><td>خروجی</td><td>من می‌روم به مدرسه، کتاب‌های من اینجا است</td></tr>
+    </table>
+    <p class="meta">«می روم» با نیم‌فاصله شد «می‌روم»، «کتاب ها» شد «کتاب‌ها»، «اينجا» شد «اینجا» و فاصله پیش از ویرگول برداشته شد.</p>
+  </div>
+
+  <div class="card">
+    <h2>ورودی و خروجی یعنی چه</h2>
+    <ul class="tight">
+      <li><strong>متن اصلی:</strong> متنی که می‌خواهید اصلاح شود؛ دست‌نخورده می‌ماند تا وقتی خودتان «اعمال اصلاحات» را بزنید.</li>
+      <li><strong>پیش‌نمایش اصلاح‌شده:</strong> نتیجه اصلاح را نشان می‌دهد؛ اگر درست بود، آن را اعمال یا کپی کنید.</li>
+      <li><strong>اعمال اصلاحات:</strong> متن ورودی با متن اصلاح‌شده جایگزین می‌شود؛ با «بازگردانی» می‌توانید برگردید.</li>
+      <li><strong>گزینه‌ها:</strong> هر نوع اصلاح را می‌توانید جداگانه روشن یا خاموش کنید.</li>
+    </ul>
+  </div>
+
+  <div class="card">
+    <h2>این ابزار برای چه مواردی مناسب نیست</h2>
+    <ul class="tight">
+      <li>غلط‌یابی املایی یا دستوری کامل — این ابزار فقط اصلاحات پایه نگارشی را انجام می‌دهد؛ غلط املایی کلمات و دستور جمله را بررسی نمی‌کند.</li>
+      <li>ویرایش تخصصی — برای متن‌های رسمی و کتاب، ویراستار انسانی لازم است.</li>
+    </ul>
+  </div>
+
+  <div class="card faq">
+    <h2>پرسش‌های متداول</h2>
+    <details>
+      <summary>نیم‌فاصله چیست و چرا مهم است؟</summary>
+      <p>نیم‌فاصله (‌) فاصله کوتاهی است که بخش‌های یک کلمه را به هم می‌چسباند بدون اینکه کلمه جدا شود؛ مثل «می‌روم» و «کتاب‌ها». در نگارش درست فارسی، پیشوند «می‌» و پسوند «ها» با نیم‌فاصله نوشته می‌شوند.</p>
+    </details>
+    <details>
+      <summary>آیا متن اصلی من تغییر می‌کند؟</summary>
+      <p>نه؛ متن اصلی دست‌نخورده می‌ماند. اصلاح را در پیش‌نمایش می‌بینید و فقط با زدن «اعمال اصلاحات» جایگزین می‌شود؛ با «بازگردانی» هم می‌توانید برگردید.</p>
+    </details>
+    <details>
+      <summary>چرا «است» جدا می‌ماند؟</summary>
+      <p>چون «است» فعل جدا است؛ «رفته است» درست است و «رفته‌است» درست نیست. این ابزار «است» را به کلمه قبل نمی‌چسباند.</p>
+    </details>
+    <details>
+      <summary>لینک‌ها و ایمیل‌ها چه می‌شوند؟</summary>
+      <p>دست نمی‌خورند؛ لینک‌ها، ایمیل‌ها و کد داخل متن پیش از اصلاح کنار گذاشته و پس از اصلاح دقیقاً همان‌طور که بودند برگردانده می‌شوند.</p>
+    </details>
+  </div>
+
+  <div class="card">
+    <h2>منابع و تاریخ بازبینی</h2>
+    <ul class="tight">
+      <li>قواعد نگارش فارسی: نیم‌فاصله، یکسان‌سازی حروف عربی و فاصله‌گذاری — دستور خط فارسی فرهنگستان زبان و ادب فارسی.</li>
+      <li>مثال این صفحه با همین قواعد محاسبه و بازبینی شده است.</li>
+    </ul>
+    <p class="meta">آخرین بازبینی: ۶ آذر ۱۴۰۵</p>
+  </div>
+
+  <div class="card">
+    <h2>ابزارهای مرتبط</h2>
+    <div class="related">
+      <a href="word-counter.html">شمارش کلمات متن فارسی</a>
+      <a href="digit-converter.html">تبدیل اعداد فارسی و انگلیسی</a>
+      <a href="qr-generator.html">ساخت کد QR</a>
+      <a href="invoice-maker.html">فاکتورساز فارسی</a>
+      <a href="index.html">همه ابزارها</a>
+    </div>
+  </div>
+
+  <footer>
+    دم‌دست — ابزار، قیمت و خبر؛ همه در یک‌جا<br>
+    ساخته‌شده توسط کوروش فرجی (KouroshLabs) ·
+    <a href="about.html">درباره ما</a> · <a href="contact.html">تماس</a> · <a href="privacy.html">حریم خصوصی</a><br>
+    <span style="font-size:12px">پردازش اطلاعات این ابزار در مرورگر شما انجام می‌شود و محتوای واردشده برای پردازش به سرور ارسال نمی‌شود.</span>
+  </footer>
+</div>
+
+<script src="assets/textfixer-app.js"></script>
+</body>
+</html>

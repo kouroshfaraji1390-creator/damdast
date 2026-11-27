@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ساخت کد QR رایگان | لینک، متن و شماره تماس</title>
+<meta name="description" content="ساخت رایگان کد QR برای لینک، متن فارسی، شماره تماس و ایمیل؛ دانلود PNG، بدون ثبت‌نام.">
+<meta property="og:title" content="ساخت کد QR رایگان | لینک، متن و شماره تماس">
+<meta property="og:description" content="ساخت کد QR برای لینک، متن فارسی و شماره تماس. رایگان و بدون ثبت‌نام.">
+<meta property="og:type" content="website">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;500;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/style.css">
+<style>
+  textarea { width: 100%; font-size: 17px; padding: 12px 14px; border: 2px solid var(--line); border-radius: 10px; font-family: inherit; min-height: 84px; resize: vertical; }
+  textarea:focus { outline: none; border-color: var(--turq); }
+  .qr-box { margin-top: 18px; text-align: center; }
+  .qr-box canvas { border: 1px solid var(--line); border-radius: 12px; background: #fff; max-width: 100%; height: auto; }
+  .qr-empty { color: var(--muted); border: 1px dashed var(--line); border-radius: 12px; padding: 40px 16px; }
+</style>
+</head>
+<body>
+<header class="site-header">
+  <div class="inner">
+    <a class="brand" href="index.html">دم‌دست<small>ابزار، قیمت و خبر؛ همه در یک‌جا</small></a>
+    <nav>
+      <a href="index.html#tools">ابزارها</a>
+      <a href="index.html#prices">قیمت‌ها</a>
+      <a href="index.html#briefing">مرور صبحگاهی</a>
+      <a href="about.html">درباره ما</a>
+    </nav>
+  </div>
+</header>
+
+<div class="wrap">
+  <p class="breadcrumb"><a href="index.html">دم‌دست</a> ← <a href="index.html#tools">ابزارها</a> ← ساخت کد QR</p>
+  <h1>ساخت کد QR</h1>
+  <p class="sub">برای لینک، متن فارسی، شماره تماس یا ایمیل — رایگان، بدون ثبت‌نام.</p>
+
+  <div class="card">
+    <label for="qrText">متن یا لینک</label>
+    <textarea id="qrText" placeholder="مثلاً https://example.com یا یک متن فارسی"></textarea>
+    <div class="row">
+      <label style="margin:0">نوع:</label>
+      <select id="qrType">
+        <option value="text">متن آزاد</option>
+        <option value="url">لینک (URL)</option>
+        <option value="tel">شماره تماس</option>
+        <option value="email">ایمیل</option>
+      </select>
+      <label style="margin:0">کیفیت تصحیح خطا:</label>
+      <select id="qrLevel">
+        <option value="L">L — کم</option>
+        <option value="M" selected>M — متوسط</option>
+        <option value="Q">Q — زیاد</option>
+        <option value="H">H — خیلی زیاد</option>
+      </select>
+      <label style="margin:0">اندازه:</label>
+      <select id="qrSize">
+        <option value="256">کوچک (۲۵۶)</option>
+        <option value="512" selected>متوسط (۵۱۲)</option>
+        <option value="1024">بزرگ (۱۰۲۴)</option>
+      </select>
+    </div>
+    <div class="hint" id="qrHint">متن را بنویسید؛ کد QR به‌صورت خودکار ساخته می‌شود.</div>
+    <div class="qr-box" id="qrBox"><div class="qr-empty">کد QR اینجا نمایش داده می‌شود.</div></div>
+    <div class="row">
+      <button class="btn-primary" id="dlBtn" disabled>دانلود PNG</button>
+      <button class="btn-ghost" id="copyBtn" disabled>کپی متن</button>
+      <button class="btn-ghost" id="shareBtn" disabled>اشتراک‌گذاری</button>
+    </div>
+    <div class="examples">مثال‌ها:
+      <button class="chip" data-t="https://kouroshlabs.ir">سایت دم‌دست</button>
+      <button class="chip" data-t="tel:+989123456789">شماره تماس</button>
+      <button class="chip" data-t="سلام! این یک کد QR فارسی است.">متن فارسی</button>
+    </div>
+    <p class="hint">این ابزار فقط کد QR می‌سازد و امن بودن لینک را بررسی نمی‌کند؛ پیش از اسکن، از معتبر بودن لینک مطمئن شوید.</p>
+  </div>
+
+  <div class="card">
+    <h2>کد QR چطور کار می‌کند</h2>
+    <p>کد QR یک ماتریس دو‌بعدی از مربع‌های سیاه و سفید است که متن یا لینک را به‌صورت کدگذاری‌شده نگه می‌دارد؛ دوربین گوشی آن را می‌خواند و به متن یا لینک تبدیل می‌کند.</p>
+    <p class="formula">نسخه ۱ تا ۴۰ × سطح تصحیح خطا (L / M / Q / H)</p>
+    <p>هرچه متن طولانی‌تر باشد، نسخه کد بزرگ‌تر می‌شود (نسخه ۱ کوچک‌ترین و نسخه ۴۰ بزرگ‌ترین است). <strong>سطح تصحیح خطا</strong> مشخص می‌کند کد تا چه حد آسیب‌دیده باز هم خوانده می‌شود: سطح L حدود ۷٪، سطح M حدود ۱۵٪، سطح Q حدود ۲۵٪ و سطح H حدود ۳۰٪ از کد می‌تواند خراب یا پوشیده باشد و کد هنوز خوانده شود. هرچه سطح بالاتر باشد، ظرفیت متن کمتر می‌شود.</p>
+    <table class="result">
+      <tr><td>ظرفیت سطح L</td><td>حداکثر ۲٬۹۵۳ بایت</td></tr>
+      <tr><td>ظرفیت سطح M</td><td>حداکثر ۲٬۳۳۱ بایت</td></tr>
+      <tr><td>ظرفیت سطح Q</td><td>حداکثر ۱٬۶۶۳ بایت</td></tr>
+      <tr><td>ظرفیت سطح H</td><td>حداکثر ۱٬۲۷۳ بایت</td></tr>
+    </table>
+    <p class="meta">متن فارسی با کدگذاری UTF-8 ذخیره می‌شود؛ هر نویسه فارسی ۲ بایت است، پس ظرفیت متن فارسی تقریباً نصف این اعداد است.</p>
+  </div>
+
+  <div class="card">
+    <h2>مثال عددی</h2>
+    <p>متن «https://kouroshlabs.ir» با سطح تصحیح خطا M:</p>
+    <table class="result">
+      <tr><td>متن</td><td>https://kouroshlabs.ir</td></tr>
+      <tr><td>طول متن</td><td>۲۳ نویسه (۲۳ بایت)</td></tr>
+      <tr class="total"><td>نتیجه</td><td>کد QR خوانا با سطح M — برای دیدن آن، روی دکمه «سایت دم‌دست» بالا بزنید</td></tr>
+    </table>
+  </div>
+
+  <div class="card">
+    <h2>ورودی و خروجی یعنی چه</h2>
+    <ul class="tight">
+      <li><strong>متن یا لینک:</strong> چیزی که می‌خواهید در کد QR باشد — لینک سایت، متن فارسی، شماره تماس یا ایمیل.</li>
+      <li><strong>نوع:</strong> مشخص می‌کند پیشوند مناسب (tel: ،mailto: یا https://) به متن اضافه شود تا گوشی آن را درست بفهمد.</li>
+      <li><strong>کیفیت تصحیح خطا:</strong> هرچه بالاتر باشد، کد در برابر خرابی و کثیفی مقاوم‌تر است ولی متن کمتری جا می‌شود.</li>
+      <li><strong>اندازه:</strong> اندازه تصویر PNG خروجی؛ برای چاپ بزرگ‌تر، اندازه بزرگ‌تر را انتخاب کنید.</li>
+      <li><strong>دانلود PNG:</strong> تصویر کد QR را با همان اندازه انتخاب‌شده دانلود می‌کند.</li>
+    </ul>
+  </div>
+
+  <div class="card">
+    <h2>این ابزار برای چه مواردی مناسب نیست</h2>
+    <ul class="tight">
+      <li>بررسی امن بودن لینک — این ابزار فقط کد می‌سازد؛ پیش از اسکن یک کد ناشناس، از معتبر بودن لینک مطمئن شوید.</li>
+      <li>کوتاه کردن لینک — کد QR لینک را کوتاه نمی‌کند؛ برای لینک کوتاه به سرویس‌های کوتاه‌کننده لینک نیاز دارید.</li>
+      <li>متن خیلی طولانی — هر سطح تصحیح خطا یک ظرفیت دارد؛ اگر متن جا نشد، آن را کوتاه‌تر کنید یا سطح تصحیح خطا را کمتر کنید.</li>
+    </ul>
+  </div>
+
+  <div class="card faq">
+    <h2>پرسش‌های متداول</h2>
+    <details>
+      <summary>کد QR تا کی معتبر است؟</summary>
+      <p>کد QR تاریخ انقضا ندارد؛ تا وقتی لینک یا متن داخل آن درست باشد، همیشه خوانده می‌شود. اگر لینک سایت عوض شود، کد قدیمی به همان لینک قدیمی می‌رود.</p>
+    </details>
+    <details>
+      <summary>چرا کد من خوانده نمی‌شود؟</summary>
+      <p>معمولاً سه دلیل دارد: تصویر خیلی کوچک چاپ شده، کنتراست کم است (پس‌زمینه روشن و کد تیره باشد)، یا متن برای سطح تصحیح خطای انتخاب‌شده خیلی طولانی است. اندازه بزرگ‌تر و سطح M یا بالاتر را امتحان کنید.</p>
+    </details>
+    <details>
+      <summary>کد QR چقدر متن جا می‌دهد؟</summary>
+      <p>در سطح M حداکثر ۲٬۳۳۱ بایت؛ متن فارسی با UTF-8 هر نویسه ۲ بایت است، پس حدود ۱٬۱۰۰ نویسه فارسی جا می‌شود. برای متن طولانی‌تر، سطح L را انتخاب کنید.</p>
+    </details>
+    <details>
+      <summary>آیا ساخت کد QR رایگان است؟</summary>
+      <p>بله؛ این ابزار رایگان است، بدون ثبت‌نام کار می‌کند و کدها در مرورگر شما ساخته می‌شوند.</p>
+    </details>
+  </div>
+
+  <div class="card">
+    <h2>منابع و تاریخ بازبینی</h2>
+    <ul class="tight">
+      <li>کتابخانه QR: qrcode-generator اثر Kazuhiko Arase، مجوز MIT.</li>
+      <li>«QR Code» علامت تجاری ثبت‌شده DENSO WAVE INCORPORATED است.</li>
+      <li>ظرفیت سطوح تصحیح خطا از مستندات همان کتابخانه گرفته شده است.</li>
+    </ul>
+    <p class="meta">آخرین بازبینی: ۶ آذر ۱۴۰۵</p>
+  </div>
+
+  <div class="card">
+    <h2>ابزارهای مرتبط</h2>
+    <div class="related">
+      <a href="invoice-maker.html">فاکتورساز فارسی</a>
+      <a href="persian-text-fixer.html">اصلاح نگارشی متن فارسی</a>
+      <a href="digit-converter.html">تبدیل اعداد فارسی و انگلیسی</a>
+      <a href="word-counter.html">شمارش کلمات متن فارسی</a>
+      <a href="index.html">همه ابزارها</a>
+    </div>
+  </div>
+
+  <footer>
+    دم‌دست — ابزار، قیمت و خبر؛ همه در یک‌جا<br>
+    ساخته‌شده توسط کوروش فرجی (KouroshLabs) ·
+    <a href="about.html">درباره ما</a> · <a href="contact.html">تماس</a> · <a href="privacy.html">حریم خصوصی</a><br>
+    <span style="font-size:12px">پردازش اطلاعات این ابزار در مرورگر شما انجام می‌شود و محتوای واردشده برای پردازش به سرور ارسال نمی‌شود.</span>
+  </footer>
+</div>
+
+<script src="assets/qrcode-lib.js"></script>
+<script src="assets/qrcode-app.js"></script>
+<script>
+(function () {
+  var shareBtn = document.getElementById('shareBtn');
+  var input = document.getElementById('qrText');
+  var dlBtn = document.getElementById('dlBtn');
+  function syncShare() { shareBtn.disabled = dlBtn.disabled; }
+  setInterval(syncShare, 500);
+  shareBtn.addEventListener('click', function () {
+    var t = input.value.trim();
+    if (!t) return;
+    if (navigator.share) { navigator.share({ text: t }).catch(function () {}); }
+    else {
+      try { navigator.clipboard.writeText(t); shareBtn.textContent = 'کپی شد ✓'; }
+      catch (e) { shareBtn.textContent = 'کپی نشد'; }
+      setTimeout(function () { shareBtn.textContent = 'اشتراک‌گذاری'; }, 2000);
+    }
+  });
+})();
+</script>
+</body>
+</html>

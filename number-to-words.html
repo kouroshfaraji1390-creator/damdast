@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>عدد به حروف فارسی | تبدیل عدد به حروف برای فاکتور و چک</title>
+<meta name="description" content="تبدیل عدد به حروف فارسی برای فاکتور، چک و قرارداد — عدد را بنویسید، معادل حروفی آن را بگیرید و کپی کنید. رایگان و بدون ثبت‌نام.">
+<meta property="og:title" content="عدد به حروف فارسی | دم‌دست">
+<meta property="og:description" content="تبدیل عدد به حروف فارسی برای فاکتور، چک و قرارداد — رایگان و بدون ثبت‌نام.">
+<meta property="og:type" content="website">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;500;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+<header class="site-header">
+  <div class="inner">
+    <a class="brand" href="index.html">دم‌دست<small>ابزار، قیمت و خبر؛ همه در یک‌جا</small></a>
+    <nav>
+      <a href="index.html#tools">ابزارها</a>
+      <a href="index.html#prices">قیمت‌ها</a>
+      <a href="index.html#briefing">مرور صبحگاهی</a>
+      <a href="about.html">درباره ما</a>
+    </nav>
+  </div>
+</header>
+
+<div class="wrap">
+  <p class="breadcrumb"><a href="index.html">دم‌دست</a> ← <a href="index.html#tools">ابزارها</a> ← عدد به حروف فارسی</p>
+  <h1>عدد به حروف فارسی</h1>
+  <p class="sub">برای فاکتور، چک و قرارداد — عدد را بنویسید، معادل حروفی آن را بگیرید. رایگان، بدون ثبت‌نام؛ هیچ داده‌ای از مرورگر شما خارج نمی‌شود.</p>
+
+  <div class="card">
+    <label for="num">عدد را وارد کنید</label>
+    <input type="text" id="num" inputmode="numeric" autocomplete="off" placeholder="مثلاً 1500000" style="direction:ltr;text-align:right;font-size:22px">
+    <div class="hint">عدد صحیح تا ۱۵ رقم؛ ارقام فارسی یا انگلیسی، با یا بدون جداکننده هزارگان.</div>
+    <div class="out" id="out">اینجا معادل حروفی عدد نمایش داده می‌شود.</div>
+    <div class="row">
+      <button class="btn-primary" id="copyBtn" type="button" disabled>کپی کردن</button>
+      <button class="btn-ghost" id="shareBtn" type="button" disabled>اشتراک‌گذاری</button>
+      <label style="display:flex;align-items:center;gap:6px;font-size:14px;color:var(--muted);font-weight:400;margin:0"><input type="checkbox" id="toman" checked style="width:auto"> افزودن «تومان» به انتها</label>
+    </div>
+    <div class="examples">مثال‌ها:
+      <button class="chip" type="button" data-n="750000">۷۵۰٬۰۰۰</button>
+      <button class="chip" type="button" data-n="900000">۹۰۰٬۰۰۰</button>
+      <button class="chip" type="button" data-n="1500000">۱٬۵۰۰٬۰۰۰</button>
+      <button class="chip" type="button" data-n="100000000">۱۰۰٬۰۰۰٬۰۰۰</button>
+    </div>
+  </div>
+
+  <div class="card">
+    <h2>فرمول</h2>
+    <p>عدد به گروه‌های سه‌رقمی تقسیم می‌شود و هر گروه جداگانه به حروف تبدیل می‌شود؛ سپس نام مرتبه هر گروه به آن اضافه می‌شود:</p>
+    <div class="formula">۱٬۵۰۰٬۰۰۰ ← «۱» میلیون + «۵۰۰» هزار ← یک میلیون و پانصد هزار</div>
+    <p>مرتبه‌ها به ترتیب عبارت‌اند از: یکان (بدون نام)، <strong>هزار</strong>، <strong>میلیون</strong>، <strong>میلیارد</strong>، <strong>تریلیون</strong> و <strong>کوادریلیون</strong>. در هر گروه سه‌رقمی هم صدگان، دهگان و یکان با «و» به هم وصل می‌شوند؛ مثلاً ۷۵۰ می‌شود «هفتصد و پنجاه».</p>
+  </div>
+
+  <div class="card">
+    <h2>مثال عددی</h2>
+    <p>عدد <strong>۱٬۵۰۰٬۰۰۰</strong> به حروف می‌شود:</p>
+    <div class="formula">«یک میلیون و پانصد هزار تومان»</div>
+    <p>چند مثال دیگر: ۷۵۰٬۰۰۰ می‌شود «هفتصد و پنجاه هزار تومان»، ۹۰۰٬۰۰۰ می‌شود «نهصد هزار تومان» و ۱۰۰٬۰۰۰٬۰۰۰ می‌شود «صد میلیون تومان». برای دیدن نتیجه، روی هر مثال در ابزار بالا بزنید.</p>
+  </div>
+
+  <div class="card">
+    <h2>ورودی و خروجی یعنی چه</h2>
+    <ul class="tight">
+      <li><strong>ورودی:</strong> یک عدد صحیح تا ۱۵ رقم. ارقام فارسی یا انگلیسی، با یا بدون جداکننده هزارگان (ویرگول یا ٬) و حتی اعداد منفی پذیرفته می‌شوند.</li>
+      <li><strong>خروجی:</strong> معادل حروفی عدد به زبان فارسی. اگر تیک «تومان» فعال باشد، «تومان» به انتهای آن اضافه می‌شود.</li>
+      <li><strong>کپی کردن:</strong> نتیجه را در حافظه موقت می‌گذارد تا مستقیم در فاکتور، چک یا قرارداد بچسبانید.</li>
+    </ul>
+  </div>
+
+  <div class="card">
+    <h2>این ابزار برای چه مواردی مناسب نیست</h2>
+    <ul class="tight">
+      <li><strong>اعداد اعشاری</strong> — مثلاً ۱٬۵۰۰٬۰۰۰٫۵ پشتیبانی نمی‌شود؛ فقط عدد صحیح تبدیل می‌شود.</li>
+      <li><strong>اعداد بالای ۱۵ رقم</strong> — عددهای بزرگ‌تر از این حد تبدیل نمی‌شوند.</li>
+      <li>نوشتن حروفیِ مبالغ در اسناد رسمیِ خاص (مانند چک‌های بانکی با قالب چاپی ویژه) — همیشه قالب موردنیاز بانک یا مرجع صادرکننده را هم بررسی کنید.</li>
+    </ul>
+  </div>
+
+  <div class="card faq">
+    <h2>پرسش‌های متداول</h2>
+    <details>
+      <summary>عدد صفر چه می‌شود؟</summary>
+      <p>صفر به حروف «صفر» می‌شود و با تیک تومان، «صفر تومان».</p>
+    </details>
+    <details>
+      <summary>عدد منفی چطور نوشته می‌شود؟</summary>
+      <p>با کلمه «منفی» در ابتدا؛ مثلاً ‎−۲۵۰٬۰۰۰‎ می‌شود «منفی دویست و پنجاه هزار تومان».</p>
+    </details>
+    <details>
+      <summary>می‌توانم عدد را با ارقام فارسی بنویسم؟</summary>
+      <p>بله؛ ارقام فارسی (۰ تا ۹) و عربی، با یا بدون جداکننده هزارگان، همه پذیرفته می‌شوند.</p>
+    </details>
+    <details>
+      <summary>بزرگ‌ترین عددی که تبدیل می‌شود چقدر است؟</summary>
+      <p>عدد صحیح تا ۱۵ رقم؛ یعنی تا ۹۹۹٬۹۹۹٬۹۹۹٬۹۹۹٬۹۹۹ (۹۹۹ تریلیون). عددهای بزرگ‌تر پیام «عدد معتبر نیست» می‌گیرند.</p>
+    </details>
+  </div>
+
+  <div class="card">
+    <h2>منابع و تاریخ بازبینی</h2>
+    <ul class="tight">
+      <li>قواعد رایج نگارش اعداد در زبان فارسی؛ منطق تبدیل بر اساس گروه‌بندی سه‌رقمی استاندارد با مرتبه‌های هزار، میلیون، میلیارد، تریلیون و کوادریلیون.</li>
+      <li>نتیجه تبدیل برای مثال‌های صفحه، با محاسبه مستقیم همین ابزار بررسی شده است.</li>
+    </ul>
+    <p class="meta">آخرین بازبینی: ۶ آذر ۱۴۰۵</p>
+  </div>
+
+  <div class="card">
+    <h2>ابزارهای مرتبط</h2>
+    <div class="related">
+      <a href="date-converter.html">مبدل تاریخ شمسی و میلادی</a>
+      <a href="mehrieh.html">محاسبه مهریه</a>
+      <a href="inheritance.html">محاسبه ارث</a>
+      <a href="loan-installment.html">محاسبه اقساط وام</a>
+      <a href="gold-price.html">محاسبه قیمت طلای ساخته‌شده</a>
+      <a href="coin-bubble.html">حباب سکه</a>
+      <a href="index.html">همه ابزارها</a>
+    </div>
+  </div>
+
+  <footer>
+    دم‌دست — ابزار، قیمت و خبر؛ همه در یک‌جا<br>
+    ساخته‌شده توسط کوروش فرجی (KouroshLabs) ·
+    <a href="about.html">درباره ما</a> · <a href="contact.html">تماس</a> · <a href="privacy.html">حریم خصوصی</a><br>
+    <span style="font-size:12px">پردازش اطلاعات این ابزار در مرورگر شما انجام می‌شود و محتوای واردشده برای پردازش به سرور ارسال نمی‌شود.</span>
+  </footer>
+</div>
+
+<script src="assets/common.js"></script>
+<script>
+// toPersianWords — proven logic from the earlier number-to-words tool.
+// Supports integers up to 15 digits, Persian/Arabic digits, thousand
+// separators, negatives.
+var ONES = ['', 'یک', 'دو', 'سه', 'چهار', 'پنج', 'شش', 'هفت', 'هشت', 'نه'];
+var TEENS = ['ده', 'یازده', 'دوازده', 'سیزده', 'چهارده', 'پانزده', 'شانزده', 'هفده', 'هجده', 'نوزده'];
+var TENS = ['', '', 'بیست', 'سی', 'چهل', 'پنجاه', 'شصت', 'هفتاد', 'هشتاد', 'نود'];
+var HUNDREDS = ['', 'صد', 'دویست', 'سیصد', 'چهارصد', 'پانصد', 'ششصد', 'هفتصد', 'هشتصد', 'نهصد'];
+var SCALES = ['', 'هزار', 'میلیون', 'میلیارد', 'تریلیون', 'کوادریلیون'];
+
+function threeDigits(n) {
+  var parts = [];
+  var h = Math.floor(n / 100);
+  var t = n % 100;
+  if (h) parts.push(HUNDREDS[h]);
+  if (t >= 20) {
+    parts.push(TENS[Math.floor(t / 10)]);
+    if (t % 10) parts.push(ONES[t % 10]);
+  } else if (t >= 10) {
+    parts.push(TEENS[t - 10]);
+  } else if (t > 0) {
+    parts.push(ONES[t]);
+  }
+  return parts.join(' و ');
+}
+
+function toPersianWords(raw) {
+  var s = String(raw).trim()
+    .replace(/[۰-۹]/g, function (d) { return '۰۱۲۳۴۵۶۷۸۹'.indexOf(d); })
+    .replace(/[٠-٩]/g, function (d) { return '٠١٢٣٤٥٦٧٨٩'.indexOf(d); })
+    .replace(/[,\s٬]/g, '');
+  if (!/^-?\d+$/.test(s)) return null;
+  var neg = false;
+  if (s[0] === '-') { neg = true; s = s.slice(1); }
+  s = s.replace(/^0+(?=\d)/, '');
+  if (s === '0') return 'صفر';
+  if (s.length > 15) return null;
+  var groups = [];
+  for (var i = s.length; i > 0; i -= 3) groups.unshift(s.slice(Math.max(0, i - 3), i));
+  var parts = [];
+  groups.forEach(function (g, idx) {
+    var n = parseInt(g, 10);
+    if (!n) return;
+    var scale = SCALES[groups.length - 1 - idx];
+    parts.push(threeDigits(n) + (scale ? ' ' + scale : ''));
+  });
+  return (neg ? 'منفی ' : '') + parts.join(' و ');
+}
+
+(function () {
+  var input = document.getElementById('num');
+  var out = document.getElementById('out');
+  var copyBtn = document.getElementById('copyBtn');
+  var shareBtn = document.getElementById('shareBtn');
+  var toman = document.getElementById('toman');
+  var current = '';
+
+  function render() {
+    var v = input.value.trim();
+    if (!v) { out.textContent = 'اینجا معادل حروفی عدد نمایش داده می‌شود.'; copyBtn.disabled = true; shareBtn.disabled = true; current = ''; return; }
+    var words = toPersianWords(v);
+    if (words === null) { out.textContent = 'عدد معتبر نیست — فقط عدد صحیح تا ۱۵ رقم وارد کنید.'; copyBtn.disabled = true; shareBtn.disabled = true; current = ''; return; }
+    current = words + (toman.checked ? ' تومان' : '');
+    out.textContent = current;
+    copyBtn.disabled = false;
+    shareBtn.disabled = false;
+  }
+  input.addEventListener('input', render);
+  toman.addEventListener('change', render);
+  document.querySelectorAll('.chip').forEach(function (b) {
+    b.addEventListener('click', function () { input.value = b.dataset.n; render(); input.focus(); });
+  });
+  copyBtn.addEventListener('click', function () { copyText(current, this, 'کپی شد ✓'); });
+  shareBtn.addEventListener('click', function () { shareText(current, this); });
+})();
+</script>
+</body>
+</html>

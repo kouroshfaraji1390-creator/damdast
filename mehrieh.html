@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>محاسبه مهریه | مهریه به نرخ روز و مهریه سکه‌ای</title>
+<meta name="description" content="محاسبه مهریه سکه‌ای و مهریه نقدی به نرخ روز با شاخص بانک مرکزی — تعداد سکه یا مبلغ عقد و شاخص سال عقد و پرداخت را وارد کنید تا مبلغ به‌روز محاسبه شود.">
+<meta property="og:title" content="محاسبه مهریه | دم‌دست">
+<meta property="og:description" content="مهریه سکه‌ای و مهریه نقدی به نرخ روز با شاخص بانک مرکزی — رایگان و بدون ثبت‌نام.">
+<meta property="og:type" content="website">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;500;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+<header class="site-header">
+  <div class="inner">
+    <a class="brand" href="index.html">دم‌دست<small>ابزار، قیمت و خبر؛ همه در یک‌جا</small></a>
+    <nav>
+      <a href="index.html#tools">ابزارها</a>
+      <a href="index.html#prices">قیمت‌ها</a>
+      <a href="index.html#briefing">مرور صبحگاهی</a>
+      <a href="about.html">درباره ما</a>
+    </nav>
+  </div>
+</header>
+
+<div class="wrap">
+  <p class="breadcrumb"><a href="index.html">دم‌دست</a> ← <a href="index.html#tools">ابزارها</a> ← محاسبه مهریه</p>
+  <h1>محاسبه مهریه</h1>
+  <p class="sub">مهریه سکه‌ای و مهریه نقدی به نرخ روز — قیمت سکه و شاخص را خودتان وارد می‌کنید؛ این ابزار هیچ قیمتی را از خودش نمی‌سازد.</p>
+
+  <div class="card">
+    <label for="mode">نوع محاسبه</label>
+    <select id="mode">
+      <option value="cash">مهریه نقدی به نرخ روز (با شاخص بانک مرکزی)</option>
+      <option value="coin">مهریه سکه‌ای (تعداد سکه × قیمت روز هر سکه)</option>
+    </select>
+
+    <div id="cashPanel" style="margin-top:16px">
+      <div class="field">
+        <label for="amount">مبلغ مهریه زمان عقد (تومان)</label>
+        <input type="text" id="amount" inputmode="numeric" autocomplete="off" placeholder="مثلاً 100000000">
+      </div>
+      <div class="fields">
+        <div>
+          <label for="idxMarriage">شاخص سال عقد</label>
+          <input type="text" id="idxMarriage" inputmode="decimal" autocomplete="off" placeholder="مثلاً 100">
+        </div>
+        <div>
+          <label for="idxPay">شاخص سال پرداخت</label>
+          <input type="text" id="idxPay" inputmode="decimal" autocomplete="off" placeholder="مثلاً 650">
+        </div>
+      </div>
+      <p class="hint">شاخص، «شاخص بهای کالاها و خدمات مصرفی» بانک مرکزی است. مقدار آن را باید از سایت بانک مرکزی بردارید؛ این ابزار شاخص را از اینترنت نمی‌خواند و عددی را حدس نمی‌زند.</p>
+    </div>
+
+    <div id="coinPanel" style="margin-top:16px;display:none">
+      <div class="fields">
+        <div>
+          <label for="coins">تعداد سکه (تمام بهار آزادی)</label>
+          <input type="text" id="coins" inputmode="numeric" autocomplete="off" placeholder="مثلاً 114">
+        </div>
+        <div>
+          <label for="coinPrice">قیمت روز هر سکه (تومان)</label>
+          <input type="text" id="coinPrice" inputmode="numeric" autocomplete="off" placeholder="قیمت روز را وارد کنید">
+        </div>
+      </div>
+      <p class="hint">قیمت روز سکه را خودتان وارد کنید — این ابزار قیمت لحظه‌ای سکه را ندارد و هیچ قیمتی را نمایش نمی‌دهد.</p>
+    </div>
+
+    <div class="out" id="out">مقادیر را وارد کنید.</div>
+    <div class="row">
+      <button class="btn-ghost" id="copyBtn" type="button">کپی نتیجه</button>
+      <button class="btn-ghost" id="shareBtn" type="button">اشتراک‌گذاری</button>
+    </div>
+    <div class="examples">مثال‌ها:
+      <button class="chip" type="button" data-mode="cash" data-amount="100000000" data-im="100" data-ip="650">مهریه نقدی: ۱۰۰ میلیون، شاخص ۱۰۰ ← ۶۵۰</button>
+      <button class="chip" type="button" data-mode="coin" data-coins="114">مهریه سکه‌ای: ۱۱۴ سکه</button>
+    </div>
+  </div>
+
+  <div class="card">
+    <h2>فرمول</h2>
+    <p><strong>مهریه نقدی به نرخ روز:</strong> مبلغ زمان عقد در نسبت شاخص سال پرداخت به شاخص سال عقد ضرب می‌شود:</p>
+    <div class="formula">مهریه به نرخ روز = مبلغ زمان عقد × (شاخص سال پرداخت ÷ شاخص سال عقد)</div>
+    <p><strong>مهریه سکه‌ای:</strong> تعداد سکه در قیمت روز هر سکه ضرب می‌شود:</p>
+    <div class="formula">ارزش مهریه سکه‌ای = تعداد سکه × قیمت روز هر سکه</div>
+    <p>شاخص مورد استفاده، «شاخص بهای کالاها و خدمات مصرفی» بانک مرکزی جمهوری اسلامی ایران است و هر سال با سال پایه مشخص منتشر می‌شود.</p>
+  </div>
+
+  <div class="card">
+    <h2>مثال عددی</h2>
+    <p><strong>مثال فرضی — مهریه نقدی:</strong> مبلغ مهریه زمان عقد ۱۰۰٬۰۰۰٬۰۰۰ تومان، شاخص سال عقد ۱۰۰ و شاخص سال پرداخت ۶۵۰ باشد:</p>
+    <div class="formula">۱۰۰٬۰۰۰٬۰۰۰ × (۶۵۰ ÷ ۱۰۰) = ۶۵۰٬۰۰۰٬۰۰۰ تومان</div>
+    <p>پس مهریه به نرخ روز <strong>۶۵۰٬۰۰۰٬۰۰۰ تومان</strong> می‌شود. توجه کنید که شاخص‌های این مثال فرضی‌اند؛ برای محاسبه واقعی، شاخص سال عقد و سال پرداخت را از سایت بانک مرکزی بردارید.</p>
+    <p><strong>مثال مهریه سکه‌ای:</strong> مهریه ۱۱۴ سکه تمام بهار آزادی — ارزش آن برابر است با ۱۱۴ ضرب در قیمت روز هر سکه که خودتان وارد می‌کنید. برای دیدن محاسبه، روی مثال سکه‌ای در ابزار بالا بزنید و قیمت روز سکه را وارد کنید.</p>
+  </div>
+
+  <div class="card">
+    <h2>ورودی و خروجی یعنی چه</h2>
+    <ul class="tight">
+      <li><strong>ورودی مهریه نقدی:</strong> مبلغ مهریه در زمان عقد (تومان)، شاخص سال عقد و شاخص سال پرداخت — هر دو از سایت بانک مرکزی.</li>
+      <li><strong>ورودی مهریه سکه‌ای:</strong> تعداد سکه‌های تمام بهار آزادی و قیمت روز هر سکه (تومان) که خودتان وارد می‌کنید.</li>
+      <li><strong>خروجی:</strong> مبلغ مهریه به نرخ روز (تومان) یا ارزش روز مهریه سکه‌ای (تومان)، به‌همراه جزئیات محاسبه.</li>
+    </ul>
+    <div class="note" style="margin-top:12px"><strong>نکته حقوقی:</strong> طبق ماده ۲۲ قانون نحوه اجرای محکومیت‌های مالی (۱۳۹۴)، مهریه تا ۱۱۰ سکه تمام بهار آزادی ضمانت اجرای حبس دارد؛ مازاد آن صرفاً از طریق اموال قابل وصول است.</div>
+    <p class="hint" style="margin-top:12px">این ابزار برآورد است؛ محاسبه رسمی با اجرای احکام دادگاه است.</p>
+  </div>
+
+  <div class="card">
+    <h2>این ابزار برای چه مواردی مناسب نیست</h2>
+    <ul class="tight">
+      <li><strong>تعیین تکلیف حقوقی</strong> — نتیجه این ابزار مشاوره حقوقی نیست و جای نظر وکیل یا دادگاه را نمی‌گیرد.</li>
+      <li>مهریه‌های غیرنقدی خاص مانند <strong>ملک یا خودرو</strong> که قیمت‌گذاری کارشناسی می‌خواهد.</li>
+      <li>مواردی که مهریه به‌صورت ترکیبی (مثلاً سکه به‌علاوه وجه نقد) تعیین شده است — هر بخش را جداگانه محاسبه کنید.</li>
+      <li>اگر شاخص سال عقد یا پرداخت را نمی‌دانید، این ابزار نمی‌تواند عددی را حدس بزند؛ نخست شاخص را از بانک مرکزی بگیرید.</li>
+    </ul>
+  </div>
+
+  <div class="card faq">
+    <h2>پرسش‌های متداول</h2>
+    <details>
+      <summary>شاخص بانک مرکزی را از کجا بیاورم؟</summary>
+      <p>از سایت بانک مرکزی جمهوری اسلامی ایران (بخش شاخص بهای کالاها و خدمات مصرفی). شاخص هر سال با سال پایه مشخص منتشر می‌شود؛ شاخص سال عقد و شاخص سال پرداخت (یا آخرین شاخص منتشرشده) را از همان‌جا بردارید و اینجا وارد کنید.</p>
+    </details>
+    <details>
+      <summary>اگر شاخص سال عقد را ندانم چه کنم؟</summary>
+      <p>بدون شاخص سال عقد نمی‌توان مهریه نقدی را به نرخ روز حساب کرد. شاخص سال‌های گذشته هم در سایت بانک مرکزی منتشر شده است؛ سال عقد را در همان جدول پیدا کنید.</p>
+    </details>
+    <details>
+      <summary>آیا نتیجه این ابزار محاسبه رسمی محسوب می‌شود؟</summary>
+      <p>خیر؛ این ابزار یک برآورد است. محاسبه رسمی مهریه به نرخ روز با اجرای احکام دادگاه و بر اساس شاخص اعلامی بانک مرکزی انجام می‌شود.</p>
+    </details>
+    <details>
+      <summary>مهریه سکه‌ای چطور به نرخ روز می‌رسد؟</summary>
+      <p>تعداد سکه در قیمت روز هر سکه ضرب می‌شود. قیمت روز سکه را باید خودتان از یک منبع معتبر بردارید و وارد کنید؛ این ابزار قیمت لحظه‌ای ندارد.</p>
+    </details>
+  </div>
+
+  <div class="card">
+    <h2>منابع و تاریخ بازبینی</h2>
+    <ul class="tight">
+      <li>بانک مرکزی جمهوری اسلامی ایران — «شاخص بهای کالاها و خدمات مصرفی».</li>
+      <li>قانون نحوه اجرای محکومیت‌های مالی (۱۳۹۴)، ماده ۲۲.</li>
+      <li>قانون مدنی جمهوری اسلامی ایران، مواد مربوط به مهر.</li>
+    </ul>
+    <p class="meta">آخرین بازبینی: ۶ آذر ۱۴۰۵</p>
+  </div>
+
+  <div class="card">
+    <h2>ابزارهای مرتبط</h2>
+    <div class="related">
+      <a href="date-converter.html">مبدل تاریخ شمسی و میلادی</a>
+      <a href="number-to-words.html">عدد به حروف فارسی</a>
+      <a href="inheritance.html">محاسبه ارث</a>
+      <a href="loan-installment.html">محاسبه اقساط وام</a>
+      <a href="gold-price.html">محاسبه قیمت طلای ساخته‌شده</a>
+      <a href="coin-bubble.html">حباب سکه</a>
+      <a href="index.html">همه ابزارها</a>
+    </div>
+  </div>
+
+  <footer>
+    دم‌دست — ابزار، قیمت و خبر؛ همه در یک‌جا<br>
+    ساخته‌شده توسط کوروش فرجی (KouroshLabs) ·
+    <a href="about.html">درباره ما</a> · <a href="contact.html">تماس</a> · <a href="privacy.html">حریم خصوصی</a><br>
+    <span style="font-size:12px">پردازش اطلاعات این ابزار در مرورگر شما انجام می‌شود و محتوای واردشده برای پردازش به سرور ارسال نمی‌شود.</span>
+  </footer>
+</div>
+
+<script src="assets/common.js"></script>
+<script>
+(function () {
+  var modeEl = document.getElementById('mode');
+  var cashPanel = document.getElementById('cashPanel');
+  var coinPanel = document.getElementById('coinPanel');
+  var out = document.getElementById('out');
+  var amountEl = document.getElementById('amount');
+  var idxMEl = document.getElementById('idxMarriage');
+  var idxPEl = document.getElementById('idxPay');
+  var coinsEl = document.getElementById('coins');
+  var coinPriceEl = document.getElementById('coinPrice');
+
+  function render() {
+    if (modeEl.value === 'cash') {
+      var amount = parseFaNum(amountEl.value);
+      var im = parseFaNum(idxMEl.value);
+      var ip = parseFaNum(idxPEl.value);
+      if (amountEl.value.trim() === '' && idxMEl.value.trim() === '' && idxPEl.value.trim() === '') { out.textContent = 'مقادیر را وارد کنید.'; return; }
+      if (!isFinite(amount) || amount <= 0) { out.textContent = 'مبلغ مهریه زمان عقد را وارد کنید.'; return; }
+      if (!isFinite(im) || im <= 0) { out.textContent = 'شاخص سال عقد را وارد کنید (عدد بزرگ‌تر از صفر).'; return; }
+      if (!isFinite(ip) || ip <= 0) { out.textContent = 'شاخص سال پرداخت را وارد کنید (عدد بزرگ‌تر از صفر).'; return; }
+      var result = amount * (ip / im);
+      out.innerHTML = '<span class="big">' + faMoney(result) + ' تومان</span>' +
+        '<small>مهریه به نرخ روز = ' + faMoney(amount) + ' × (' + faNum(ip) + ' ÷ ' + faNum(im) + ')</small>';
+    } else {
+      var coins = parseFaNum(coinsEl.value);
+      var price = parseFaNum(coinPriceEl.value);
+      if (coinsEl.value.trim() === '' && coinPriceEl.value.trim() === '') { out.textContent = 'مقادیر را وارد کنید.'; return; }
+      if (!isFinite(coins) || coins <= 0) { out.textContent = 'تعداد سکه را وارد کنید.'; return; }
+      if (!isFinite(price) || price <= 0) { out.textContent = 'قیمت روز هر سکه را وارد کنید.'; return; }
+      var total = coins * price;
+      out.innerHTML = '<span class="big">' + faMoney(total) + ' تومان</span>' +
+        '<small>' + faNum(coins) + ' سکه × ' + faMoney(price) + ' تومان</small>';
+    }
+  }
+
+  function switchMode() {
+    var cash = modeEl.value === 'cash';
+    cashPanel.style.display = cash ? '' : 'none';
+    coinPanel.style.display = cash ? 'none' : '';
+    render();
+  }
+  modeEl.addEventListener('change', switchMode);
+  [amountEl, idxMEl, idxPEl, coinsEl, coinPriceEl].forEach(function (el) {
+    el.addEventListener('input', render);
+  });
+  document.querySelectorAll('.chip').forEach(function (b) {
+    b.addEventListener('click', function () {
+      modeEl.value = b.dataset.mode;
+      switchMode();
+      if (b.dataset.mode === 'cash') {
+        amountEl.value = b.dataset.amount;
+        idxMEl.value = b.dataset.im;
+        idxPEl.value = b.dataset.ip;
+      } else {
+        coinsEl.value = b.dataset.coins;
+        coinPriceEl.focus();
+      }
+      render();
+    });
+  });
+  document.getElementById('copyBtn').addEventListener('click', function () { copyText(out.textContent, this); });
+  document.getElementById('shareBtn').addEventListener('click', function () { shareText(out.textContent, this); });
+})();
+</script>
+</body>
+</html>

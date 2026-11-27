@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>شمارش کلمات متن فارسی | کلمه، نویسه و جمله</title>
+<meta name="description" content="شمارش کلمات، نویسه‌ها، جملات و پاراگراف‌های متن فارسی؛ زمان تقریبی خواندن را هم ببینید. رایگان و بدون ثبت‌نام.">
+<meta property="og:title" content="شمارش کلمات متن فارسی | کلمه، نویسه و جمله">
+<meta property="og:description" content="کلمات، نویسه‌ها و جملات متن فارسی را بشمارید؛ با زمان تقریبی خواندن.">
+<meta property="og:type" content="website">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;500;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+<header class="site-header">
+  <div class="inner">
+    <a class="brand" href="index.html">دم‌دست<small>ابزار، قیمت و خبر؛ همه در یک‌جا</small></a>
+    <nav>
+      <a href="index.html#tools">ابزارها</a>
+      <a href="index.html#prices">قیمت‌ها</a>
+      <a href="index.html#briefing">مرور صبحگاهی</a>
+      <a href="about.html">درباره ما</a>
+    </nav>
+  </div>
+</header>
+
+<div class="wrap">
+  <p class="breadcrumb"><a href="index.html">دم‌دست</a> ← <a href="index.html#tools">ابزارها</a> ← شمارش کلمات متن فارسی</p>
+  <h1>شمارش کلمات متن فارسی</h1>
+  <p class="sub">کلمات، نویسه‌ها، جملات و پاراگراف‌های متن را بشمارید؛ زمان تقریبی خواندن را هم ببینید.</p>
+
+  <div class="card">
+    <div class="field">
+      <label for="inText">متن</label>
+      <textarea id="inText" placeholder="متن خود را اینجا بنویسید یا بچسبانید…" style="width:100%;font-size:16px;padding:12px 14px;border:2px solid var(--line);border-radius:10px;font-family:inherit;min-height:130px;resize:vertical;line-height:2"></textarea>
+    </div>
+    <div class="out" id="out"><small>کلمات</small><span class="big">۰</span></div>
+    <table class="result" id="resultTable">
+      <tr><td>کلمات</td><td id="rWords">۰</td></tr>
+      <tr><td>نویسه‌ها (با فاصله)</td><td id="rCharsSpace">۰</td></tr>
+      <tr><td>نویسه‌ها (بدون فاصله)</td><td id="rCharsNoSpace">۰</td></tr>
+      <tr><td>جملات</td><td id="rSentences">۰</td></tr>
+      <tr><td>پاراگراف‌ها</td><td id="rParagraphs">۰</td></tr>
+      <tr><td>خط‌ها</td><td id="rLines">۰</td></tr>
+      <tr><td>زمان تقریبی خواندن</td><td id="rReadTime">۰ دقیقه</td></tr>
+    </table>
+    <div class="row">
+      <button class="btn-primary" type="button" id="copyBtn">کپی نتیجه</button>
+      <button class="btn-ghost" type="button" id="shareBtn">اشتراک‌گذاری</button>
+      <button class="btn-ghost" type="button" id="clearBtn">پاک کردن</button>
+    </div>
+    <p class="examples">مثال:
+      <button class="chip" type="button" data-t="سلام دنیا">سلام دنیا</button>
+      <button class="chip" type="button" data-t="دم‌دست، ابزارهای دقیق و رایگان فارسی است. قیمت طلا، مبدل تاریخ و شمارش کلمات را رایگان حساب کنید.">متن نمونه</button>
+    </p>
+  </div>
+
+  <div class="card">
+    <h2>فرمول</h2>
+    <p class="formula">کلمات = تعداد بخش‌های جدا شده با فاصله یا خط جدید</p>
+    <p>متن را با فاصله‌ها و خط‌های جدید جدا می‌کنیم؛ هر بخش یک کلمه است. <strong>نیم‌فاصله کلمه را جدا نمی‌کند</strong> — «می‌روم» یک کلمه شمرده می‌شود، نه دو کلمه.</p>
+    <p class="formula">زمان خواندن ≈ تعداد کلمات ÷ ۲۰۰ (دقیقه)</p>
+    <p>سرعت میانگین خواندن حدود ۲۰۰ کلمه در دقیقه در نظر گرفته شده است.</p>
+  </div>
+
+  <div class="card">
+    <h2>مثال عددی</h2>
+    <p>متن «سلام دنیا»:</p>
+    <table class="result">
+      <tr><td>کلمات</td><td>۲</td></tr>
+      <tr><td>نویسه‌ها (با فاصله)</td><td>۹</td></tr>
+      <tr><td>نویسه‌ها (بدون فاصله)</td><td>۸</td></tr>
+      <tr class="total"><td>جملات</td><td>۱</td></tr>
+    </table>
+    <p class="meta">«سلام» ۴ نویسه و «دنیا» ۴ نویسه دارد؛ با یک فاصله بین آن‌ها، ۹ نویسه می‌شود.</p>
+  </div>
+
+  <div class="card">
+    <h2>ورودی و خروجی یعنی چه</h2>
+    <ul class="tight">
+      <li><strong>کلمات:</strong> بخش‌های جدا شده با فاصله یا خط جدید. نیم‌فاصله (‌) کلمه را جدا نمی‌کند.</li>
+      <li><strong>نویسه‌ها (با فاصله):</strong> همه نویسه‌های متن، شامل فاصله‌ها و خط‌های جدید.</li>
+      <li><strong>نویسه‌ها (بدون فاصله):</strong> نویسه‌ها بدون فاصله و خط جدید — معیار رایج برای محدودیت‌های کاراکتری.</li>
+      <li><strong>جملات:</strong> بخش‌های جدا شده با نقطه، علامت سؤال یا علامت تعجب و خط جدید.</li>
+      <li><strong>پاراگراف‌ها:</strong> بخش‌های جدا شده با خط خالی.</li>
+      <li><strong>زمان تقریبی خواندن:</strong> بر اساس ۲۰۰ کلمه در دقیقه.</li>
+    </ul>
+  </div>
+
+  <div class="card">
+    <h2>این ابزار برای چه مواردی مناسب نیست</h2>
+    <ul class="tight">
+      <li>شمارش دقیق واژگان تخصصی — کلماتی مثل «نیم‌فاصله‌دار» یک کلمه شمرده می‌شوند؛ اگر معیار دیگری دارید، نتیجه فرق می‌کند.</li>
+      <li>تشخیص زبان یا غلط‌یابی — این ابزار فقط می‌شمارد و متن را اصلاح نمی‌کند؛ برای اصلاح متن از <a href="persian-text-fixer.html">اصلاح نگارشی متن فارسی</a> استفاده کنید.</li>
+    </ul>
+  </div>
+
+  <div class="card faq">
+    <h2>پرسش‌های متداول</h2>
+    <details>
+      <summary>کلمه چطور شمرده می‌شود؟</summary>
+      <p>جداکننده فقط فاصله و خط جدید است؛ نیم‌فاصله کلمه را جدا نمی‌کند. «می‌روم» یک کلمه و «کتاب‌های من» دو کلمه است.</p>
+    </details>
+    <details>
+      <summary>زمان خواندن چطور حساب می‌شود؟</summary>
+      <p>تعداد کلمات تقسیم بر ۲۰۰ (سرعت میانگین خواندن در دقیقه). برای متن‌های تخصصی یا دشوار، زمان واقعی بیشتر می‌شود.</p>
+    </details>
+    <details>
+      <summary>آیا متن من ذخیره یا ارسال می‌شود؟</summary>
+      <p>نه؛ همه محاسبات در مرورگر شما انجام می‌شود و متن برای پردازش به سرور ارسال نمی‌شود.</p>
+    </details>
+    <details>
+      <summary>تفاوت نویسه با فاصله و بدون فاصله چیست؟</summary>
+      <p>در شمارش «با فاصله»، فاصله‌ها و خط‌های جدید هم شمرده می‌شوند؛ در شمارش «بدون فاصله» فقط نویسه‌های واقعی متن شمرده می‌شوند. شبکه‌های اجتماعی معمولاً با فاصله می‌شمارند.</p>
+    </details>
+  </div>
+
+  <div class="card">
+    <h2>منابع و تاریخ بازبینی</h2>
+    <ul class="tight">
+      <li>تعریف کلمه در این ابزار: جداسازی با فاصله و خط جدید؛ نیم‌فاصله جداکننده نیست.</li>
+      <li>سرعت میانگین خواندن: حدود ۲۰۰ کلمه در دقیقه (معیار رایج).</li>
+      <li>مثال عددی این صفحه با همین روش محاسبه و بازبینی شده است.</li>
+    </ul>
+    <p class="meta">آخرین بازبینی: ۶ آذر ۱۴۰۵</p>
+  </div>
+
+  <div class="card">
+    <h2>ابزارهای مرتبط</h2>
+    <div class="related">
+      <a href="persian-text-fixer.html">اصلاح نگارشی متن فارسی</a>
+      <a href="digit-converter.html">تبدیل اعداد فارسی و انگلیسی</a>
+      <a href="cooking-units.html">تبدیل واحد آشپزی</a>
+      <a href="number-to-words.html">عدد به حروف فارسی</a>
+      <a href="index.html">همه ابزارها</a>
+    </div>
+  </div>
+
+  <footer>
+    دم‌دست — ابزار، قیمت و خبر؛ همه در یک‌جا<br>
+    ساخته‌شده توسط کوروش فرجی (KouroshLabs) ·
+    <a href="about.html">درباره ما</a> · <a href="contact.html">تماس</a> · <a href="privacy.html">حریم خصوصی</a><br>
+    <span style="font-size:12px">پردازش اطلاعات این ابزار در مرورگر شما انجام می‌شود و محتوای واردشده برای پردازش به سرور ارسال نمی‌شود.</span>
+  </footer>
+</div>
+
+<script src="assets/common.js"></script>
+<script>
+(function () {
+  var input = document.getElementById('inText');
+  var out = document.getElementById('out');
+  var lastText = '';
+  function count(t) {
+    var words = t.trim() ? t.trim().split(/\s+/) : [];
+    var withSpaces = t.length;
+    var withoutSpaces = t.replace(/\s/g, '').length;
+    var sentences = t.split(/[.!؟\n]+/).filter(function (s) { return s.trim().length > 0; }).length;
+    var paragraphs = t.trim() ? t.trim().split(/\n\s*\n/).filter(function (s) { return s.trim().length > 0; }).length : 0;
+    var lines = t ? t.split('\n').length : 0;
+    var readMin = words.length / 200;
+    return { words: words.length, withSpaces: withSpaces, withoutSpaces: withoutSpaces, sentences: sentences, paragraphs: paragraphs, lines: lines, readMin: readMin };
+  }
+  function fmtTime(min) {
+    if (min < 1) {
+      var sec = Math.max(1, Math.round(min * 60));
+      return 'کمتر از ۱ دقیقه (حدود ' + faNum(sec) + ' ثانیه)';
+    }
+    var m = Math.floor(min), s = Math.round((min - m) * 60);
+    return faNum(m) + ' دقیقه' + (s > 0 ? ' و ' + faNum(s) + ' ثانیه' : '');
+  }
+  function render() {
+    var c = count(input.value);
+    out.innerHTML = '<small>کلمات</small><span class="big">' + faNum(c.words) + '</span>';
+    document.getElementById('rWords').textContent = faNum(c.words);
+    document.getElementById('rCharsSpace').textContent = faNum(c.withSpaces);
+    document.getElementById('rCharsNoSpace').textContent = faNum(c.withoutSpaces);
+    document.getElementById('rSentences').textContent = faNum(c.sentences);
+    document.getElementById('rParagraphs').textContent = faNum(c.paragraphs);
+    document.getElementById('rLines').textContent = faNum(c.lines);
+    document.getElementById('rReadTime').textContent = fmtTime(c.readMin);
+    lastText = 'شمارش کلمات — کلمات: ' + faNum(c.words) + '، نویسه‌ها (با فاصله): ' + faNum(c.withSpaces) + '، نویسه‌ها (بدون فاصله): ' + faNum(c.withoutSpaces) + '، جملات: ' + faNum(c.sentences) + '، پاراگراف‌ها: ' + faNum(c.paragraphs) + '، زمان خواندن: ' + fmtTime(c.readMin) + '. (دم‌دست)';
+  }
+  input.addEventListener('input', render);
+  document.querySelectorAll('.examples .chip').forEach(function (b) {
+    b.addEventListener('click', function () { input.value = b.dataset.t; render(); input.focus(); });
+  });
+  document.getElementById('clearBtn').addEventListener('click', function () { input.value = ''; render(); input.focus(); });
+  document.getElementById('copyBtn').addEventListener('click', function () {
+    if (lastText) copyText(lastText, this);
+  });
+  document.getElementById('shareBtn').addEventListener('click', function () {
+    if (lastText) shareText(lastText, this);
+  });
+  render();
+})();
+</script>
+</body>
+</html>
