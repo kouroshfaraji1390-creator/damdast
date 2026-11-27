@@ -61,7 +61,7 @@ textarea:focus { outline: none; border-color: var(--turq); }
   <p class="sub">هر جمله یا واژه‌ای را بنویسید؛ هوش مصنوعی همان معنا را به‌صورت طبیعی ترجمه می‌کند — نه کلمه‌به‌کلمه.</p>
 
   <div class="note" style="margin-bottom:16px">
-    <strong>ترجمه با هوش مصنوعی (سرویس رایگان Pollinations).</strong>
+    <strong>ترجمه با هوش مصنوعی (Gemini گوگل، از راه واسط امن دم‌دست).</strong>
     خروجی هوش مصنوعی معمولاً طبیعی و روان است، اما گاهی ممکن است نادرست باشد؛ برای متن‌های مهم، نتیجه را دوباره بررسی کنید. اگر هوش مصنوعی در ترجمه‌ای مطمئن نباشد، خودش می‌گوید و آن را به‌جای جواب قطعی نشان نمی‌دهد.
   </div>
 
@@ -103,12 +103,12 @@ textarea:focus { outline: none; border-color: var(--turq); }
   </div>
 
   <div class="note" style="margin-bottom:16px">
-    <strong>درباره حریم خصوصی:</strong> متن شما برای ترجمه به سرور سرویس رایگان Pollinations فرستاده می‌شود؛ برای متن‌های محرمانه از این ابزار استفاده نکنید.
+    <strong>درباره حریم خصوصی:</strong> متن شما برای ترجمه به سرویس هوش مصنوعی Gemini گوگل فرستاده می‌شود — از راه واسط امن دم‌دست (کلید در کد صفحه نیست و متن ذخیره نمی‌شود)؛ برای متن‌های محرمانه از این ابزار استفاده نکنید.
   </div>
 
   <div class="card">
     <h2>این ابزار چطور کار می‌کند</h2>
-    <p>متن شما به <strong>هوش مصنوعی Pollinations</strong> (سرویس رایگان، بدون کلید و بدون پرداخت) فرستاده می‌شود و هوش مصنوعی آن را ترجمه می‌کند — نه با جایگذاری کلمه‌به‌کلمه، بلکه با درک معنا و انتخاب جمله‌ای که یک انگلیسی‌زبان یا فارسی‌زبان واقعاً همان‌طور می‌گوید. دقت در اولویت است: اگر هوش مصنوعی در معنای واژه یا لحن جمله مطمئن نباشد، به‌جای حدس زدن، خودش می‌گوید و نتیجه به‌عنوان نامطمئن نشان داده می‌شود.</p>
+    <p>متن شما به <strong>هوش مصنوعی Gemini گوگل</strong> فرستاده می‌شود — از راه یک واسط امن (Cloudflare Worker) که کلید در آن نگهداری می‌شود و هرگز در کد صفحه نیست — و هوش مصنوعی آن را ترجمه می‌کند. دقت در اولویت است: اگر هوش مصنوعی در معنای واژه یا لحن جمله مطمئن نباشد، به‌جای حدس زدن، خودش می‌گوید و نتیجه به‌عنوان نامطمئن نشان داده می‌شود.</p>
     <p><strong>جمله فارسی ← انگلیسی:</strong> همان معنا در چهار لحن نشان داده می‌شود — <strong>رسمی</strong> (برای نامه و محل کار)، <strong>معمولی</strong> (خنثی و روزمره)، <strong>غیررسمی</strong> (دوستانه) و <strong>کوچه‌بازاری</strong> (عامیانه). هر چهار نسخه همان معنا را دارند، فقط لحن‌شان فرق می‌کند.</p>
     <p><strong>جمله انگلیسی ← فارسی:</strong> معادل طبیعی فارسی نشان داده می‌شود و گفته می‌شود که جمله انگلیسی در چه لحنی بوده است.</p>
     <p><strong>تک‌واژه:</strong> تلفظ (IPA + خوانش فارسی) و همه معانی رایج آن با نقش دستوری (اسم، فعل، صفت…) نشان داده می‌شود؛ هر معنی در یک کارت جداگانه می‌آید با جمله‌های مثال در بافت‌های مختلف و ترکیب‌های پرکاربرد خودش، به‌علاوه هم‌معنی‌ها و نکته‌ای درباره رسمی یا غیررسمی بودن کاربرد آن. معنی اول باز است و بقیه معانی را با یک ضربه باز می‌کنید تا صفحه شلوغ نشود.</p>
@@ -142,7 +142,7 @@ textarea:focus { outline: none; border-color: var(--turq); }
     <h2>این ابزار برای چه مواردی مناسب نیست</h2>
     <ul class="tight">
       <li>ترجمه تخصصی، حقوقی یا پزشکی — هوش مصنوعی ممکن است گاهی نادرست ترجمه کند؛ برای متن‌های مهم، مترجم انسانی را بررسی کنید.</li>
-      <li>متن‌های محرمانه — متن برای ترجمه به سرور سرویس Pollinations فرستاده می‌شود.</li>
+      <li>متن‌های محرمانه — متن برای ترجمه به سرور هوش مصنوعی (Gemini) فرستاده می‌شود.</li>
       <li>متن‌های بلندتر از ۲۰۰۰ نویسه — متن را به بخش‌های کوچک‌تر تقسیم کنید.</li>
     </ul>
   </div>
@@ -151,7 +151,7 @@ textarea:focus { outline: none; border-color: var(--turq); }
     <h2>پرسش‌های متداول</h2>
     <details>
       <summary>ترجمه با چه سرویسی انجام می‌شود؟</summary>
-      <p>با هوش مصنوعی Pollinations (text.pollinations.ai) — سرویس رایگان، بدون کلید و بدون پرداخت. متن شما به سرور این سرویس فرستاده می‌شود.</p>
+      <p>با Gemini گوگل — از راه یک واسط امن (Cloudflare Worker) که کلید API در آن نگهداری می‌شود و هرگز در صفحه دیده نمی‌شود؛ سهمیه رایگان Gemini برای همه کاربران سایت مشترک است و نیمه‌شب به وقت اقیانوس آرام صفر می‌شود. متن شما برای ترجمه به سرور این سرویس فرستاده می‌شود.</p>
     </details>
     <details>
       <summary>چرا یک جمله چهار ترجمه دارد؟</summary>
@@ -171,18 +171,18 @@ textarea:focus { outline: none; border-color: var(--turq); }
     </details>
     <details>
       <summary>اگر سرویس در دسترس نبود چه می‌شود؟</summary>
-      <p>پیام خطا با دکمه تلاش دوباره نشان داده می‌شود. برای تک‌واژه، دیکشنری پایه آفلاین (۳۲۰ واژه پرکاربرد) به‌عنوان پشتیبان استفاده می‌شود؛ جمله‌ها فقط با هوش مصنوعی ترجمه می‌شوند.</p>
+      <p>اگر Gemini جواب ندهد، پیام خطا با دکمه تلاش دوباره نشان داده می‌شود. برای تک‌واژه، دیکشنری پایه آفلاین (۳۲۰ واژه پرکاربرد) به‌عنوان پشتیبان استفاده می‌شود؛ جمله‌ها فقط با هوش مصنوعی ترجمه می‌شوند.</p>
     </details>
     <details>
       <summary>آیا متن من ذخیره می‌شود؟</summary>
-      <p>نه در این سایت. متن فقط برای ترجمه به سرور Pollinations فرستاده می‌شود و در مرورگر شما ذخیره نمی‌شود. برای متن محرمانه از این ابزار استفاده نکنید.</p>
+      <p>نه در این سایت. متن فقط برای ترجمه فرستاده می‌شود — به Gemini از راه واسط امن دم‌دست — و در مرورگر شما ذخیره نمی‌شود. برای متن محرمانه از این ابزار استفاده نکنید.</p>
     </details>
   </div>
 
   <div class="card">
     <h2>منابع و تاریخ بازبینی</h2>
     <ul class="tight">
-      <li>ترجمه: هوش مصنوعی Pollinations — text.pollinations.ai (سرویس رایگان، بدون کلید، بدون پرداخت).</li>
+      <li>ترجمه: هوش مصنوعی Gemini گوگل — generativelanguage.googleapis.com (از راه واسط امن Cloudflare Worker؛ کلید API فقط در واسط نگهداری می‌شود و در کد سایت نیست؛ سهمیه رایگان برای همه کاربران سایت مشترک است).</li>
       <li>دیکشنری پایه پشتیبان: فهرست ۳۲۰ واژه پرکاربرد روزمره که توسط تیم دم‌دست گردآوری شده است؛ فقط برای زمانی که سرویس هوش مصنوعی در دسترس نباشد و فقط برای تک‌واژه.</li>
     </ul>
     <p class="meta">آخرین بازبینی: ۶ آذر ۱۴۰۵</p>
@@ -248,23 +248,6 @@ textarea:focus { outline: none; border-color: var(--turq); }
   function esc(s) { return String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;'); }
   function isSingleWord(text) { return text.trim().split(/\s+/).length === 1; }
 
-  var ACC = 'Accuracy is the top priority. Translate precisely and idiomatically, using only phrasing a native speaker would actually say; never translate word-for-word. If you are unsure about the correct translation, meaning, or register of a word or sentence, do not guess: add the fields "uncertain": true and "uncertainty_note": "a short note in Persian explaining what is uncertain" to the JSON. If you are certain, set "uncertain": false and "uncertainty_note": "". ';
-  function promptFor(text, faMode, single, long) {
-    if (single) {
-      if (faMode) {
-        return 'You are an expert Persian-English dictionary. The user typed a single Persian word: "' + text + '". Return ONLY valid JSON (no markdown, no code fences, no extra text) with this exact structure: {"word": "' + text + '", "meanings": [{"pos": "part of speech in English, e.g. noun/verb/adjective", "en": "English meaning", "fa": "Persian explanation in Persian", "examples": [{"en": "example sentence in English showing this exact meaning in a real everyday context", "fa": "its Persian translation"}], "collocations": [{"en": "common English phrase using the word in this meaning", "fa": "its Persian translation"}]}], "synonyms": ["English synonym 1", "English synonym 2"], "register": "short note in Persian about whether the word is formal, informal or neutral", "pronunciation": {"ipa": "IPA transcription, e.g. /həˈloʊ/", "fa": "Persian transliteration, e.g. هِلو"}, "tip": "one short learning tip in Persian — a common mistake, a usage note, or a memory hook"}. Give ALL common meanings of the word — every meaning a learner would need — each with its part of speech; for EACH meaning give 1-2 example sentences in different everyday contexts with Persian translations, and 1-2 common collocations where they exist. Give 2-4 synonyms. Also give the pronunciation (IPA + Persian transliteration) and one short learning tip in Persian.';
-      }
-      return 'You are an expert English-Persian dictionary. The user typed a single English word: "' + text + '". Return ONLY valid JSON (no markdown, no code fences, no extra text) with this exact structure: {"word": "' + text + '", "meanings": [{"pos": "part of speech, e.g. noun/verb/adjective", "en": "English definition in English", "fa": "Persian meaning in Persian", "examples": [{"en": "example sentence in English showing this exact meaning in a real everyday context", "fa": "its Persian translation"}], "collocations": [{"en": "common English phrase using the word in this meaning", "fa": "its Persian translation"}]}], "synonyms": ["English synonym 1", "English synonym 2"], "register": "short note in Persian about whether the word is formal, informal or neutral", "pronunciation": {"ipa": "IPA transcription, e.g. /həˈloʊ/", "fa": "Persian transliteration, e.g. هِلو"}, "tip": "one short learning tip in Persian — a common mistake, a usage note, or a memory hook"}. Give ALL common meanings of the word — every meaning a learner would need — each with its part of speech; for EACH meaning give 1-2 example sentences in different everyday contexts with Persian translations, and 1-2 common collocations where they exist. Give 2-4 synonyms. Also give the pronunciation (IPA + Persian transliteration) and one short learning tip in Persian.';
-    }
-    if (faMode) {
-      if (long) {
-        return 'You are an expert Persian-English translator. Translate this whole Persian text into natural, idiomatic English — never word-for-word. Return ONLY valid JSON (no markdown, no code fences, no extra text) with this exact structure: {"translation": "complete faithful English translation of the whole text", "key_sentence": {"formal": "formal English version of the most important sentence", "neutral": "neutral everyday English version of the most important sentence", "informal": "friendly casual English version of the most important sentence", "slang": "very colloquial slang English version of the most important sentence"}, "note": "short note in Persian about tone or nuance, or empty string", "tip": "one short learning tip in Persian — a common mistake, a usage note, or a memory hook"}. Text: "' + text + '"';
-      }
-      return 'You are an expert Persian-English translator. Translate this Persian sentence into natural, idiomatic English — never word-for-word. Give the SAME meaning in four registers. Return ONLY valid JSON (no markdown, no code fences, no extra text) with this exact structure: {"formal": "formal English version, suitable for work or official letters", "neutral": "neutral everyday English version", "informal": "friendly casual English version", "slang": "very colloquial slang English version", "note": "short note in Persian about tone or nuance, or empty string", "tip": "one short learning tip in Persian — a common mistake, a usage note, or a memory hook"}. Sentence: "' + text + '"';
-    }
-    return 'You are an expert English-Persian translator. Translate this English sentence into natural, idiomatic Persian — never word-for-word. Return ONLY valid JSON (no markdown, no code fences, no extra text) with this exact structure: {"translation": "natural Persian translation", "register": "one of: formal, neutral, informal, slang — the register of the English sentence", "note": "short note in Persian about tone or nuance, or empty string", "tip": "one short learning tip in Persian — a common mistake, a usage note, or a memory hook"}. ' + (long ? 'The text is long; translate all of it faithfully, keeping the tone. ' : '') + 'Sentence: "' + text + '"';
-  }
-
   function parseAI(raw) {
     var t = raw.trim();
     try { return JSON.parse(t); } catch (e) {}
@@ -290,7 +273,10 @@ textarea:focus { outline: none; border-color: var(--turq); }
       '<button class="btn-ghost copy-mini" type="button" data-copy="' + esc(text) + '">کپی</button>' +
       '<div class="txt' + (ltr ? '' : ' fa') + '">' + esc(text) + '</div></div>';
   }
-  function renderSentenceFAEN(d, raw, long) {
+  function backendLabel(backend) {
+    return '<p class="meta">ترجمه با هوش مصنوعی (' + esc(backend || 'Gemini') + ') — خروجی گاهی ممکن است نادرست باشد.</p>';
+  }
+  function renderSentenceFAEN(d, raw, long, backend) {
     if (d && d.translation && d.key_sentence) {
       var html = uncertaintyNote(d) + '<h3 style="margin-bottom:14px">ترجمه کامل</h3>' +
         regCard('ترجمه کامل', 'neutral', d.translation, true);
@@ -304,7 +290,7 @@ textarea:focus { outline: none; border-color: var(--turq); }
       }
       if (d.note) html += '<p class="meta">نکته: ' + esc(d.note) + '</p>';
       html += tipBox(d);
-      html += '<p class="meta">ترجمه با هوش مصنوعی (Pollinations) — خروجی گاهی ممکن است نادرست باشد.</p>';
+      html += backendLabel(backend);
       return html;
     }
     if (d && d.formal && d.neutral && d.informal && d.slang) {
@@ -314,23 +300,23 @@ textarea:focus { outline: none; border-color: var(--turq); }
         regCard('کوچه‌بازاری', 'slang', d.slang, true);
       if (d.note) html += '<p class="meta">نکته: ' + esc(d.note) + '</p>';
       html += tipBox(d);
-      html += '<p class="meta">ترجمه با هوش مصنوعی (Pollinations) — خروجی گاهی ممکن است نادرست باشد.</p>';
+      html += backendLabel(backend);
       return html;
     }
     return renderRaw(raw);
   }
-  function renderSentenceENFA(d, raw) {
+  function renderSentenceENFA(d, raw, backend) {
     if (d && d.translation) {
       var regFa = { formal: 'رسمی', neutral: 'معمولی', informal: 'غیررسمی', slang: 'کوچه‌بازاری' }[d.register] || '';
       var html = uncertaintyNote(d) + regCard('ترجمه فارسی' + (regFa ? ' — لحن جمله انگلیسی: ' + regFa : ''), 'neutral', d.translation, false);
       if (d.note) html += '<p class="meta">نکته: ' + esc(d.note) + '</p>';
       html += tipBox(d);
-      html += '<p class="meta">ترجمه با هوش مصنوعی (Pollinations) — خروجی گاهی ممکن است نادرست باشد.</p>';
+      html += backendLabel(backend);
       return html;
     }
     return renderRaw(raw);
   }
-  function renderWord(d, raw, faMode) {
+  function renderWord(d, raw, faMode, backend) {
     if (d && d.meanings && d.meanings.length) {
       var html = uncertaintyNote(d) + '<h3 style="margin-bottom:6px">«' + esc(d.word || '') + '» — ' + faNum(d.meanings.length) + ' معنی</h3>';
       if (d.pronunciation && (d.pronunciation.ipa || d.pronunciation.fa)) {
@@ -362,7 +348,7 @@ textarea:focus { outline: none; border-color: var(--turq); }
       }
       if (d.register) html += '<p class="meta">نکته کاربرد: ' + esc(d.register) + '</p>';
       html += tipBox(d);
-      html += '<p class="meta">ترجمه با هوش مصنوعی (Pollinations) — خروجی گاهی ممکن است نادرست باشد.</p>';
+      html += backendLabel(backend);
       return html;
     }
     return renderRaw(raw);
@@ -394,11 +380,15 @@ textarea:focus { outline: none; border-color: var(--turq); }
       return hit2 ? pre + hit2[0] + post : tok;
     }).join(' ');
   }
-  function showError(text, faMode, single, status) {
+  function showError(text, faMode, single, workerErr) {
     var fb = single ? dictionaryFallback(text, faMode) : null;
-    var msg = (status === 402 || status === 429)
-      ? '<strong>سهمیه رایگان روزانه سرویس هوش مصنوعی تمام شد.</strong><br>سرویس رایگان Pollinations برای هر آدرس اینترنتی ۱۰۰ پاسخ در روز می‌دهد؛ فردا دوباره تلاش کنید، یا از دیکشنری پایه پایین همین صفحه استفاده کنید.'
-      : '<strong>سرویس هوش مصنوعی در دسترس نیست.</strong><br>اتصال به Pollinations برقرار نشد؛ اینترنت را بررسی کنید و دوباره تلاش کنید.';
+    var quotaGemini = workerErr && (workerErr.code === 'quota' || workerErr.code === 'rate_limited');
+    var msg;
+    if (quotaGemini) {
+      msg = '<strong>سهمیه روزانه Gemini تمام شد.</strong><br>سهمیه رایگان Gemini برای امروز تمام شده است (مشترک برای همه کاربران سایت؛ تا نیمه‌شب به وقت اقیانوس آرام صفر می‌شود). فردا دوباره تلاش کنید، یا از دیکشنری پایه پایین همین صفحه استفاده کنید.';
+    } else {
+      msg = '<strong>سرویس هوش مصنوعی در دسترس نیست.</strong><br>اتصال به سرویس ترجمه برقرار نشد؛ اینترنت را بررسی کنید و دوباره تلاش کنید.';
+    }
     var html = '<div class="error-box">' + msg + '</div>' +
       '<div class="row" style="margin-top:10px"><button class="btn-primary" type="button" id="retryBtn">تلاش دوباره</button></div>';
     if (fb) html += '<div style="margin-top:14px">' + fb + '</div>';
@@ -454,6 +444,49 @@ textarea:focus { outline: none; border-color: var(--turq); }
       list.appendChild(li);
     });
   }
+  /* Gemini first, Groq second, via the Damdast Worker (API keys stay
+     server-side). WORKER_URL is filled in by the parent after deploying
+     worker/translate-worker.js, e.g.
+     'https://damdast-translate.<your-subdomain>.workers.dev'.
+     The Worker returns j.backend ('gemini' | 'groq'); the label below
+     shows the real provider. */
+  var WORKER_URL = 'https://damdast-translate.kourosh-faraji-1390.workers.dev/';
+
+  function displayBackend(b) {
+    return b === 'groq' ? 'Groq' : 'Gemini';
+  }
+
+  function workerTranslate(text, direction, outerSignal) {
+    var ctrl = new AbortController();
+    var timer = setTimeout(function () { ctrl.abort(); }, 20000);
+    function done() { clearTimeout(timer); }
+    if (outerSignal) {
+      if (outerSignal.aborted) ctrl.abort();
+      else outerSignal.addEventListener('abort', function () { ctrl.abort(); });
+    }
+    return fetch(WORKER_URL, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ text: text, direction: direction }),
+      signal: ctrl.signal
+    })
+      .then(function (r) {
+        done();
+        return r.text().then(function (t) {
+          var j = null;
+          try { j = JSON.parse(t); } catch (e) {}
+          if (r.ok && j && j.ok && j.choices && j.choices[0] && j.choices[0].message && j.choices[0].message.content) {
+            return { content: j.choices[0].message.content, backend: displayBackend(j.backend) };
+          }
+          var err = new Error('worker failed: ' + (j && j.error ? j.error : 'http ' + r.status));
+          err.code = (j && j.error) || ('http' + r.status);
+          err.status = r.status;
+          throw err;
+        });
+      })
+      .catch(function (e) { done(); throw e; });
+  }
+
   function translate() {
     var text = srcEl.value.trim();
     if (!text) {
@@ -468,31 +501,28 @@ textarea:focus { outline: none; border-color: var(--turq); }
     areaEl.innerHTML = '<div class="loading"><span class="dots">در حال ترجمه با هوش مصنوعی</span></div>';
     var ctrl = new AbortController();
     var timer = setTimeout(function () { ctrl.abort(); }, 60000);
-    var lastStatus = 0;
-    var prompt = ACC + promptFor(text, faMode, single, long);
-    fetch('https://text.pollinations.ai/openai', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ model: 'openai', messages: [{ role: 'user', content: prompt }], temperature: 0.3, stream: false, max_tokens: 2000 }),
-      signal: ctrl.signal
-    })
-      .then(function (r) { clearTimeout(timer); if (!r.ok) { lastStatus = r.status; throw new Error('bad status ' + r.status); } return r.text(); })
-      .then(function (raw) {
-        var content = raw;
-        try {
-          var j = JSON.parse(raw);
-          if (j && j.choices && j.choices[0] && j.choices[0].message && j.choices[0].message.content) content = j.choices[0].message.content;
-        } catch (e) { /* plain-text response */ }
-        if (!content || !content.trim()) throw new Error('empty');
-        var d = parseAI(content);
+    if (!WORKER_URL) {
+      clearTimeout(timer);
+      areaEl.innerHTML = '<div class="error-box"><strong>سرویس ترجمه هنوز راه‌اندازی نشده است.</strong><br>به‌زودی در دسترس قرار می‌گیرد.</div>';
+      return;
+    }
+    var workerErr = null;
+    workerTranslate(text, dir, ctrl.signal)
+      .then(function (res) {
+        clearTimeout(timer);
+        var d = parseAI(res.content);
         var html;
-        if (single) html = renderWord(d, content, faMode);
-        else if (faMode) html = renderSentenceFAEN(d, content, long);
-        else html = renderSentenceENFA(d, content, long);
+        if (single) html = renderWord(d, res.content, faMode, res.backend);
+        else if (faMode) html = renderSentenceFAEN(d, res.content, long, res.backend);
+        else html = renderSentenceENFA(d, res.content, res.backend);
         areaEl.innerHTML = html;
-        saveHistory(text, d, content);
+        saveHistory(text, d, res.content);
       })
-      .catch(function () { showError(text, faMode, single, lastStatus); });
+      .catch(function (e) {
+        clearTimeout(timer);
+        workerErr = e;
+        showError(text, faMode, single, workerErr);
+      });
   }
   srcEl.addEventListener('input', function () { countEl.textContent = faNum(srcEl.value.length); });
   document.getElementById('translateBtn').addEventListener('click', translate);
