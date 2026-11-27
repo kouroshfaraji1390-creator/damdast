@@ -1,0 +1,525 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>مترجم هوش مصنوعی انگلیسی به فارسی | رسمی، معمولی، غیررسمی و عامیانه</title>
+<meta name="description" content="مترجم هوش مصنوعی انگلیسی ↔ فارسی — هر جمله را در چهار لحن رسمی، معمولی، غیررسمی و کوچه‌بازاری ترجمه می‌کند؛ تک‌واژه را با معنی، مثال و هم‌معنی نشان می‌دهد.">
+<meta property="og:title" content="مترجم هوش مصنوعی انگلیسی به فارسی | رسمی، معمولی، غیررسمی و عامیانه">
+<meta property="og:description" content="جمله فارسی را به انگلیسی طبیعی در چهار لحن ترجمه کنید؛ واژه را با معنی، مثال و هم‌معنی ببینید.">
+<meta property="og:type" content="website">
+<link rel="stylesheet" href="assets/style.css">
+<style>
+textarea { width: 100%; font-size: 17px; padding: 10px 12px; border: 2px solid var(--line); border-radius: 10px; font-family: inherit; background: #fff; color: var(--ink); min-height: 90px; resize: vertical; }
+textarea:focus { outline: none; border-color: var(--turq); }
+.reg-card { background: #fff; border: 1px solid var(--line); border-radius: 12px; padding: 14px 16px; margin-bottom: 14px; }
+.reg-card .tag { display: inline-block; font-size: 12px; font-weight: 700; border-radius: 999px; padding: 2px 12px; margin-bottom: 6px; }
+.reg-card .tag.formal { background: var(--navy); color: #fff; }
+.reg-card .tag.neutral { background: var(--turq); color: #fff; }
+.reg-card .tag.informal { background: #eef4ff; color: var(--navy); border: 1px solid var(--line); }
+.reg-card .tag.slang { background: var(--gold-bg); color: #8a6d1a; border: 1px solid #ecd98a; }
+.reg-card .txt { font-size: 18px; direction: ltr; text-align: left; font-weight: 700; color: var(--navy); }
+.reg-card .txt.fa { direction: rtl; text-align: right; }
+.reg-card .copy-mini { float: left; font-size: 12px; padding: 4px 10px; }
+.meaning-card { background: #fff; border: 1px solid var(--line); border-radius: 12px; padding: 16px 18px; margin-bottom: 14px; }
+.meaning-card summary { cursor: pointer; font-weight: 700; font-size: 17px; list-style: none; display: flex; gap: 10px; align-items: center; }
+.meaning-card summary::-webkit-details-marker { display: none; }
+.meaning-card summary::after { content: '＋'; margin-inline-start: auto; color: var(--turq-dark); font-weight: 400; }
+.meaning-card[open] summary::after { content: '−'; }
+.pos { font-size: 12px; font-weight: 700; color: var(--turq-dark); background: #f2f7f7; border-radius: 999px; padding: 2px 10px; white-space: nowrap; }
+.ex-quote { border-inline-start: 3px solid var(--turq); padding-inline-start: 12px; margin: 10px 0; }
+.ex-quote .en { direction: ltr; text-align: left; font-weight: 700; }
+.ex-quote .fa { color: var(--muted); font-size: 14px; }
+.colloc-chip { display: inline-block; background: #f2f7f7; border: 1px solid var(--line); border-radius: 999px; padding: 2px 12px; font-size: 13px; margin: 2px; }
+.error-box { background: #fdecea; border: 1px solid #f5c6c0; border-radius: 12px; padding: 16px; color: #7a1f1a; }
+.loading { text-align: center; color: var(--muted); padding: 18px; }
+.loading .dots::after { content: '…'; animation: dots 1.2s steps(3) infinite; }
+@keyframes dots { 0% { content: '…'; } 50% { content: '……'; } 100% { content: '………'; } }
+.tip-box { background: #f2f7f7; border: 1px solid var(--turq); border-radius: 10px; padding: 12px 16px; margin-top: 14px; font-size: 14px; }
+.tip-box strong { color: var(--turq-dark); }
+.hist-item { display: flex; justify-content: space-between; gap: 10px; padding: 8px 4px; border-bottom: 1px dashed var(--line); cursor: pointer; font-size: 14px; }
+.hist-item:hover { color: var(--turq-dark); }
+.hist-item span:last-child { color: var(--muted); font-size: 12px; white-space: nowrap; }
+</style>
+</head>
+<body>
+<header class="site-header">
+  <div class="inner">
+    <a class="brand" href="index.html">دم‌دست<small>ابزار، قیمت و خبر؛ همه در یک‌جا</small></a>
+    <nav>
+      <a href="index.html#tools">ابزارها</a>
+      <a href="index.html#prices">قیمت‌ها</a>
+      <a href="index.html#briefing">مرور صبحگاهی</a>
+      <a href="about.html">درباره ما</a>
+    </nav>
+  </div>
+</header>
+
+<div class="wrap">
+  <p class="breadcrumb"><a href="index.html">دم‌دست</a> ← <a href="index.html#tools">ابزارها</a> ← مترجم هوش مصنوعی</p>
+  <h1>مترجم هوش مصنوعی انگلیسی ↔ فارسی</h1>
+  <p class="sub">هر جمله یا واژه‌ای را بنویسید؛ هوش مصنوعی همان معنا را به‌صورت طبیعی ترجمه می‌کند — نه کلمه‌به‌کلمه.</p>
+
+  <div class="note" style="margin-bottom:16px">
+    <strong>ترجمه با هوش مصنوعی (سرویس رایگان Pollinations).</strong>
+    خروجی هوش مصنوعی معمولاً طبیعی و روان است، اما گاهی ممکن است نادرست باشد؛ برای متن‌های مهم، نتیجه را دوباره بررسی کنید. اگر هوش مصنوعی در ترجمه‌ای مطمئن نباشد، خودش می‌گوید و آن را به‌جای جواب قطعی نشان نمی‌دهد.
+  </div>
+
+  <div class="card">
+    <div class="field">
+      <label for="srcText">متن را بنویسید (حداکثر ۲۰۰۰ نویسه)</label>
+      <textarea id="srcText" maxlength="2000" placeholder="مثلاً: من خسته‌ام"></textarea>
+      <p class="hint"><span id="charCount">۰</span> / ۲۰۰۰ نویسه — جمله را کامل بنویسید تا لحن درست انتخاب شود.</p>
+    </div>
+    <div class="field">
+      <label for="dir">جهت ترجمه</label>
+      <select id="dir">
+        <option value="auto" selected>خودکار (تشخیص بر اساس حروف)</option>
+        <option value="fa-en">فارسی ← انگلیسی</option>
+        <option value="en-fa">انگلیسی ← فارسی</option>
+      </select>
+    </div>
+    <div class="row">
+      <button class="btn-primary" type="button" id="translateBtn">ترجمه با هوش مصنوعی</button>
+      <button class="btn-ghost" type="button" id="swapBtn">جابه‌جایی جهت</button>
+      <button class="btn-ghost" type="button" id="clearBtn">پاک کردن</button>
+    </div>
+    <div id="resultArea" style="margin-top:16px"></div>
+    <p class="examples">مثال:
+      <button class="chip" type="button" data-text="من خسته‌ام">من خسته‌ام</button>
+      <button class="chip" type="button" data-text="ممنون که کمکم کردی">ممنون که کمکم کردی</button>
+      <button class="chip" type="button" data-text="I'm really sorry about that">I'm really sorry about that</button>
+      <button class="chip" type="button" data-text="book">book</button>
+    </p>
+  </div>
+
+  <div class="card" id="historyCard" hidden>
+    <h2>تاریخچه ترجمه‌ها</h2>
+    <p class="meta">۱۰ ترجمهٔ اخیر شما — فقط در مرورگر همین دستگاه ذخیره می‌شود. برای ترجمه دوباره، روی هر مورد بزنید.</p>
+    <ul id="historyList" style="list-style:none;margin:0;padding:0"></ul>
+    <div class="row">
+      <button class="btn-ghost" type="button" id="clearHistoryBtn">پاک کردن تاریخچه</button>
+    </div>
+  </div>
+
+  <div class="note" style="margin-bottom:16px">
+    <strong>درباره حریم خصوصی:</strong> متن شما برای ترجمه به سرور سرویس رایگان Pollinations فرستاده می‌شود؛ برای متن‌های محرمانه از این ابزار استفاده نکنید.
+  </div>
+
+  <div class="card">
+    <h2>این ابزار چطور کار می‌کند</h2>
+    <p>متن شما به <strong>هوش مصنوعی Pollinations</strong> (سرویس رایگان، بدون کلید و بدون پرداخت) فرستاده می‌شود و هوش مصنوعی آن را ترجمه می‌کند — نه با جایگذاری کلمه‌به‌کلمه، بلکه با درک معنا و انتخاب جمله‌ای که یک انگلیسی‌زبان یا فارسی‌زبان واقعاً همان‌طور می‌گوید. دقت در اولویت است: اگر هوش مصنوعی در معنای واژه یا لحن جمله مطمئن نباشد، به‌جای حدس زدن، خودش می‌گوید و نتیجه به‌عنوان نامطمئن نشان داده می‌شود.</p>
+    <p><strong>جمله فارسی ← انگلیسی:</strong> همان معنا در چهار لحن نشان داده می‌شود — <strong>رسمی</strong> (برای نامه و محل کار)، <strong>معمولی</strong> (خنثی و روزمره)، <strong>غیررسمی</strong> (دوستانه) و <strong>کوچه‌بازاری</strong> (عامیانه). هر چهار نسخه همان معنا را دارند، فقط لحن‌شان فرق می‌کند.</p>
+    <p><strong>جمله انگلیسی ← فارسی:</strong> معادل طبیعی فارسی نشان داده می‌شود و گفته می‌شود که جمله انگلیسی در چه لحنی بوده است.</p>
+    <p><strong>تک‌واژه:</strong> تلفظ (IPA + خوانش فارسی) و همه معانی رایج آن با نقش دستوری (اسم، فعل، صفت…) نشان داده می‌شود؛ هر معنی در یک کارت جداگانه می‌آید با جمله‌های مثال در بافت‌های مختلف و ترکیب‌های پرکاربرد خودش، به‌علاوه هم‌معنی‌ها و نکته‌ای درباره رسمی یا غیررسمی بودن کاربرد آن. معنی اول باز است و بقیه معانی را با یک ضربه باز می‌کنید تا صفحه شلوغ نشود.</p>
+    <p>متن‌های طولانی تا <strong>۲۰۰۰ نویسه</strong> هم ترجمه می‌شوند؛ برای متن طولانی، ترجمه کامل متن به‌علاوه لحن‌های جملهٔ کلیدی آن نشان داده می‌شود. هر نتیجه یک <strong>نکتهٔ آموزشی</strong> کوتاه دارد — یک اشتباه رایج، یک نکته کاربردی یا یک راه برای به‌خاطر سپردن. ترجمه‌های اخیر شما هم در مرورگر ذخیره می‌شوند تا بعداً مرورشان کنید.</p>
+    <p>اگر سرویس در دسترس نباشد، پیام خطا با دکمه تلاش دوباره نشان داده می‌شود؛ برای تک‌واژه، یک <strong>دیکشنری پایه آفلاین</strong> (۳۲۰ واژه پرکاربرد) به‌عنوان پشتیبان استفاده می‌شود.</p>
+  </div>
+
+  <div class="card">
+    <h2>مثال</h2>
+    <p>جملهٔ «من خسته‌ام» را به انگلیسی ترجمه کنید؛ خروجی ابزار چهار نسخه با یک معنا و لحن‌های متفاوت است:</p>
+    <table class="result">
+      <tr><td>رسمی</td><td>I am quite exhausted.</td></tr>
+      <tr><td>معمولی</td><td>I'm tired.</td></tr>
+      <tr><td>غیررسمی</td><td>I'm beat.</td></tr>
+      <tr><td>کوچه‌بازاری</td><td>I'm wiped out.</td></tr>
+    </table>
+    <p class="meta">این چهار جمله یک معنا دارند؛ فقط لحن‌شان فرق می‌کند. برای ترجمه کلمه‌به‌کلمه («من خسته هستم» → I tired am) جایی در این ابزار نیست.</p>
+  </div>
+
+  <div class="card">
+    <h2>ورودی و خروجی یعنی چه</h2>
+    <ul class="tight">
+      <li><strong>متن:</strong> جمله یا واژه‌ای که می‌خواهید ترجمه شود؛ حداکثر ۲۰۰۰ نویسه در هر ترجمه.</li>
+      <li><strong>جهت ترجمه:</strong> «خودکار» جهت را از روی حروف تشخیص می‌دهد؛ اگر نتیجه نگرفتید، جهت را دستی انتخاب کنید.</li>
+      <li><strong>چهار لحن:</strong> رسمی برای موقعیت‌های جدی، معمولی برای گفت‌وگوی روزمره، غیررسمی برای دوستان و کوچه‌بازاری برای صحبت کاملاً عامیانه.</li>
+      <li><strong>نکته لحن:</strong> توضیح کوتاه درباره تفاوت معنایی یا کاربرد هر نسخه، وقتی لازم باشد.</li>
+    </ul>
+  </div>
+
+  <div class="card">
+    <h2>این ابزار برای چه مواردی مناسب نیست</h2>
+    <ul class="tight">
+      <li>ترجمه تخصصی، حقوقی یا پزشکی — هوش مصنوعی ممکن است گاهی نادرست ترجمه کند؛ برای متن‌های مهم، مترجم انسانی را بررسی کنید.</li>
+      <li>متن‌های محرمانه — متن برای ترجمه به سرور سرویس Pollinations فرستاده می‌شود.</li>
+      <li>متن‌های بلندتر از ۲۰۰۰ نویسه — متن را به بخش‌های کوچک‌تر تقسیم کنید.</li>
+    </ul>
+  </div>
+
+  <div class="card faq">
+    <h2>پرسش‌های متداول</h2>
+    <details>
+      <summary>ترجمه با چه سرویسی انجام می‌شود؟</summary>
+      <p>با هوش مصنوعی Pollinations (text.pollinations.ai) — سرویس رایگان، بدون کلید و بدون پرداخت. متن شما به سرور این سرویس فرستاده می‌شود.</p>
+    </details>
+    <details>
+      <summary>چرا یک جمله چهار ترجمه دارد؟</summary>
+      <p>چون یک معنا را می‌شود با لحن‌های مختلف گفت. «من خسته‌ام» در محل کار «I am quite exhausted» است، بین دوستان «I'm beat» و در صحبت عامیانه «I'm wiped out» — معنا یکی است، لحن فرق می‌کند.</p>
+    </details>
+    <details>
+      <summary>متن طولانی هم ترجمه می‌شود؟</summary>
+      <p>بله؛ تا ۲۰۰۰ نویسه. برای متن طولانی، ترجمه کامل متن نشان داده می‌شود و جملهٔ کلیدی آن در چهار لحن می‌آید.</p>
+    </details>
+    <details>
+      <summary>ترجمه‌های قبلی من کجا می‌روند؟</summary>
+      <p>۱۰ ترجمهٔ اخیر در مرورگر همین دستگاه ذخیره می‌شود تا دوباره مرورشان کنید؛ با دکمه «پاک کردن تاریخچه» حذف می‌شوند و به هیچ سروری فرستاده نمی‌شوند.</p>
+    </details>
+    <details>
+      <summary>آیا خروجی هوش مصنوعی همیشه درست است؟</summary>
+      <p>معمولاً بله، اما گاهی ممکن است نادرست باشد؛ مخصوصاً در اصطلاح‌ها و جمله‌های مبهم. اگر هوش مصنوعی در ترجمه‌ای مطمئن نباشد، خودش می‌گوید و آن را به‌جای جواب قطعی نشان نمی‌دهد. برای متن‌های مهم، نتیجه را دوباره بررسی کنید.</p>
+    </details>
+    <details>
+      <summary>اگر سرویس در دسترس نبود چه می‌شود؟</summary>
+      <p>پیام خطا با دکمه تلاش دوباره نشان داده می‌شود. برای تک‌واژه، دیکشنری پایه آفلاین (۳۲۰ واژه پرکاربرد) به‌عنوان پشتیبان استفاده می‌شود؛ جمله‌ها فقط با هوش مصنوعی ترجمه می‌شوند.</p>
+    </details>
+    <details>
+      <summary>آیا متن من ذخیره می‌شود؟</summary>
+      <p>نه در این سایت. متن فقط برای ترجمه به سرور Pollinations فرستاده می‌شود و در مرورگر شما ذخیره نمی‌شود. برای متن محرمانه از این ابزار استفاده نکنید.</p>
+    </details>
+  </div>
+
+  <div class="card">
+    <h2>منابع و تاریخ بازبینی</h2>
+    <ul class="tight">
+      <li>ترجمه: هوش مصنوعی Pollinations — text.pollinations.ai (سرویس رایگان، بدون کلید، بدون پرداخت).</li>
+      <li>دیکشنری پایه پشتیبان: فهرست ۳۲۰ واژه پرکاربرد روزمره که توسط تیم دم‌دست گردآوری شده است؛ فقط برای زمانی که سرویس هوش مصنوعی در دسترس نباشد و فقط برای تک‌واژه.</li>
+    </ul>
+    <p class="meta">آخرین بازبینی: ۶ آذر ۱۴۰۵</p>
+  </div>
+
+  <div class="card">
+    <h2>ابزارهای مرتبط</h2>
+    <div class="related">
+      <a href="word-counter.html">شمارش کلمات متن فارسی</a>
+      <a href="digit-converter.html">تبدیل اعداد فارسی و انگلیسی</a>
+      <a href="persian-text-fixer.html">اصلاح نگارشی متن فارسی</a>
+      <a href="notepad.html">یادداشت سریع</a>
+      <a href="index.html">همه ابزارها</a>
+    </div>
+  </div>
+
+  <p style="text-align:center;font-weight:700;color:var(--navy);margin-top:8px">زیر نظر مدرس زبان کوروش فرجی</p>
+
+  <footer>
+    دم‌دست — ابزار، قیمت و خبر؛ همه در یک‌جا<br>
+    ساخته‌شده توسط کوروش فرجی (KouroshLabs) ·
+    <a href="about.html">درباره ما</a> · <a href="contact.html">تماس</a> · <a href="privacy.html">حریم خصوصی</a><br>
+    <span style="font-size:12px">پردازش اطلاعات این ابزار در مرورگر شما انجام می‌شود و محتوای واردشده برای پردازش به سرور ارسال نمی‌شود.</span>
+  </footer>
+</div>
+
+<script src="assets/common.js"></script>
+<script>
+(function () {
+  /* Small embedded dictionary — ONLY as offline fallback for single words. */
+  var WORDS = [
+    ["hello","سلام"],["hi","سلام"],["goodbye","خداحافظ"],["good morning","صبح بخیر"],["good evening","عصر بخیر"],["good night","شب بخیر"],["please","لطفاً"],["thank you","متشکرم"],["thanks","ممنون"],["sorry","ببخشید"],["excuse me","ببخشید"],["welcome","خوش آمدید"],["yes","بله"],["no","نه"],["ok","باشه"],["good","خوب"],["bad","بد"],["beautiful","زیبا"],["happy","خوشحال"],["sad","ناراحت"],
+    ["one","یک"],["two","دو"],["three","سه"],["four","چهار"],["five","پنج"],["six","شش"],["seven","هفت"],["eight","هشت"],["nine","نه"],["ten","ده"],["eleven","یازده"],["twelve","دوازده"],["twenty","بیست"],["thirty","سی"],["fifty","پنجاه"],["hundred","صد"],["thousand","هزار"],["million","میلیون"],["first","اول"],["second","دوم"],
+    ["today","امروز"],["tomorrow","فردا"],["yesterday","دیروز"],["now","الان"],["later","بعداً"],["morning","صبح"],["afternoon","بعدازظهر"],["evening","عصر"],["night","شب"],["day","روز"],["week","هفته"],["month","ماه"],["year","سال"],["hour","ساعت"],["minute","دقیقه"],["second","ثانیه"],["Monday","دوشنبه"],["Tuesday","سه‌شنبه"],["Wednesday","چهارشنبه"],["Thursday","پنجشنبه"],["Friday","جمعه"],["Saturday","شنبه"],["Sunday","یکشنبه"],["spring","بهار"],["summer","تابستان"],["autumn","پاییز"],["winter","زمستان"],
+    ["father","پدر"],["mother","مادر"],["brother","برادر"],["sister","خواهر"],["son","پسر"],["daughter","دختر"],["child","کودک"],["baby","نوزاد"],["friend","دوست"],["man","مرد"],["woman","زن"],["boy","پسر"],["girl","دختر"],["family","خانواده"],["people","مردم"],
+    ["head","سر"],["eye","چشم"],["ear","گوش"],["nose","بینی"],["mouth","دهان"],["hand","دست"],["foot","پا"],["hair","مو"],["tooth","دندان"],["tongue","زبان"],["heart","قلب"],["body","بدن"],["finger","انگشت"],["leg","ساق"],["arm","بازو"],
+    ["bread","نان"],["rice","برنج"],["water","آب"],["tea","چای"],["coffee","قهوه"],["milk","شیر"],["sugar","شکر"],["salt","نمک"],["meat","گوشت"],["chicken","مرغ"],["fish","ماهی"],["egg","تخم‌مرغ"],["cheese","پنیر"],["butter","کره"],["fruit","میوه"],["apple","سیب"],["banana","موز"],["orange","پرتقال"],["grape","انگور"],["lemon","لیمو"],["vegetable","سبزی"],["potato","سیب‌زمینی"],["tomato","گوجه‌فرنگی"],["onion","پیاز"],["breakfast","صبحانه"],["lunch","ناهار"],["dinner","شام"],["food","غذا"],["drink","نوشیدنی"],["cake","کیک"],
+    ["dog","سگ"],["cat","گربه"],["bird","پرنده"],["horse","اسب"],["cow","گاو"],["sheep","گوسفند"],["goat","بز"],["lion","شیر"],["tiger","ببر"],["bear","خرس"],["snake","مار"],["mouse","موش"],["rabbit","خرگوش"],["duck","اردک"],["elephant","فیل"],["monkey","میمون"],
+    ["red","قرمز"],["blue","آبی"],["green","سبز"],["yellow","زرد"],["black","سیاه"],["white","سفید"],["orange","نارنجی"],["pink","صورتی"],["purple","بنفش"],["brown","قهوه‌ای"],["gray","خاکستری"],["gold","طلایی"],
+    ["house","خانه"],["home","خانه"],["room","اتاق"],["door","در"],["window","پنجره"],["table","میز"],["chair","صندلی"],["bed","تخت"],["kitchen","آشپزخانه"],["bathroom","حمام"],["toilet","توالت"],["key","کلید"],["light","چراغ"],["phone","تلفن"],["computer","کامپیوتر"],["book","کتاب"],["pen","خودکار"],["pencil","مداد"],["paper","کاغذ"],["bag","کیف"],["money","پول"],
+    ["teacher","معلم"],["student","دانش‌آموز"],["school","مدرسه"],["university","دانشگاه"],["lesson","درس"],["exam","امتحان"],["work","کار"],["job","شغل"],["office","اداره"],["doctor","دکتر"],["nurse","پرستار"],["hospital","بیمارستان"],["shop","فروشگاه"],["market","بازار"],["bank","بانک"],
+    ["go","رفتن"],["come","آمدن"],["eat","خوردن"],["drink","نوشیدن"],["sleep","خوابیدن"],["wake","بیدار شدن"],["read","خواندن"],["write","نوشتن"],["speak","صحبت کردن"],["listen","گوش دادن"],["look","نگاه کردن"],["see","دیدن"],["buy","خریدن"],["sell","فروختن"],["give","دادن"],["take","گرفتن"],["open","باز کردن"],["close","بستن"],["help","کمک کردن"],["love","دوست داشتن"],["like","دوست داشتن"],["want","خواستن"],["need","نیاز داشتن"],["know","دانستن"],["learn","یاد گرفتن"],["teach","آموزش دادن"],["play","بازی کردن"],["run","دویدن"],["walk","راه رفتن"],["sit","نشستن"],["stand","ایستادن"],["swim","شنا کردن"],["cook","آشپزی کردن"],["clean","تمیز کردن"],["wash","شستن"],["wait","صبر کردن"],["ask","پرسیدن"],["answer","جواب دادن"],["find","پیدا کردن"],["forget","فراموش کردن"],
+    ["big","بزرگ"],["small","کوچک"],["long","بلند"],["short","کوتاه"],["tall","قدبلند"],["new","جدید"],["old","قدیمی"],["young","جوان"],["hot","داغ"],["cold","سرد"],["warm","گرم"],["fast","سریع"],["slow","آهسته"],["easy","آسان"],["hard","سخت"],["cheap","ارزان"],["expensive","گران"],["important","مهم"],
+    ["city","شهر"],["village","روستا"],["street","خیابان"],["road","جاده"],["park","پارک"],["garden","باغ"],["sea","دریا"],["river","رودخانه"],["mountain","کوه"],["forest","جنگل"],["airport","فرودگاه"],["station","ایستگاه"],["hotel","هتل"],["restaurant","رستوران"],["library","کتابخانه"],
+    ["sun","خورشید"],["moon","ماه"],["star","ستاره"],["sky","آسمان"],["rain","باران"],["snow","برف"],["wind","باد"],["cloud","ابر"],["storm","طوفان"],["weather","هوا"],
+    ["car","ماشین"],["bus","اتوبوس"],["train","قطار"],["airplane","هواپیما"],["bicycle","دوچرخه"],["boat","قایق"],["taxi","تاکسی"],["ticket","بلیط"],["travel","سفر"],["driver","راننده"],
+    ["pharmacy","داروخانه"],["medicine","دارو"],["pain","درد"],["sick","بیمار"],["healthy","سالم"],["ill","مریض"],["treatment","درمان"],["clinic","درمانگاه"],["dentist","دندانپزشک"],["glasses","عینک"],
+    ["tree","درخت"],["flower","گل"],["grass","چمن"],["earth","زمین"],["fire","آتش"],["stone","سنگ"],["silver","نقره"],["iron","آهن"],
+    ["shoe","کفش"],["shirt","پیراهن"],["dress","لباس"],["hat","کلاه"],["watch","ساعت"],["clock","ساعت"],["mirror","آینه"],["bridge","پل"],
+    ["newspaper","روزنامه"],["radio","رادیو"],["television","تلویزیون"],["song","آهنگ"],["music","موسیقی"],["game","بازی"],["gift","هدیه"],["question","سؤال"],["answer","پاسخ"],["problem","مشکل"]
+  ];
+  var EN2FA = {}, FA2EN = {};
+  WORDS.forEach(function (w) {
+    (EN2FA[w[0].toLowerCase()] = EN2FA[w[0].toLowerCase()] || []).push(w[1]);
+    (FA2EN[w[1]] = FA2EN[w[1]] || []).push(w[0]);
+  });
+
+  var srcEl = document.getElementById('srcText');
+  var dirEl = document.getElementById('dir');
+  var areaEl = document.getElementById('resultArea');
+  var countEl = document.getElementById('charCount');
+  function isFa(s) { return /[\u0600-\u06FF]/.test(s); }
+  function esc(s) { return String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;'); }
+  function isSingleWord(text) { return text.trim().split(/\s+/).length === 1; }
+
+  var ACC = 'Accuracy is the top priority. Translate precisely and idiomatically, using only phrasing a native speaker would actually say; never translate word-for-word. If you are unsure about the correct translation, meaning, or register of a word or sentence, do not guess: add the fields "uncertain": true and "uncertainty_note": "a short note in Persian explaining what is uncertain" to the JSON. If you are certain, set "uncertain": false and "uncertainty_note": "". ';
+  function promptFor(text, faMode, single, long) {
+    if (single) {
+      if (faMode) {
+        return 'You are an expert Persian-English dictionary. The user typed a single Persian word: "' + text + '". Return ONLY valid JSON (no markdown, no code fences, no extra text) with this exact structure: {"word": "' + text + '", "meanings": [{"pos": "part of speech in English, e.g. noun/verb/adjective", "en": "English meaning", "fa": "Persian explanation in Persian", "examples": [{"en": "example sentence in English showing this exact meaning in a real everyday context", "fa": "its Persian translation"}], "collocations": [{"en": "common English phrase using the word in this meaning", "fa": "its Persian translation"}]}], "synonyms": ["English synonym 1", "English synonym 2"], "register": "short note in Persian about whether the word is formal, informal or neutral", "pronunciation": {"ipa": "IPA transcription, e.g. /həˈloʊ/", "fa": "Persian transliteration, e.g. هِلو"}, "tip": "one short learning tip in Persian — a common mistake, a usage note, or a memory hook"}. Give ALL common meanings of the word — every meaning a learner would need — each with its part of speech; for EACH meaning give 1-2 example sentences in different everyday contexts with Persian translations, and 1-2 common collocations where they exist. Give 2-4 synonyms. Also give the pronunciation (IPA + Persian transliteration) and one short learning tip in Persian.';
+      }
+      return 'You are an expert English-Persian dictionary. The user typed a single English word: "' + text + '". Return ONLY valid JSON (no markdown, no code fences, no extra text) with this exact structure: {"word": "' + text + '", "meanings": [{"pos": "part of speech, e.g. noun/verb/adjective", "en": "English definition in English", "fa": "Persian meaning in Persian", "examples": [{"en": "example sentence in English showing this exact meaning in a real everyday context", "fa": "its Persian translation"}], "collocations": [{"en": "common English phrase using the word in this meaning", "fa": "its Persian translation"}]}], "synonyms": ["English synonym 1", "English synonym 2"], "register": "short note in Persian about whether the word is formal, informal or neutral", "pronunciation": {"ipa": "IPA transcription, e.g. /həˈloʊ/", "fa": "Persian transliteration, e.g. هِلو"}, "tip": "one short learning tip in Persian — a common mistake, a usage note, or a memory hook"}. Give ALL common meanings of the word — every meaning a learner would need — each with its part of speech; for EACH meaning give 1-2 example sentences in different everyday contexts with Persian translations, and 1-2 common collocations where they exist. Give 2-4 synonyms. Also give the pronunciation (IPA + Persian transliteration) and one short learning tip in Persian.';
+    }
+    if (faMode) {
+      if (long) {
+        return 'You are an expert Persian-English translator. Translate this whole Persian text into natural, idiomatic English — never word-for-word. Return ONLY valid JSON (no markdown, no code fences, no extra text) with this exact structure: {"translation": "complete faithful English translation of the whole text", "key_sentence": {"formal": "formal English version of the most important sentence", "neutral": "neutral everyday English version of the most important sentence", "informal": "friendly casual English version of the most important sentence", "slang": "very colloquial slang English version of the most important sentence"}, "note": "short note in Persian about tone or nuance, or empty string", "tip": "one short learning tip in Persian — a common mistake, a usage note, or a memory hook"}. Text: "' + text + '"';
+      }
+      return 'You are an expert Persian-English translator. Translate this Persian sentence into natural, idiomatic English — never word-for-word. Give the SAME meaning in four registers. Return ONLY valid JSON (no markdown, no code fences, no extra text) with this exact structure: {"formal": "formal English version, suitable for work or official letters", "neutral": "neutral everyday English version", "informal": "friendly casual English version", "slang": "very colloquial slang English version", "note": "short note in Persian about tone or nuance, or empty string", "tip": "one short learning tip in Persian — a common mistake, a usage note, or a memory hook"}. Sentence: "' + text + '"';
+    }
+    return 'You are an expert English-Persian translator. Translate this English sentence into natural, idiomatic Persian — never word-for-word. Return ONLY valid JSON (no markdown, no code fences, no extra text) with this exact structure: {"translation": "natural Persian translation", "register": "one of: formal, neutral, informal, slang — the register of the English sentence", "note": "short note in Persian about tone or nuance, or empty string", "tip": "one short learning tip in Persian — a common mistake, a usage note, or a memory hook"}. ' + (long ? 'The text is long; translate all of it faithfully, keeping the tone. ' : '') + 'Sentence: "' + text + '"';
+  }
+
+  function parseAI(raw) {
+    var t = raw.trim();
+    try { return JSON.parse(t); } catch (e) {}
+    var start = t.indexOf('{'), end = t.lastIndexOf('}');
+    if (start !== -1 && end > start) {
+      try { return JSON.parse(t.slice(start, end + 1)); } catch (e2) {}
+    }
+    return null;
+  }
+
+  function tipBox(d) {
+    if (d && d.tip) return '<div class="tip-box"><strong>💡 نکتهٔ آموزشی:</strong> ' + esc(d.tip) + '</div>';
+    return '';
+  }
+  function uncertaintyNote(d) {
+    if (d && d.uncertain) {
+      return '<p class="note"><strong>هوش مصنوعی در این ترجمه مطمئن نیست:</strong> ' + esc(d.uncertainty_note || 'درستی این ترجمه قطعی نیست؛ پیش از استفاده، آن را بررسی کنید.') + '</p>';
+    }
+    return '';
+  }
+  function regCard(label, cls, text, ltr) {
+    return '<div class="reg-card"><span class="tag ' + cls + '">' + label + '</span>' +
+      '<button class="btn-ghost copy-mini" type="button" data-copy="' + esc(text) + '">کپی</button>' +
+      '<div class="txt' + (ltr ? '' : ' fa') + '">' + esc(text) + '</div></div>';
+  }
+  function renderSentenceFAEN(d, raw, long) {
+    if (d && d.translation && d.key_sentence) {
+      var html = uncertaintyNote(d) + '<h3 style="margin-bottom:14px">ترجمه کامل</h3>' +
+        regCard('ترجمه کامل', 'neutral', d.translation, true);
+      var k = d.key_sentence;
+      if (k.formal && k.neutral && k.informal && k.slang) {
+        html += '<h3 style="margin:18px 0 14px">لحن‌های جملهٔ کلیدی</h3>' +
+          regCard('رسمی', 'formal', k.formal, true) +
+          regCard('معمولی', 'neutral', k.neutral, true) +
+          regCard('غیررسمی', 'informal', k.informal, true) +
+          regCard('کوچه‌بازاری', 'slang', k.slang, true);
+      }
+      if (d.note) html += '<p class="meta">نکته: ' + esc(d.note) + '</p>';
+      html += tipBox(d);
+      html += '<p class="meta">ترجمه با هوش مصنوعی (Pollinations) — خروجی گاهی ممکن است نادرست باشد.</p>';
+      return html;
+    }
+    if (d && d.formal && d.neutral && d.informal && d.slang) {
+      var html = uncertaintyNote(d) + '<h3 style="margin-bottom:14px">ترجمه در چهار لحن</h3>' + regCard('رسمی', 'formal', d.formal, true) +
+        regCard('معمولی', 'neutral', d.neutral, true) +
+        regCard('غیررسمی', 'informal', d.informal, true) +
+        regCard('کوچه‌بازاری', 'slang', d.slang, true);
+      if (d.note) html += '<p class="meta">نکته: ' + esc(d.note) + '</p>';
+      html += tipBox(d);
+      html += '<p class="meta">ترجمه با هوش مصنوعی (Pollinations) — خروجی گاهی ممکن است نادرست باشد.</p>';
+      return html;
+    }
+    return renderRaw(raw);
+  }
+  function renderSentenceENFA(d, raw) {
+    if (d && d.translation) {
+      var regFa = { formal: 'رسمی', neutral: 'معمولی', informal: 'غیررسمی', slang: 'کوچه‌بازاری' }[d.register] || '';
+      var html = uncertaintyNote(d) + regCard('ترجمه فارسی' + (regFa ? ' — لحن جمله انگلیسی: ' + regFa : ''), 'neutral', d.translation, false);
+      if (d.note) html += '<p class="meta">نکته: ' + esc(d.note) + '</p>';
+      html += tipBox(d);
+      html += '<p class="meta">ترجمه با هوش مصنوعی (Pollinations) — خروجی گاهی ممکن است نادرست باشد.</p>';
+      return html;
+    }
+    return renderRaw(raw);
+  }
+  function renderWord(d, raw, faMode) {
+    if (d && d.meanings && d.meanings.length) {
+      var html = uncertaintyNote(d) + '<h3 style="margin-bottom:6px">«' + esc(d.word || '') + '» — ' + faNum(d.meanings.length) + ' معنی</h3>';
+      if (d.pronunciation && (d.pronunciation.ipa || d.pronunciation.fa)) {
+        html += '<p style="margin-bottom:14px"><span style="direction:ltr;display:inline-block;font-weight:700">' + esc(d.pronunciation.ipa || '') + '</span>' + (d.pronunciation.fa ? ' — <span>' + esc(d.pronunciation.fa) + '</span>' : '') + '</p>';
+      }
+      d.meanings.forEach(function (m, i) {
+        html += '<details class="meaning-card"' + (i === 0 ? ' open' : '') + '><summary><span class="pos">' + esc(m.pos || 'معنی') + '</span><span>' + esc(faMode ? m.en : m.fa) + '</span></summary>';
+        html += '<p style="color:var(--muted);margin:10px 0 4px">' + esc(faMode ? m.fa : m.en) + '</p>';
+        var exs = m.examples || [];
+        if (!exs.length && i === 0 && d.examples) exs = d.examples;
+        if (exs && exs.length) {
+          exs.forEach(function (ex) {
+            html += '<div class="ex-quote"><div class="en">' + esc(ex.en) + '</div><div class="fa">' + esc(ex.fa) + '</div></div>';
+          });
+        }
+        var cols = m.collocations || [];
+        if (!cols.length && i === 0 && d.collocations) cols = d.collocations;
+        if (cols.length) {
+          html += '<p style="margin-top:12px"><span class="meta">ترکیب‌های پرکاربرد: </span>';
+          cols.forEach(function (c) {
+            html += '<span class="colloc-chip" title="' + esc(c.fa || '') + '">' + esc(c.en) + '</span>';
+          });
+          html += '</p>';
+        }
+        html += '</details>';
+      });
+      if (d.synonyms && d.synonyms.length) {
+        html += '<p style="margin-top:14px"><strong>هم‌معنی‌ها:</strong> ' + d.synonyms.map(esc).join('، ') + '</p>';
+      }
+      if (d.register) html += '<p class="meta">نکته کاربرد: ' + esc(d.register) + '</p>';
+      html += tipBox(d);
+      html += '<p class="meta">ترجمه با هوش مصنوعی (Pollinations) — خروجی گاهی ممکن است نادرست باشد.</p>';
+      return html;
+    }
+    return renderRaw(raw);
+  }
+  function renderRaw(raw) {
+    return '<div class="reg-card"><div class="txt" style="font-weight:400;font-size:16px;white-space:pre-wrap">' + esc(raw) + '</div></div>' +
+      '<p class="meta">پاسخ هوش مصنوعی به‌صورت ساخت‌یافته برنگشت؛ متن خام نمایش داده شد.</p>';
+  }
+  function dictionaryFallback(text, faMode) {
+    var hits = faMode ? FA2EN[text.trim()] : EN2FA[text.trim().toLowerCase()];
+    if (!hits || !hits.length) return null;
+    var html = '<div class="reg-card"><span class="tag neutral">دیکشنری پایه (آفلاین)</span>' +
+      '<div class="txt' + (faMode ? '' : ' fa') + '" style="font-size:20px">' + esc(hits.join('، ')) + '</div></div>' +
+      '<p class="meta">سرویس هوش مصنوعی در دسترس نبود؛ این معادل از دیکشنری پایه ۳۲۰ واژه‌ای است و فقط معنی رایج واژه را نشان می‌دهد.</p>';
+    return html;
+  }
+  function offlineTranslate(text, faMode) {
+    var tokens = text.trim().split(/\s+/);
+    return tokens.map(function (tok) {
+      var core = tok.replace(/^[.,!?؟"«»()]+|[.,!?؟"«»()]+$/g, '');
+      if (!core) return tok;
+      var pre = tok.slice(0, tok.indexOf(core));
+      var post = tok.slice(tok.indexOf(core) + core.length);
+      if (faMode) {
+        var hit = FA2EN[core];
+        return hit ? pre + hit[0] + post : tok;
+      }
+      var hit2 = EN2FA[core.toLowerCase()];
+      return hit2 ? pre + hit2[0] + post : tok;
+    }).join(' ');
+  }
+  function showError(text, faMode, single, status) {
+    var fb = single ? dictionaryFallback(text, faMode) : null;
+    var msg = (status === 402 || status === 429)
+      ? '<strong>سهمیه رایگان روزانه سرویس هوش مصنوعی تمام شد.</strong><br>سرویس رایگان Pollinations برای هر آدرس اینترنتی ۱۰۰ پاسخ در روز می‌دهد؛ فردا دوباره تلاش کنید، یا از دیکشنری پایه پایین همین صفحه استفاده کنید.'
+      : '<strong>سرویس هوش مصنوعی در دسترس نیست.</strong><br>اتصال به Pollinations برقرار نشد؛ اینترنت را بررسی کنید و دوباره تلاش کنید.';
+    var html = '<div class="error-box">' + msg + '</div>' +
+      '<div class="row" style="margin-top:10px"><button class="btn-primary" type="button" id="retryBtn">تلاش دوباره</button></div>';
+    if (fb) html += '<div style="margin-top:14px">' + fb + '</div>';
+    else if (!single) {
+      var wb = offlineTranslate(text, faMode);
+      html += '<div style="margin-top:14px"><div class="reg-card"><span class="tag neutral">ترجمه واژه‌به‌واژه از دیکشنری پایه</span><div class="txt' + (faMode ? '' : ' fa') + '" style="font-size:18px">' + esc(wb) + '</div></div><p class="meta">سرویس هوش مصنوعی در دسترس نیست؛ این ترجمه واژه‌به‌واژه از دیکشنری پایه ۳۲۰ واژه‌ای است و لحن جمله را نشان نمی‌دهد.</p></div>';
+    }
+    areaEl.innerHTML = html;
+    var rb = document.getElementById('retryBtn');
+    if (rb) rb.addEventListener('click', translate);
+  }
+
+  var HIST_KEY = 'damdast-translator-history-v1';
+  function loadHistory() {
+    try { return JSON.parse(localStorage.getItem(HIST_KEY) || '[]'); } catch (e) { return []; }
+  }
+  function saveHistory(text, d, raw) {
+    try {
+      var summary = '';
+      if (d && d.meanings && d.meanings.length) summary = d.meanings[0].en || d.meanings[0].fa || '';
+      else if (d && d.translation) summary = d.translation;
+      else if (d && d.neutral) summary = d.neutral;
+      else summary = String(raw || '').slice(0, 60);
+      var h = loadHistory().filter(function (x) { return x.text !== text; });
+      h.unshift({ text: text, summary: summary, time: Date.now() });
+      if (h.length > 10) h = h.slice(0, 10);
+      localStorage.setItem(HIST_KEY, JSON.stringify(h));
+      renderHistory();
+    } catch (e) {}
+  }
+  function renderHistory() {
+    var card = document.getElementById('historyCard');
+    var list = document.getElementById('historyList');
+    if (!card || !list) return;
+    var h = loadHistory();
+    if (!h.length) { card.hidden = true; list.innerHTML = ''; return; }
+    card.hidden = false;
+    list.innerHTML = '';
+    h.forEach(function (item) {
+      var li = document.createElement('li');
+      li.className = 'hist-item';
+      var a = document.createElement('span');
+      a.textContent = item.text.length > 60 ? item.text.slice(0, 60) + '…' : item.text;
+      var b = document.createElement('span');
+      b.textContent = new Date(item.time).toLocaleDateString('fa-IR');
+      li.appendChild(a); li.appendChild(b);
+      li.addEventListener('click', function () {
+        srcEl.value = item.text;
+        countEl.textContent = faNum(srcEl.value.length);
+        translate();
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      });
+      list.appendChild(li);
+    });
+  }
+  function translate() {
+    var text = srcEl.value.trim();
+    if (!text) {
+      areaEl.innerHTML = '<p class="meta">اول متن را بنویسید.</p>';
+      return;
+    }
+    var dir = dirEl.value;
+    var faMode = dir === 'fa-en' || (dir === 'auto' && isFa(text));
+    var single = isSingleWord(text);
+    var sentenceCount = (text.match(/[.!?؟]+/g) || []).length;
+    var long = text.length > 500 || sentenceCount > 2;
+    areaEl.innerHTML = '<div class="loading"><span class="dots">در حال ترجمه با هوش مصنوعی</span></div>';
+    var ctrl = new AbortController();
+    var timer = setTimeout(function () { ctrl.abort(); }, 60000);
+    var lastStatus = 0;
+    var prompt = ACC + promptFor(text, faMode, single, long);
+    fetch('https://text.pollinations.ai/openai', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ model: 'openai', messages: [{ role: 'user', content: prompt }], temperature: 0.3, stream: false, max_tokens: 2000 }),
+      signal: ctrl.signal
+    })
+      .then(function (r) { clearTimeout(timer); if (!r.ok) { lastStatus = r.status; throw new Error('bad status ' + r.status); } return r.text(); })
+      .then(function (raw) {
+        var content = raw;
+        try {
+          var j = JSON.parse(raw);
+          if (j && j.choices && j.choices[0] && j.choices[0].message && j.choices[0].message.content) content = j.choices[0].message.content;
+        } catch (e) { /* plain-text response */ }
+        if (!content || !content.trim()) throw new Error('empty');
+        var d = parseAI(content);
+        var html;
+        if (single) html = renderWord(d, content, faMode);
+        else if (faMode) html = renderSentenceFAEN(d, content, long);
+        else html = renderSentenceENFA(d, content, long);
+        areaEl.innerHTML = html;
+        saveHistory(text, d, content);
+      })
+      .catch(function () { showError(text, faMode, single, lastStatus); });
+  }
+  srcEl.addEventListener('input', function () { countEl.textContent = faNum(srcEl.value.length); });
+  document.getElementById('translateBtn').addEventListener('click', translate);
+  srcEl.addEventListener('keydown', function (e) {
+    if ((e.ctrlKey || e.metaKey) && e.key === 'Enter') { e.preventDefault(); translate(); }
+  });
+  document.getElementById('swapBtn').addEventListener('click', function () {
+    if (dirEl.value === 'en-fa') dirEl.value = 'fa-en';
+    else if (dirEl.value === 'fa-en') dirEl.value = 'en-fa';
+    else dirEl.value = isFa(srcEl.value) ? 'en-fa' : 'fa-en';
+    translate();
+  });
+  document.getElementById('clearBtn').addEventListener('click', function () {
+    srcEl.value = ''; countEl.textContent = faNum(0);
+    areaEl.innerHTML = ''; srcEl.focus();
+  });
+  document.querySelectorAll('.examples .chip').forEach(function (chip) {
+    chip.addEventListener('click', function () { srcEl.value = chip.dataset.text; countEl.textContent = faNum(srcEl.value.length); translate(); });
+  });
+  var clearHistBtn = document.getElementById('clearHistoryBtn');
+  if (clearHistBtn) clearHistBtn.addEventListener('click', function () { try { localStorage.removeItem(HIST_KEY); } catch (e) {} renderHistory(); });
+  renderHistory();
+  document.addEventListener('click', function (e) {
+    var t = e.target.closest('[data-copy]');
+    if (t) copyText(t.getAttribute('data-copy'), t, 'کپی شد ✓');
+  });
+})();
+</script>
+</body>
+</html>

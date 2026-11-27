@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>تبدیل واحد | طول، وزن، دما و حجم</title>
+<meta name="description" content="تبدیل واحد طول، وزن، دما و حجم — متر و کیلومتر، کیلوگرم و پوند، سلسیوس و فارنهایت، لیتر و فنجان؛ سریع و رایگان.">
+<meta property="og:title" content="تبدیل واحد | طول، وزن، دما و حجم">
+<meta property="og:description" content="متر به مایل، کیلوگرم به پوند، سلسیوس به فارنهایت و لیتر به فنجان — همه در یک ابزار.">
+<meta property="og:type" content="website">
+<link rel="stylesheet" href="assets/style.css">
+<style>
+.swap-btn { align-self: flex-end; padding: 10px 14px; font-size: 18px; }
+.unit-grid { display: grid; grid-template-columns: 1fr auto 1fr; gap: 10px; align-items: end; }
+@media (max-width: 520px) { .unit-grid { grid-template-columns: 1fr; } .swap-btn { align-self: center; justify-self: center; } }
+.tabs { display: flex; gap: 8px; margin-bottom: 14px; flex-wrap: wrap; }
+.tabs button { flex: 1; min-width: 110px; padding: 10px; font-size: 15px; font-weight: 700; background: #fff; border: 1px solid var(--line); color: var(--ink); border-radius: 10px; }
+.tabs button.active { background: var(--navy); color: #fff; border-color: var(--navy); }
+</style>
+</head>
+<body>
+<header class="site-header">
+  <div class="inner">
+    <a class="brand" href="index.html">دم‌دست<small>ابزار، قیمت و خبر؛ همه در یک‌جا</small></a>
+    <nav>
+      <a href="index.html#tools">ابزارها</a>
+      <a href="index.html#prices">قیمت‌ها</a>
+      <a href="index.html#briefing">مرور صبحگاهی</a>
+      <a href="about.html">درباره ما</a>
+    </nav>
+  </div>
+</header>
+
+<div class="wrap">
+  <p class="breadcrumb"><a href="index.html">دم‌دست</a> ← <a href="index.html#tools">ابزارها</a> ← تبدیل واحد</p>
+  <h1>تبدیل واحد</h1>
+  <p class="sub">طول، وزن، دما و حجم — مقدار را بنویسید، واحد را انتخاب کنید، جواب همان لحظه آماده است.</p>
+
+  <div class="card">
+    <div class="tabs" id="catTabs">
+      <button type="button" data-cat="length" class="active">📏 طول</button>
+      <button type="button" data-cat="weight">⚖️ وزن</button>
+      <button type="button" data-cat="temp">🌡️ دما</button>
+      <button type="button" data-cat="volume">🥛 حجم</button>
+    </div>
+    <div class="unit-grid">
+      <div class="field">
+        <label for="amount">مقدار</label>
+        <input type="text" id="amount" inputmode="decimal" value="۱">
+      </div>
+      <button class="btn-ghost swap-btn" type="button" id="swapBtn" title="جابه‌جایی واحدها">⇄</button>
+      <div class="field">
+        <label for="fromUnit" id="fromLabel">از واحد</label>
+        <select id="fromUnit"></select>
+      </div>
+    </div>
+    <div class="field">
+      <label for="toUnit">به واحد</label>
+      <select id="toUnit"></select>
+    </div>
+    <div class="out" id="out"><small>نتیجه</small><span class="big">—</span></div>
+    <table class="result" id="resultTable" hidden>
+      <tr><td>مقدار ورودی</td><td id="rIn">—</td></tr>
+      <tr><td>نتیجه تبدیل</td><td id="rOut">—</td></tr>
+      <tr><td>ضریب تبدیل</td><td id="rFactor">—</td></tr>
+    </table>
+    <div class="row">
+      <button class="btn-primary" type="button" id="copyBtn">کپی نتیجه</button>
+      <button class="btn-ghost" type="button" id="shareBtn">اشتراک‌گذاری</button>
+    </div>
+    <p class="examples">مثال:
+      <button class="chip" type="button" data-cat="length" data-amount="1" data-from="km" data-to="m">۱ کیلومتر ← متر</button>
+      <button class="chip" type="button" data-cat="weight" data-amount="1" data-from="kg" data-to="lb">۱ کیلوگرم ← پوند</button>
+      <button class="chip" type="button" data-cat="temp" data-amount="100" data-from="c" data-to="f">۱۰۰ سلسیوس ← فارنهایت</button>
+      <button class="chip" type="button" data-cat="volume" data-amount="1" data-from="l" data-to="cup">۱ لیتر ← فنجان</button>
+    </p>
+  </div>
+
+  <div class="card">
+    <h2>فرمول و ضرایب تبدیل</h2>
+    <p class="formula">طول و وزن و حجم: نتیجه = مقدار × (ضریب واحد مبدأ ÷ ضریب واحد مقصد)</p>
+    <p>هر واحد یک ضریب نسبت به واحد پایه دارد؛ مثلاً در طول، واحد پایه متر است: ۱ کیلومتر = ۱۰۰۰ متر، ۱ مایل = ۱۶۰۹٫۳۴۴ متر، ۱ اینچ = ۲٫۵۴ سانتی‌متر.</p>
+    <p class="formula">دما: فارنهایت = سلسیوس × ۹ ÷ ۵ + ۳۲ — کلوین = سلسیوس + ۲۷۳٫۱۵</p>
+    <p>دما با ضرب ساده تبدیل نمی‌شود، چون نقطه صفر آن‌ها یکی نیست؛ برای همین فرمول جداگانه دارد.</p>
+  </div>
+
+  <div class="card">
+    <h2>مثال عددی</h2>
+    <p>۱ کیلومتر چند متر است؟</p>
+    <table class="result">
+      <tr><td>۱ کیلومتر</td><td>۱٬۰۰۰ متر</td></tr>
+    </table>
+    <p>۱۰۰ درجه سلسیوس چند فارنهایت است؟</p>
+    <table class="result">
+      <tr><td>۱۰۰ × ۹ ÷ ۵ + ۳۲</td><td>۲۱۲ فارنهایت</td></tr>
+    </table>
+    <p>۱ کیلوگرم چند پوند است؟</p>
+    <table class="result">
+      <tr><td>۱ کیلوگرم</td><td>۲٫۲۰۵ پوند</td></tr>
+    </table>
+  </div>
+
+  <div class="card">
+    <h2>ورودی و خروجی یعنی چه</h2>
+    <ul class="tight">
+      <li><strong>مقدار:</strong> عددی که می‌خواهید تبدیل کنید؛ می‌توانید اعشار هم بنویسید.</li>
+      <li><strong>از واحد / به واحد:</strong> واحد مبدأ و مقصد. دکمه ⇄ جای آن‌ها را عوض می‌کند.</li>
+      <li><strong>ضریب تبدیل:</strong> عددی که مقدار ورودی در آن ضرب می‌شود تا نتیجه به دست بیاید؛ مثلاً برای کیلومتر به متر، ضریب ۱٬۰۰۰ است.</li>
+      <li><strong>فنجان:</strong> فنجان استاندارد آشپزی ۲۴۰ میلی‌لیتر است — همان مقداری که در <a href="cooking-units.html">تبدیل واحد آشپزی</a> استفاده شده است.</li>
+    </ul>
+  </div>
+
+  <div class="card">
+    <h2>این ابزار برای چه مواردی مناسب نیست</h2>
+    <ul class="tight">
+      <li>تبدیل‌های تخصصی مهندسی — این ابزار چهار دسته پرکاربرد (طول، وزن، دما، حجم) را دارد؛ واحدهای تخصصی مثل فشار یا توان در آن نیست.</li>
+      <li>دقت آزمایشگاهی — ضرایب تا ۶ رقم اعشار حساب می‌شوند؛ برای کار آزمایشگاهی، مرجع استاندارد را بررسی کنید.</li>
+    </ul>
+  </div>
+
+  <div class="card faq">
+    <h2>پرسش‌های متداول</h2>
+    <details>
+      <summary>۱ مایل چند کیلومتر است؟</summary>
+      <p>۱ مایل = ۱٫۶۰۹ کیلومتر (دقیقاً ۱۶۰۹٫۳۴۴ متر).</p>
+    </details>
+    <details>
+      <summary>چرا دما فرمول جداگانه دارد؟</summary>
+      <p>چون نقطه صفر سلسیوس و فارنهایت یکی نیست؛ صفر سلسیوس برابر ۳۲ فارنهایت است، پس فقط ضرب کافی نیست و باید ۳۲ را هم اضافه کرد.</p>
+    </details>
+    <details>
+      <summary>۱ پوند چند گرم است؟</summary>
+      <p>۱ پوند = ۴۵۳٫۵۹ گرم؛ ۱ اونس = ۲۸٫۳۵ گرم.</p>
+    </details>
+    <details>
+      <summary>فنجان دقیقاً چند میلی‌لیتر است؟</summary>
+      <p>فنجان استاندارد آشپزی ۲۴۰ میلی‌لیتر است (فنجان آمریکایی ۲۳۶٫۶ میلی‌لیتر است؛ این ابزار مقدار استاندارد ۲۴۰ را استفاده می‌کند).</p>
+    </details>
+  </div>
+
+  <div class="card">
+    <h2>منابع و تاریخ بازبینی</h2>
+    <ul class="tight">
+      <li>ضرایب تبدیل بر اساس تعریف‌های استاندارد بین‌المللی (SI): ۱ اینچ = ۲٫۵۴ سانتی‌متر (دقیق)، ۱ پوند = ۴۵۳٫۵۹۲۳۷ گرم (دقیق)، ۱ مایل = ۱۶۰۹٫۳۴۴ متر (دقیق).</li>
+      <li>فنجان آشپزی ۲۴۰ میلی‌لیتر — همان مقدار صفحه تبدیل واحد آشپزی این سایت.</li>
+      <li>فرمول‌های دما: استاندارد علمی — کلوین = سلسیوس + ۲۷۳٫۱۵؛ فارنهایت = سلسیوس × ۹ ÷ ۵ + ۳۲.</li>
+    </ul>
+    <p class="meta">آخرین بازبینی: ۶ آذر ۱۴۰۵</p>
+  </div>
+
+  <div class="card">
+    <h2>ابزارهای مرتبط</h2>
+    <div class="related">
+      <a href="cooking-units.html">تبدیل واحد آشپزی</a>
+      <a href="calculator.html">ماشین‌حساب</a>
+      <a href="digit-converter.html">تبدیل اعداد فارسی و انگلیسی</a>
+      <a href="date-converter.html">مبدل تاریخ شمسی و میلادی</a>
+      <a href="index.html">همه ابزارها</a>
+    </div>
+  </div>
+
+  <footer>
+    دم‌دست — ابزار، قیمت و خبر؛ همه در یک‌جا<br>
+    ساخته‌شده توسط کوروش فرجی (KouroshLabs) ·
+    <a href="about.html">درباره ما</a> · <a href="contact.html">تماس</a> · <a href="privacy.html">حریم خصوصی</a><br>
+    <span style="font-size:12px">پردازش اطلاعات این ابزار در مرورگر شما انجام می‌شود و محتوای واردشده برای پردازش به سرور ارسال نمی‌شود.</span>
+  </footer>
+</div>
+
+<script src="assets/common.js"></script>
+<script>
+(function () {
+  var CATS = {
+    length: { base: 'متر', units: [
+      ['km', 'کیلومتر', 1000], ['m', 'متر', 1], ['cm', 'سانتی‌متر', 0.01], ['mm', 'میلی‌متر', 0.001],
+      ['mi', 'مایل', 1609.344], ['yd', 'یارد', 0.9144], ['ft', 'فوت', 0.3048], ['in', 'اینچ', 0.0254]
+    ]},
+    weight: { base: 'کیلوگرم', units: [
+      ['t', 'تن', 1000], ['kg', 'کیلوگرم', 1], ['g', 'گرم', 0.001],
+      ['lb', 'پوند', 0.45359237], ['oz', 'اونس', 0.028349523125]
+    ]},
+    temp: { base: 'سلسیوس', units: [
+      ['c', 'سلسیوس (°C)', 0], ['f', 'فارنهایت (°F)', 0], ['k', 'کلوین (K)', 0]
+    ]},
+    volume: { base: 'لیتر', units: [
+      ['l', 'لیتر', 1], ['ml', 'میلی‌لیتر', 0.001], ['cup', 'فنجان (۲۴۰ میلی‌لیتر)', 0.24]
+    ]}
+  };
+  var cat = 'length';
+  var amountEl = document.getElementById('amount');
+  var fromEl = document.getElementById('fromUnit');
+  var toEl = document.getElementById('toUnit');
+  var out = document.getElementById('out');
+  var table = document.getElementById('resultTable');
+  var lastText = '';
+  function unitName(id) {
+    var u = CATS[cat].units.filter(function (x) { return x[0] === id; })[0];
+    return u ? u[1] : id;
+  }
+  function fillUnits() {
+    [fromEl, toEl].forEach(function (sel, i) {
+      var keep = sel.value;
+      sel.innerHTML = '';
+      CATS[cat].units.forEach(function (u) {
+        var o = document.createElement('option');
+        o.value = u[0]; o.textContent = u[1];
+        sel.appendChild(o);
+      });
+      if (i === 0) sel.value = keep && CATS[cat].units.some(function (u) { return u[0] === keep; }) ? keep : CATS[cat].units[0][0];
+      else sel.value = keep && CATS[cat].units.some(function (u) { return u[0] === keep; }) ? keep : CATS[cat].units[1][0];
+    });
+  }
+  function fmtNum(n) {
+    var s;
+    if (Math.abs(n) >= 1e9 || (Math.abs(n) < 1e-6 && n !== 0)) s = n.toExponential(4);
+    else s = String(Math.round(n * 1e6) / 1e6);
+    return s;
+  }
+  function toCelsius(v, u) {
+    if (u === 'c') return v;
+    if (u === 'f') return (v - 32) * 5 / 9;
+    return v - 273.15;
+  }
+  function fromCelsius(c, u) {
+    if (u === 'c') return c;
+    if (u === 'f') return c * 9 / 5 + 32;
+    return c + 273.15;
+  }
+  function calc() {
+    var v = parseFaNum(amountEl.value);
+    if (isNaN(v)) {
+      out.innerHTML = '<small>لطفاً مقدار را به‌صورت عدد وارد کنید.</small>';
+      table.hidden = true; lastText = ''; return;
+    }
+    var f = fromEl.value, t = toEl.value, res, factorText;
+    if (cat === 'temp') {
+      res = fromCelsius(toCelsius(v, f), t);
+      factorText = 'فرمول دما (نه ضریب ثابت)';
+      if (t === 'k' && res < 0) {
+        out.innerHTML = '<small>نتیجه کمتر از صفر کلوین می‌شود؛ چنین دمایی در طبیعت وجود ندارد. مقدار ورودی را بررسی کنید.</small>';
+        table.hidden = true; lastText = ''; return;
+      }
+    } else {
+      var fu = CATS[cat].units.filter(function (x) { return x[0] === f; })[0][2];
+      var tu = CATS[cat].units.filter(function (x) { return x[0] === t; })[0][2];
+      res = v * fu / tu;
+      factorText = '۱ ' + unitName(f) + ' = ' + faNum(fmtNum(fu / tu)) + ' ' + unitName(t);
+    }
+    out.innerHTML = '<small>' + faNum(fmtNum(v)) + ' ' + unitName(f) + ' برابر است با</small><span class="big">' + faNum(fmtNum(res)) + ' ' + unitName(t) + '</span>';
+    document.getElementById('rIn').textContent = faNum(fmtNum(v)) + ' ' + unitName(f);
+    document.getElementById('rOut').textContent = faNum(fmtNum(res)) + ' ' + unitName(t);
+    document.getElementById('rFactor').textContent = factorText;
+    table.hidden = false;
+    lastText = 'تبدیل واحد — ' + faNum(fmtNum(v)) + ' ' + unitName(f) + ' = ' + faNum(fmtNum(res)) + ' ' + unitName(t) + '. (دم‌دست)';
+  }
+  function setCat(c) {
+    cat = c;
+    document.querySelectorAll('#catTabs button').forEach(function (b) {
+      b.classList.toggle('active', b.dataset.cat === c);
+    });
+    fillUnits();
+    calc();
+  }
+  document.querySelectorAll('#catTabs button').forEach(function (b) {
+    b.addEventListener('click', function () { setCat(b.dataset.cat); });
+  });
+  amountEl.addEventListener('input', calc);
+  fromEl.addEventListener('change', calc);
+  toEl.addEventListener('change', calc);
+  document.getElementById('swapBtn').addEventListener('click', function () {
+    var tmp = fromEl.value; fromEl.value = toEl.value; toEl.value = tmp;
+    calc();
+  });
+  document.querySelectorAll('.examples .chip').forEach(function (chip) {
+    chip.addEventListener('click', function () {
+      setCat(chip.dataset.cat);
+      amountEl.value = faNum(chip.dataset.amount);
+      fromEl.value = chip.dataset.from;
+      toEl.value = chip.dataset.to;
+      calc();
+    });
+  });
+  document.getElementById('copyBtn').addEventListener('click', function () { if (lastText) copyText(lastText, this); });
+  document.getElementById('shareBtn').addEventListener('click', function () { if (lastText) shareText(lastText, this); });
+  setCat('length');
+})();
+</script>
+</body>
+</html>

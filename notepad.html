@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>یادداشت سریع | دفترچه آنلاین با ذخیره خودکار</title>
+<meta name="description" content="یادداشت سریع و رایگان — بنویسید، خودکار ذخیره می‌شود؛ شمارش کلمات، دانلود فایل متنی و پاک‌کردن؛ یادداشت فقط در مرورگر شما می‌ماند.">
+<meta property="og:title" content="یادداشت سریع | دفترچه آنلاین با ذخیره خودکار">
+<meta property="og:description" content="یادداشت سریع با ذخیره خودکار در مرورگر، شمارش کلمات و دانلود فایل متنی.">
+<meta property="og:type" content="website">
+<link rel="stylesheet" href="assets/style.css">
+<style>
+textarea { width: 100%; font-size: 17px; padding: 14px; border: 2px solid var(--line); border-radius: 10px; font-family: inherit; background: #fff; color: var(--ink); min-height: 320px; resize: vertical; line-height: 2; }
+textarea:focus { outline: none; border-color: var(--turq); }
+.stat-row { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 12px; }
+.stat { flex: 1; min-width: 100px; background: var(--blue-soft); border-radius: 10px; padding: 10px; text-align: center; }
+.stat .n { font-size: 22px; font-weight: 800; color: var(--navy); display: block; }
+.stat .l { font-size: 13px; color: var(--muted); }
+</style>
+</head>
+<body>
+<header class="site-header">
+  <div class="inner">
+    <a class="brand" href="index.html">دم‌دست<small>ابزار، قیمت و خبر؛ همه در یک‌جا</small></a>
+    <nav>
+      <a href="index.html#tools">ابزارها</a>
+      <a href="index.html#prices">قیمت‌ها</a>
+      <a href="index.html#briefing">مرور صبحگاهی</a>
+      <a href="about.html">درباره ما</a>
+    </nav>
+  </div>
+</header>
+
+<div class="wrap">
+  <p class="breadcrumb"><a href="index.html">دم‌دست</a> ← <a href="index.html#tools">ابزارها</a> ← یادداشت سریع</p>
+  <h1>یادداشت سریع</h1>
+  <p class="sub">بنویسید؛ خودکار ذخیره می‌شود — بدون ثبت‌نام، بدون سرور، فقط در مرورگر شما.</p>
+
+  <div class="note" style="margin-bottom:16px">
+    <strong>یادداشت شما فقط در مرورگر همین دستگاه می‌ماند</strong> و به هیچ سروری فرستاده نمی‌شود. اگر حافظه مرورگر را پاک کنید یا از دستگاه دیگری وارد شوید، یادداشت را نمی‌بینید؛ برای نگه‌داشتن همیشگی، آن را دانلود کنید.
+  </div>
+
+  <div class="card">
+    <div class="field">
+      <label for="note">یادداشت</label>
+      <textarea id="note" placeholder="اینجا بنویسید…"></textarea>
+    </div>
+    <p class="meta"><span id="saveState">—</span></p>
+    <div class="stat-row">
+      <div class="stat"><span class="n" id="wordCount">۰</span><span class="l">کلمه</span></div>
+      <div class="stat"><span class="n" id="charCount">۰</span><span class="l">نویسه</span></div>
+      <div class="stat"><span class="n" id="lineCount">۰</span><span class="l">خط</span></div>
+      <div class="stat"><span class="n" id="readTime">۰</span><span class="l">دقیقه خواندن</span></div>
+    </div>
+    <div class="row">
+      <button class="btn-primary" type="button" id="downloadBtn">دانلود فایل متنی (.txt)</button>
+      <button class="btn-ghost" type="button" id="copyBtn">کپی متن</button>
+      <button class="btn-ghost" type="button" id="clearBtn">پاک کردن یادداشت</button>
+    </div>
+  </div>
+
+  <div class="card">
+    <h2>چطور کار می‌کند</h2>
+    <p>هر چیزی که تایپ می‌کنید، <strong>خودکار</strong> در حافظه مرورگر (localStorage) همین دستگاه ذخیره می‌شود؛ یعنی اگر صفحه را ببندید و دوباره باز کنید، یادداشت سر جایش است. شمارش کلمات هم هم‌زمان انجام می‌شود: کلمه یعنی رشته‌ای از حروف که با فاصله جدا شده باشد؛ زمان خواندن هم با سرعت معمول ۲۰۰ کلمه در دقیقه حساب می‌شود.</p>
+    <p>دکمه دانلود، متن را به‌صورت فایل <strong>.txt</strong> با رمزگذاری UTF-8 روی دستگاه شما ذخیره می‌کند تا برای همیشه داشته باشید.</p>
+  </div>
+
+  <div class="card">
+    <h2>مثال</h2>
+    <p>متن «سلام دنیا، امروز روز خوبی است»:</p>
+    <table class="result">
+      <tr><td>کلمه</td><td>۶</td></tr>
+      <tr><td>نویسه (با فاصله)</td><td>۲۸</td></tr>
+      <tr><td>خط</td><td>۱</td></tr>
+    </table>
+  </div>
+
+  <div class="card">
+    <h2>ورودی و خروجی یعنی چه</h2>
+    <ul class="tight">
+      <li><strong>ذخیره خودکار:</strong> چند لحظه بعد از تایپ، زیر متن نوشته می‌شود «ذخیره شد»؛ نیازی به دکمه ذخیره نیست.</li>
+      <li><strong>کلمه:</strong> بخش‌های متن که با فاصله، خط جدید یا تب جدا شده‌اند.</li>
+      <li><strong>زمان خواندن:</strong> برآورد زمانی که خواندن متن طول می‌کشد (۲۰۰ کلمه در دقیقه).</li>
+      <li><strong>دانلود:</strong> فایل متنی یادداشت روی دستگاه شما ذخیره می‌شود.</li>
+    </ul>
+  </div>
+
+  <div class="card">
+    <h2>این ابزار برای چه مواردی مناسب نیست</h2>
+    <ul class="tight">
+      <li>یادداشت‌های مهم و همیشگی بدون پشتیبان — حافظه مرورگر ممکن است با پاک کردن داده‌های مرورگر از بین برود؛ فایل را دانلود کنید.</li>
+      <li>همگام‌سازی بین دستگاه‌ها — یادداشت فقط در همین مرورگر و همین دستگاه است و در گوشی یا کامپیوتر دیگر دیده نمی‌شود.</li>
+      <li>اطلاعات محرمانه — اگرچه متن به سرور فرستاده نمی‌شود، اما هر کسی که به همین مرورگر دسترسی داشته باشد، یادداشت را می‌بیند.</li>
+    </ul>
+  </div>
+
+  <div class="card faq">
+    <h2>پرسش‌های متداول</h2>
+    <details>
+      <summary>یادداشت من کجا ذخیره می‌شود؟</summary>
+      <p>فقط در حافظه مرورگر همین دستگاه (localStorage)؛ به هیچ سروری فرستاده نمی‌شود و بدون ثبت‌نام کار می‌کند.</p>
+    </details>
+    <details>
+      <summary>اگر صفحه را ببندم، یادداشت می‌ماند؟</summary>
+      <p>بله؛ وقتی دوباره همین صفحه را در همین مرورگر باز کنید، یادداشت سر جایش است. اما اگر داده‌های مرورگر را پاک کنید، از بین می‌رود.</p>
+    </details>
+    <details>
+      <summary>چطور یادداشت را برای همیشه نگه دارم؟</summary>
+      <p>دکمه «دانلود فایل متنی» را بزنید؛ فایل .txt روی دستگاه شما ذخیره می‌شود.</p>
+    </details>
+    <details>
+      <summary>در گوشی هم کار می‌کند؟</summary>
+      <p>بله؛ در هر مرورگر موبایل و کامپیوتر کار می‌کند، اما یادداشت هر دستگاه جداست.</p>
+    </details>
+  </div>
+
+  <div class="card">
+    <h2>منابع و تاریخ بازبینی</h2>
+    <ul class="tight">
+      <li>ذخیره‌سازی: localStorage — استاندارد Web Storage مرورگرها؛ داده فقط در دستگاه کاربر می‌ماند.</li>
+      <li>سرعت خواندن ۲۰۰ کلمه در دقیقه: برآورد معمول برای متن فارسی و انگلیسی در مطالعات خواندن.</li>
+    </ul>
+    <p class="meta">آخرین بازبینی: ۶ آذر ۱۴۰۵</p>
+  </div>
+
+  <div class="card">
+    <h2>ابزارهای مرتبط</h2>
+    <div class="related">
+      <a href="word-counter.html">شمارش کلمات متن فارسی</a>
+      <a href="persian-text-fixer.html">اصلاح نگارشی متن فارسی</a>
+      <a href="translator.html">مترجم هوش مصنوعی</a>
+      <a href="digit-converter.html">تبدیل اعداد فارسی و انگلیسی</a>
+      <a href="index.html">همه ابزارها</a>
+    </div>
+  </div>
+
+  <footer>
+    دم‌دست — ابزار، قیمت و خبر؛ همه در یک‌جا<br>
+    ساخته‌شده توسط کوروش فرجی (KouroshLabs) ·
+    <a href="about.html">درباره ما</a> · <a href="contact.html">تماس</a> · <a href="privacy.html">حریم خصوصی</a><br>
+    <span style="font-size:12px">پردازش اطلاعات این ابزار در مرورگر شما انجام می‌شود و محتوای واردشده برای پردازش به سرور ارسال نمی‌شود.</span>
+  </footer>
+</div>
+
+<script src="assets/common.js"></script>
+<script>
+(function () {
+  var KEY = 'damdast-notepad-v1';
+  var noteEl = document.getElementById('note');
+  var saveState = document.getElementById('saveState');
+  var wordEl = document.getElementById('wordCount');
+  var charEl = document.getElementById('charCount');
+  var lineEl = document.getElementById('lineCount');
+  var readEl = document.getElementById('readTime');
+  var saveTimer = null;
+  try {
+    var saved = localStorage.getItem(KEY);
+    if (saved) noteEl.value = saved;
+  } catch (e) { /* storage unavailable — notes still work in-session */ }
+  function count() {
+    var text = noteEl.value;
+    var words = text.trim() === '' ? 0 : text.trim().split(/\s+/).length;
+    var lines = text === '' ? 0 : text.split('\n').length;
+    wordEl.textContent = faNum(words);
+    charEl.textContent = faNum(text.length);
+    lineEl.textContent = faNum(lines);
+    readEl.textContent = faNum(Math.ceil(words / 200));
+  }
+  function save() {
+    try {
+      localStorage.setItem(KEY, noteEl.value);
+      saveState.textContent = 'ذخیره شد ✓ — ' + faNum(new Date().getHours()) + ':' + faNum(String(new Date().getMinutes()).padStart(2, '0'));
+    } catch (e) {
+      saveState.textContent = 'ذخیره در مرورگر ممکن نشد؛ متن فقط تا بستن صفحه می‌ماند.';
+    }
+  }
+  noteEl.addEventListener('input', function () {
+    count();
+    saveState.textContent = 'در حال ذخیره…';
+    clearTimeout(saveTimer);
+    saveTimer = setTimeout(save, 600);
+  });
+  document.getElementById('downloadBtn').addEventListener('click', function () {
+    var blob = new Blob([noteEl.value], { type: 'text/plain;charset=utf-8' });
+    var a = document.createElement('a');
+    a.href = URL.createObjectURL(blob);
+    a.download = 'yaddasht.txt';
+    document.body.appendChild(a);
+    a.click();
+    setTimeout(function () { URL.revokeObjectURL(a.href); a.remove(); }, 500);
+  });
+  document.getElementById('copyBtn').addEventListener('click', function () {
+    if (noteEl.value) copyText(noteEl.value, this);
+  });
+  document.getElementById('clearBtn').addEventListener('click', function () {
+    if (!noteEl.value) return;
+    if (confirm('یادداشت پاک شود؟ این کار قابل برگشت نیست.')) {
+      noteEl.value = '';
+      try { localStorage.removeItem(KEY); } catch (e) {}
+      count();
+      saveState.textContent = 'پاک شد.';
+      noteEl.focus();
+    }
+  });
+  count();
+  if (noteEl.value) saveState.textContent = 'یادداشت قبلی بازیابی شد.';
+})();
+</script>
+</body>
+</html>

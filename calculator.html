@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ماشین‌حساب ساده | جمع، تفریق، ضرب، تقسیم و درصد</title>
+<meta name="description" content="ماشین‌حساب ساده و رایگان — جمع، تفریق، ضرب، تقسیم، درصد و حافظه؛ با پشتیبانی از کیبورد، کاملاً در مرورگر شما.">
+<meta property="og:title" content="ماشین‌حساب ساده | جمع، تفریق، ضرب، تقسیم و درصد">
+<meta property="og:description" content="ماشین‌حساب ساده با درصد و حافظه؛ با کیبورد هم کار می‌کند.">
+<meta property="og:type" content="website">
+<link rel="stylesheet" href="assets/style.css">
+<style>
+.calc-display { background: var(--navy); color: #fff; border-radius: 12px; padding: 16px 18px; margin-bottom: 12px; text-align: left; min-height: 92px; }
+.calc-display .expr { font-size: 15px; color: #9fd8d7; direction: ltr; min-height: 22px; word-break: break-all; }
+.calc-display .val { font-size: 34px; font-weight: 800; direction: ltr; word-break: break-all; line-height: 1.3; }
+.calc-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; }
+.calc-grid button { padding: 16px 0; font-size: 20px; font-weight: 700; border-radius: 10px; background: #fff; border: 1px solid var(--line); color: var(--ink); }
+.calc-grid button:hover { border-color: var(--turq); }
+.calc-grid button.op { background: var(--blue-soft); color: var(--navy); }
+.calc-grid button.eq { background: var(--turq); color: #fff; }
+.calc-grid button.fn { background: #f2f7f7; font-size: 15px; }
+.calc-grid button.mem-on { background: var(--gold-bg); border-color: var(--gold); }
+</style>
+</head>
+<body>
+<header class="site-header">
+  <div class="inner">
+    <a class="brand" href="index.html">دم‌دست<small>ابزار، قیمت و خبر؛ همه در یک‌جا</small></a>
+    <nav>
+      <a href="index.html#tools">ابزارها</a>
+      <a href="index.html#prices">قیمت‌ها</a>
+      <a href="index.html#briefing">مرور صبحگاهی</a>
+      <a href="about.html">درباره ما</a>
+    </nav>
+  </div>
+</header>
+
+<div class="wrap">
+  <p class="breadcrumb"><a href="index.html">دم‌دست</a> ← <a href="index.html#tools">ابزارها</a> ← ماشین‌حساب</p>
+  <h1>ماشین‌حساب ساده</h1>
+  <p class="sub">جمع، تفریق، ضرب، تقسیم، درصد و حافظه — با دکمه‌ها یا مستقیم با کیبورد.</p>
+
+  <div class="card">
+    <div class="calc-display" aria-live="polite">
+      <div class="expr" id="expr"></div>
+      <div class="val" id="val">۰</div>
+    </div>
+    <div class="calc-grid">
+      <button type="button" class="fn" data-k="mc">MC</button>
+      <button type="button" class="fn" data-k="mr">MR</button>
+      <button type="button" class="fn" data-k="m+">M+</button>
+      <button type="button" class="fn" data-k="m-">M−</button>
+      <button type="button" class="fn" data-k="c">C</button>
+      <button type="button" class="fn" data-k="back">⌫</button>
+      <button type="button" class="fn" data-k="pct">٪</button>
+      <button type="button" class="op" data-k="/">÷</button>
+      <button type="button" data-k="7">۷</button>
+      <button type="button" data-k="8">۸</button>
+      <button type="button" data-k="9">۹</button>
+      <button type="button" class="op" data-k="*">×</button>
+      <button type="button" data-k="4">۴</button>
+      <button type="button" data-k="5">۵</button>
+      <button type="button" data-k="6">۶</button>
+      <button type="button" class="op" data-k="-">−</button>
+      <button type="button" data-k="1">۱</button>
+      <button type="button" data-k="2">۲</button>
+      <button type="button" data-k="3">۳</button>
+      <button type="button" class="op" data-k="+">+</button>
+      <button type="button" class="fn" data-k="neg">±</button>
+      <button type="button" data-k="0">۰</button>
+      <button type="button" data-k=".">.</button>
+      <button type="button" class="eq" data-k="=">=</button>
+    </div>
+    <p class="hint">با کیبورد هم می‌توانید حساب کنید: عددها، + − * /، Enter برای مساوی، Esc برای پاک کردن، Backspace برای حذف رقم آخر. حافظه (M) فقط در همین صفحه می‌ماند و با بستن صفحه پاک می‌شود.</p>
+    <div class="row">
+      <button class="btn-ghost" type="button" id="copyBtn">کپی جواب</button>
+    </div>
+  </div>
+
+  <div class="card">
+    <h2>ترتیب محاسبه چطور است؟</h2>
+    <p>این ماشین‌حساب مثل بیشتر ماشین‌حساب‌های ساده، عملیات را <strong>به‌ترتیب وارد شدن</strong> حساب می‌کند؛ یعنی ۲ + ۳ × ۴ را اول ۲ + ۳ = ۵ و بعد ۵ × ۴ = ۲۰ حساب می‌کند، نه ۱۴. اگر می‌خواهید ضرب و تقسیم اول انجام شود، هر بخش را جداگانه حساب کنید.</p>
+    <p class="formula">درصد: عدد ٪ یعنی آن عدد تقسیم بر ۱۰۰؛ مثلاً ۲۰٪ از ۵۰۰ برابر است با ۵۰۰ × ۲۰ ÷ ۱۰۰ = ۱۰۰</p>
+    <p class="formula">حافظه: M+ عدد روی صفحه را به حافظه اضافه می‌کند، M− کم می‌کند، MR عدد حافظه را نشان می‌دهد و MC حافظه را صفر می‌کند.</p>
+  </div>
+
+  <div class="card">
+    <h2>مثال عددی</h2>
+    <p>۱۲ × ۸:</p>
+    <table class="result">
+      <tr><td>۱۲ × ۸</td><td>۹۶</td></tr>
+    </table>
+    <p>۲۰٪ از ۵۰۰:</p>
+    <table class="result">
+      <tr><td>۵۰۰ × ۲۰٪</td><td>۱۰۰</td></tr>
+    </table>
+    <p>۷۵۰ − ۱۲۵:</p>
+    <table class="result">
+      <tr><td>۷۵۰ − ۱۲۵</td><td>۶۲۵</td></tr>
+    </table>
+  </div>
+
+  <div class="card">
+    <h2>ورودی و خروجی یعنی چه</h2>
+    <ul class="tight">
+      <li><strong>عدد روی صفحه:</strong> عددی که الان تایپ کرده‌اید یا جواب آخرین محاسبه است.</li>
+      <li><strong>عبارت بالای صفحه:</strong> محاسبه‌ای که تا اینجا وارد کرده‌اید؛ مثلاً «۱۲ +» یعنی منتظر عدد بعدی است.</li>
+      <li><strong>C:</strong> همه‌چیز را پاک می‌کند. <strong>⌫:</strong> فقط رقم آخر را حذف می‌کند.</li>
+      <li><strong>٪:</strong> عدد فعلی را به درصد تبدیل می‌کند (تقسیم بر ۱۰۰).</li>
+    </ul>
+  </div>
+
+  <div class="card">
+    <h2>این ابزار برای چه مواردی مناسب نیست</h2>
+    <ul class="tight">
+      <li>محاسبات علمی و مهندسی — این ماشین‌حساب تابع‌های سینوس، لگاریتم، توان و جذر ندارد.</li>
+      <li>محاسبات مالی دقیق — برای اقساط، سود و مالیات از <a href="loan-installment.html">محاسبه اقساط وام</a> و <a href="vat.html">مالیات بر ارزش افزوده</a> استفاده کنید.</li>
+      <li>عددهای خیلی بزرگ — جواب با بیش از ۱۲ رقم به‌صورت نمایی (مثل 1e+15) نشان داده می‌شود.</li>
+    </ul>
+  </div>
+
+  <div class="card faq">
+    <h2>پرسش‌های متداول</h2>
+    <details>
+      <summary>چرا ۲ + ۳ × ۴ جواب ۲۰ می‌دهد، نه ۱۴؟</summary>
+      <p>این ماشین‌حساب عملیات را به‌ترتیب وارد شدن حساب می‌کند، مثل ماشین‌حساب‌های ساده دستی. برای اولویت ضرب، اول ۳ × ۴ را جداگانه حساب کنید.</p>
+    </details>
+    <details>
+      <summary>با کیبورد هم می‌شود حساب کرد؟</summary>
+      <p>بله؛ عددها و + − * / را تایپ کنید، Enter مساوی است، Esc پاک می‌کند و Backspace رقم آخر را حذف می‌کند.</p>
+    </details>
+    <details>
+      <summary>حافظه (M) کجا ذخیره می‌شود؟</summary>
+      <p>فقط در حافظه همین صفحه؛ با بستن یا تازه‌کردن صفحه پاک می‌شود و به جایی فرستاده نمی‌شود.</p>
+    </details>
+    <details>
+      <summary>تقسیم بر صفر چه می‌شود؟</summary>
+      <p>پیام «نمی‌شود بر صفر تقسیم کرد» نشان داده می‌شود؛ جواب بی‌نهایت نمایش داده نمی‌شود.</p>
+    </details>
+  </div>
+
+  <div class="card">
+    <h2>منابع و تاریخ بازبینی</h2>
+    <ul class="tight">
+      <li>محاسبات چهار عمل اصلی و درصد، طبق قواعد استاندارد حساب؛ ترتیب محاسبه به‌ترتیب ورود است و در همین صفحه توضیح داده شده است.</li>
+      <li>همه محاسبات در مرورگر شما انجام می‌شود و چیزی به سرور فرستاده نمی‌شود.</li>
+    </ul>
+    <p class="meta">آخرین بازبینی: ۶ آذر ۱۴۰۵</p>
+  </div>
+
+  <div class="card">
+    <h2>ابزارهای مرتبط</h2>
+    <div class="related">
+      <a href="loan-installment.html">محاسبه اقساط وام</a>
+      <a href="deposit-interest.html">محاسبه سود سپرده بانکی</a>
+      <a href="unit-converter.html">تبدیل واحد</a>
+      <a href="word-counter.html">شمارش کلمات متن فارسی</a>
+      <a href="index.html">همه ابزارها</a>
+    </div>
+  </div>
+
+  <footer>
+    دم‌دست — ابزار، قیمت و خبر؛ همه در یک‌جا<br>
+    ساخته‌شده توسط کوروش فرجی (KouroshLabs) ·
+    <a href="about.html">درباره ما</a> · <a href="contact.html">تماس</a> · <a href="privacy.html">حریم خصوصی</a><br>
+    <span style="font-size:12px">پردازش اطلاعات این ابزار در مرورگر شما انجام می‌شود و محتوای واردشده برای پردازش به سرور ارسال نمی‌شود.</span>
+  </footer>
+</div>
+
+<script src="assets/common.js"></script>
+<script>
+(function () {
+  var exprEl = document.getElementById('expr');
+  var valEl = document.getElementById('val');
+  var cur = '0', prev = null, op = null, fresh = true, mem = 0, lastVal = '0';
+  function fmt(n) {
+    if (!isFinite(n)) return 'خطا';
+    var s;
+    if (Math.abs(n) >= 1e12 || (Math.abs(n) < 1e-9 && n !== 0)) s = n.toExponential(6);
+    else s = String(Math.round(n * 1e10) / 1e10);
+    return faNum(s.replace(/-/g, '−'));
+  }
+  function render() {
+    valEl.textContent = fmt(parseFloat(cur.replace(/−/g, '-'))) === 'خطا' ? cur : faNum(cur);
+    exprEl.textContent = prev === null ? '' : faNum(String(prev).replace(/-/g, '−')) + ' ' + ({ '+': '+', '-': '−', '*': '×', '/': '÷' }[op] || '');
+    lastVal = cur;
+  }
+  function applyOp(a, b, o) {
+    if (o === '+') return a + b;
+    if (o === '-') return a - b;
+    if (o === '*') return a * b;
+    if (o === '/') return b === 0 ? NaN : a / b;
+    return b;
+  }
+  function press(k) {
+    if (/^[0-9]$/.test(k)) {
+      if (fresh || cur === '0') { cur = k; fresh = false; }
+      else if (cur.replace(/[^0-9]/g, '').length < 12) cur += k;
+    } else if (k === '.') {
+      if (fresh) { cur = '0.'; fresh = false; }
+      else if (cur.indexOf('.') === -1) cur += '.';
+    } else if (k === 'neg') {
+      if (cur !== '0') cur = cur.charAt(0) === '-' ? cur.slice(1) : '-' + cur;
+    } else if (k === 'back') {
+      cur = cur.length > 1 ? cur.slice(0, -1) : '0';
+      if (cur === '-' || cur === '') cur = '0';
+    } else if (k === 'c') {
+      cur = '0'; prev = null; op = null; fresh = true;
+    } else if (k === 'pct') {
+      cur = String(parseFloat(cur) / 100); fresh = true;
+    } else if (k === 'mc') { mem = 0; syncMem(); }
+    else if (k === 'mr') { cur = String(mem); fresh = true; }
+    else if (k === 'm+') { mem += parseFloat(cur); fresh = true; syncMem(); }
+    else if (k === 'm-') { mem -= parseFloat(cur); fresh = true; syncMem(); }
+    else if (k === '+' || k === '-' || k === '*' || k === '/') {
+      if (prev !== null && op && !fresh) {
+        var r = applyOp(prev, parseFloat(cur), op);
+        if (isNaN(r)) { error('نمی‌شود بر صفر تقسیم کرد'); return; }
+        prev = r; cur = String(r);
+      } else if (prev === null) { prev = parseFloat(cur); }
+      op = k; fresh = true;
+    } else if (k === '=') {
+      if (prev !== null && op) {
+        var res = applyOp(prev, parseFloat(cur), op);
+        if (isNaN(res)) { error('نمی‌شود بر صفر تقسیم کرد'); return; }
+        exprEl.textContent = faNum(String(prev).replace(/-/g, '−')) + ' ' + ({ '+': '+', '-': '−', '*': '×', '/': '÷' }[op]) + ' ' + faNum(cur) + ' =';
+        cur = String(res); prev = null; op = null; fresh = true;
+        valEl.textContent = fmt(res);
+        lastVal = cur;
+        return;
+      }
+    }
+    render();
+  }
+  function error(msg) {
+    valEl.textContent = msg;
+    cur = '0'; prev = null; op = null; fresh = true;
+  }
+  function syncMem() {
+    document.querySelectorAll('[data-k="mr"]').forEach(function (b) {
+      b.classList.toggle('mem-on', mem !== 0);
+    });
+  }
+  document.querySelectorAll('.calc-grid button').forEach(function (b) {
+    b.addEventListener('click', function () { press(b.dataset.k); });
+  });
+  document.addEventListener('keydown', function (e) {
+    if (e.target && (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA')) return;
+    var k = e.key;
+    if (/^[0-9.]$/.test(k)) press(k);
+    else if (k === '+' || k === '-' || k === '*' || k === '/') press(k);
+    else if (k === 'Enter' || k === '=') { e.preventDefault(); press('='); }
+    else if (k === 'Escape') press('c');
+    else if (k === 'Backspace') { e.preventDefault(); press('back'); }
+    else if (k === '%') press('pct');
+  });
+  document.getElementById('copyBtn').addEventListener('click', function () {
+    copyText('جواب ماشین‌حساب: ' + valEl.textContent, this);
+  });
+  render();
+})();
+</script>
+</body>
+</html>
